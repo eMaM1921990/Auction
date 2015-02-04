@@ -47,9 +47,7 @@ public class winner extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
-                System.out.println("INseid ");
 
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,20 +65,22 @@ public class winner extends HttpServlet {
         processRequest(request, response);
         DBConnection db = new DBConnection();
         PrintWriter out = response.getWriter();
-        System.out.println("INseid ");
+
         try {
             String result = null;
             String user = null;
             String email = null;
             final String authAddress = "support@livevirtualauctions.com";
-            final String authPassword = "livevirtualauctions1089";
+            final String authPassword = "1089icanor";
             final String smtpServer = "mail.livevirtualauctions.com";
-            final String smtpPort = "25";
+            final String smtpPort = "26";
             String siteName = request.getServerName();
             int itemid = 0;
             String uservalid = null;
             double bid = 0;
-            String sql = "SELECT USERBID,PRODUCT_ID,MAXBID  FROM AUCTION WHERE idAUCTION=(SELECT MAX(idAUCTION) FROM AUCTION WHERE STATUS=?)";
+            int currentauctionid = 0;
+            String product_name=null;
+            String sql = "SELECT USERBID,PRODUCT_ID,MAXBID,idAUCTION,NAME  FROM AUCTION A,PRODUCT P WHERE A.idAUCTION=(SELECT MAX(idAUCTION) FROM AUCTION WHERE STATUS=?) AND A.PRODUCT_ID=P.idPRODUCT";
             db.connect();
             db.pstm = db.con.prepareStatement(sql);
             db.pstm.setString(1, "open");
@@ -89,7 +89,16 @@ public class winner extends HttpServlet {
                 uservalid = db.rs.getString(1);
                 itemid = db.rs.getInt(2);
                 bid = db.rs.getInt(3);
+                currentauctionid = db.rs.getInt(4);
+                product_name=db.rs.getString(5);
             }
+            db.pstm.closeOnCompletion();
+            db.rs.close();
+
+            System.out.println("USER ID :" + uservalid);
+            System.out.println("Product Id :" + itemid);
+            System.out.println("Bid Max :" + bid);
+
             if (uservalid != null) {
                 String sql2 = "SELECT USERNAME,EMAIL FROM USER WHERE idUSER=(SELECT USERBID  FROM AUCTION where idAUCTION=(SELECT MAX(idAUCTION) FROM AUCTION WHERE STATUS=?))";
                 db.pstm = db.con.prepareStatement(sql2);
@@ -99,16 +108,37 @@ public class winner extends HttpServlet {
                     user = db.rs.getString(1);
                     email = db.rs.getString(2);
                 }
+                
+                
+                /////SENDING MAIL TO SELLER
+                String sql4 = "SELECT EMAIL,idUSER,USERNAME FROM USER WHERE idUSER=(SELECT PRODUCTCREATEDBY FROM PRODUCT WHERE idPRODUCT=?)";
+                String seller_mail = null;
+                String seller_id = null;
+                String seller_name=null;
+                db.pstm = db.con.prepareStatement(sql4);
+                db.pstm.setInt(1, itemid);
+                db.rs = db.pstm.executeQuery();
+                while (db.rs.next()) {
+                    seller_mail = db.rs.getString(1);
+                    seller_id = db.rs.getString(2);
+                    seller_name=db.rs.getString(3);
+                }
 
+                //Send Notification to winner 
                 // Recipient's email ID needs to be mentioned.
                 String to = email;
                 String subject = "Congratulation, you are the winner";
-                String message = "Congratulations. Your bid was the winner in the last auction in LiveVirtualAuctions.com. \n \n Please contact the seller as soon as possible in order to pay the item and shipping cost. The \n seller will contact you as soon as the payment is verified. \n \n We have hundreds of items available at low prices. Please go back and find your favorite  \n items. Remember, you don't have to pay anything to make bids, unless your bid is the winner.\n \n Thanks for being part of LiveVirtualAuctions.com \n \n Administration";
+                String message = "<p>"
+                        + " Congratulations.<br> Your bid was the winner in the last auction # <div style='color:red'>"+product_name+", total "+bid+" </div> in LiveVirtualAuctions.com. \n \n"
+                        + " Please contact the seller <b style='color:red'>"+seller_name+"</b>- <b>"+seller_mail+"</b> &nbsp;&nbsp;as soon as possible in order to pay the item and shipping cost.After you pay for the total , "
+                        + "please Confirm Your Payment By Click here : <br> http://livevirtualauctions.com/AuctionWeb/Confirm?p=" + currentauctionid
+                        + "\n The  seller will contact you as soon as the payment is verified. \n \n We have hundreds of items available at low prices. Please go back and find your favorite  \n items. Remember, you don't have to pay anything to make bids, unless your bid is the winner.\n \n Thanks for being part of LiveVirtualAuctions.com \n \n Administration </p>";
                 try {
                     Properties props = new Properties();
                     props.put("mail.smtp.host", smtpServer);
                     props.put("mail.smtp.port", smtpPort);
                     props.put("mail.smtp.auth", "true");
+                    //props.put("mail.smtp.starttls.enable", "true");
 
                     // create some properties and get the default Session
                     Session sessionMail = Session.getInstance(props, new Authenticator() {
@@ -136,7 +166,7 @@ public class winner extends HttpServlet {
 
                     // Setting the Subject and Content Type
                     msg.setSubject(subject);
-                    msg.setContent(message, "text/plain");
+                    msg.setContent(message, "text/html");
                     Transport.send(msg);
                 } catch (AddressException ex) {
                     Logger.getLogger(winner.class.getName()).log(Level.SEVERE, null, ex);
@@ -159,13 +189,14 @@ public class winner extends HttpServlet {
                     // Recipient's email ID needs to be mentioned.
                     String tos = mailList.get(i);
                     String subjects = "Your bid on Livevirtualauctions.com";
-                    String messages = "We're sorry. \n \n Your bid was not the winner in your recent participation in  \n LiveVirtualAuctions.com. \n \n We have hundreds of items available at low prices. Please go back and find your \n favorite items. Remember, you don't have to pay anything to make bids, unless  \n your bid is the winner. \n \n Thanks for being part of LiveVirtualAuctions.com \n \n Administration";
+                    String messages = "<p>We're sorry. <br><br> Your bid was not the winner in your recent participation in <br>LiveVirtualAuctions.com. <br><br> We have hundreds of items available at low prices. Please go back and find your \n favorite items. Remember, you don't have to pay anything to make bids, unless  <br> your bid is the winner. <br><br> Thanks for being part of LiveVirtualAuctions.com <br><br> Administration </p>";
                     try {
                         Properties props = new Properties();
                         props.put("mail.smtp.host", smtpServer);
                         props.put("mail.smtp.port", smtpPort);
                         props.put("mail.smtp.auth", "true");
-
+                        //props.put("mail.smtp.starttls.enable", "true");
+                        // props.put("mail.smtp.auth", "true");
                         // create some properties and get the default Session
                         Session sessionMail = Session.getInstance(props, new Authenticator() {
 
@@ -192,7 +223,7 @@ public class winner extends HttpServlet {
 
                         // Setting the Subject and Content Type
                         msg.setSubject(subjects);
-                        msg.setContent(messages, "text/plain");
+                        msg.setContent(messages, "text/html");
                         Transport.send(msg);
                     } catch (Exception e) {
                         e.printStackTrace(response.getWriter());
@@ -200,26 +231,18 @@ public class winner extends HttpServlet {
 
                 }
 
-                /////SENDING MAIL TO SELLER
-                String sql4 = "SELECT EMAIL,idUSER FROM USER WHERE id=(SELECT PRODUCTCREATEDBY FROM PRODUCT WHERE idPRODUCT=?)";
-                String seller_mail = null;
-                String seller_id = null;
-                db.pstm = db.con.prepareStatement(sql4);
-                db.pstm.setInt(1, itemid);
-                db.rs = db.pstm.executeQuery();
-                while (db.rs.next()) {
-                    seller_mail = db.rs.getString(1);
-                    seller_id = db.rs.getString(2);
-                }
+                
+
                 String toSeller = seller_mail;
                 String Seller_subject = "Congratulation";
-                String Seller_message = "Your item was sold. Please, contact the buyers in order to closed this sale fast and smooth. \n Go to your back office and check your Items Sold list. After that, go back and list another items.";
+                String Seller_message = "<p>Your item Auction # <b style='color:red'>"+product_name+", total "+bid+"</b> was sold. Please, contact the buyers <b style='color:red'>"+to+"</b> in order to closed this sale fast and smooth. \n Go to your back office and check your Items Sold list. After that, go back and list another items.</p>";
                 try {
                     Properties props = new Properties();
                     props.put("mail.smtp.host", smtpServer);
                     props.put("mail.smtp.port", smtpPort);
                     props.put("mail.smtp.auth", "true");
-
+                    //props.put("mail.smtp.starttls.enable", "true");
+                    //  props.put("mail.smtp.auth", "true");
                     // create some properties and get the default Session
                     Session sessionMail = Session.getInstance(props, new Authenticator() {
 
@@ -246,45 +269,55 @@ public class winner extends HttpServlet {
 
                     // Setting the Subject and Content Type
                     msg.setSubject(Seller_subject);
-                    msg.setContent(Seller_message, "text/plain");
+                    msg.setContent(Seller_message, "text/html");
                     Transport.send(msg);
                 } catch (Exception e) {
                     e.printStackTrace(response.getWriter());
                 }
 
-                String sql5 = "UPDATE PRODUCT SET PRODUCTSTATUS='Not Live',QUANTITYONHAND=QUANTITYONHAND-1 WHERE idPRODUCT=?";
+                String Fees = "SELECT FEES FROM FEES";
+                db.pstm = db.con.prepareStatement(Fees);
+                db.rs = db.pstm.executeQuery();
+                double fees = 0.0;
+                while (db.rs.next()) {
+                    fees = db.rs.getDouble(1);
+                }
+
+                String sql5 = "UPDATE PRODUCT SET QUANTITYONHAND=QUANTITYONHAND-1 WHERE idPRODUCT=?";
                 db.pstm = db.con.prepareStatement(sql5);
                 db.pstm.setInt(1, itemid);
                 db.pstm.executeUpdate();
 
-                String sql6 = "INSERT INTO AUCTIONWINNER (AUCTION_PRO,USER_AUCTION_W,WINNER,TOTAL) VALUES (?,?,?,?)";
+                String sql6 = "INSERT INTO AUCTIONWINNER (AUCTION_PRO,USER_AUCTION_W,WINNER,TOTAL,FEES,AUCTION_ID_W) VALUES (?,?,?,?,?,?)";
                 db.pstm = db.con.prepareStatement(sql6);
                 db.pstm.setInt(1, itemid);
                 db.pstm.setString(2, seller_id);
                 db.pstm.setString(3, uservalid);
                 db.pstm.setDouble(4, bid);
+                db.pstm.setDouble(5, fees);
+                db.pstm.setInt(6, currentauctionid);
                 db.pstm.executeUpdate();
 
                 /* TODO output your page here. You may use following sample code. */
-            } else {
-                String sql7 = "SELECT * FROM PRODUCT WHERE PRODUCTSTATUS=? ";
-                db.pstm = db.con.prepareStatement(sql7);
-                db.pstm.setString(1, "Live");
-                db.rs = db.pstm.executeQuery();
-                
-                        int items=0;
-                 while(db.rs.next()){
-                     db.rs.first();
-                     items = db.rs.getInt("idPRODUCT");
-                 }
-                
-                String sql8 = "UPDATE PRODUCT SET PRODUCTSTATUS=? WHERE idPRODUCT=?";
-                db.pstm = db.con.prepareStatement(sql8);
-                db.pstm.setString(1, "Not Live");
-                db.pstm.setInt(2, items);
-                db.pstm.executeUpdate();
-
             }
+            System.out.println("Update Product Status");
+            String sql7 = "SELECT idPRODUCT FROM PRODUCT WHERE PRODUCTSTATUS=?";
+            db.pstm = db.con.prepareStatement(sql7);
+            db.pstm.setString(1, "Live");
+            db.rs = db.pstm.executeQuery();
+
+            int items = 0;
+            while (db.rs.next()) {
+                db.rs.isFirst();
+                items = db.rs.getInt("idPRODUCT");
+            }
+
+            System.out.println("Product id to update : " + items);
+            String sql8 = "UPDATE PRODUCT SET PRODUCTSTATUS=? WHERE idPRODUCT=?";
+            db.pstm = db.con.prepareStatement(sql8);
+            db.pstm.setString(1, "Not Live");
+            db.pstm.setInt(2, items);
+            db.pstm.executeUpdate();
 
             String sql9 = "SELECT MAX(idAUCTION) AS AUCTION FROM AUCTION";
             int auction = 0;
@@ -300,8 +333,8 @@ public class winner extends HttpServlet {
 
             db.closeConnection();
 
-            response.sendRedirect(request.getContextPath() + "/Live/Reload.jsp");
-
+            // response.sendRedirect(request.getContextPath() + "/Live/ReLoad.jsp");
+            response.getWriter().write("OK");
         } catch (SQLException ex) {
             Logger.getLogger(winner.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

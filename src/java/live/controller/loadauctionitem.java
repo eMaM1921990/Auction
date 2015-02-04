@@ -88,8 +88,12 @@ public class loadauctionitem extends HttpServlet {
             db.pstm=db.con.prepareStatement(sql);
             db.pstm.setString(1, "Live");
             db.rs=db.pstm.executeQuery();
-            db.rs.first();
-            buffer = "<center><div class='img'><img src='../" + db.rs.getString("IMAGEURL") + "' alt='' width='280px' height='200px'> <div class='desc'>" + db.rs.getString("NAME") + "</div></div></center> ";
+            
+            while(db.rs.next()){
+                db.rs.isFirst();
+                buffer = "<center><div class='img'><img src='../" + db.rs.getString("IMAGEURL") + "' alt='' width='280px' height='200px'> <div class='desc'>" + db.rs.getString("NAME") + "</div></div></center> ";
+            }
+            
             db.closeConnection();
         response.getWriter().println(buffer);
 

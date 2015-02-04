@@ -91,7 +91,7 @@
 
                     <div class="row"> 
                         <!-- Product Item -->
-                        <%db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS != ?");
+                        <%db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS != ? AND ISACTIVE='Y'");
                             db.pstm.setString(1, "Not Live");
                             ResultSet rs = db.pstm.executeQuery();
                              while (rs.next()) {%>

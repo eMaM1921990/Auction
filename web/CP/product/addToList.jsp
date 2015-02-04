@@ -217,7 +217,7 @@
                                             <div class="controls">
                                                 <div class="input-xlarge"><select name="idUSERLIST" id="select" class='chosen-select'>
                                                         <%db.pstm = db.con.prepareStatement("SELECT * FROM USERLIST WHERE USERLIST=?");
-                                                            db.pstm.setInt(1, 1);
+                                                            db.pstm.setInt(1, login.getUserId());
                                                             ResultSet rs = db.pstm.executeQuery();
                                                             while (rs.next()) {%>
                                                         <option value="<%=rs.getString("idUSERLIST")%>"><%=rs.getString("LISTNAME")%></option>
@@ -239,16 +239,11 @@
                                             <div class="controls">
                                                 <div class="bootstrap-timepicker">
                                                     <input type="text" name="STARTTIM" id="timepicker" class="input-small timepick">
-                                                    <span class="help-block">Time setting with UTC , now is : <%=new Date()%></span>
+                                                    <span class="help-block">Time setting with American/New_York time , now is : <font style="color:red"><%=new Date()%></font></span>
                                                 </div>
 
                                             </div>
                                         </div>
-
-                                       
-
-
-
 
                                         <div class="form-actions">
                                             <button type="submit" class="btn btn-primary">Save changes</button>

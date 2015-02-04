@@ -44,11 +44,11 @@ public class ProductList {
             db.pstm.setDate(3, dateauction);
             db.pstm.setString(4, parseFormat.format(datetim));
             db.pstm.executeUpdate();
-            String eventname = "event" + PRODUCTID + date.getMinutes();
-            System.out.println("CREATE EVENT event" + PRODUCTID + " ON schedule AT ('" + dateauction + " " + parseFormat.format(datetim) + "'+ INTERVAL 1 DAY) ON COMPLETION PRESERVE ENABLE DO update PRODUCT SET PRODUCTSTATUS='Live' WHERE idPRODUCT=" + PRODUCTID + ";");
-            //  db.pstm.executeUpdate("CREATE EVENT "+eventname+" ON schedule AT ('"+dateauction+" "+formatter.format(datetim)+"'+ INTERVAL 0 DAY) ON COMPLETION PRESERVE ENABLE DO update PRODUCT SET PRODUCTSTATUS='Live' WHERE idPRODUCT="+PRODUCTID+";");
+            String eventname = "event" + PRODUCTID + System.currentTimeMillis();
+            
+            db.pstm.executeUpdate("SET GLOBAL event_scheduler = ON;");
             db.pstm.executeUpdate("CREATE EVENT `" + eventname + "` ON SCHEDULE AT '" + dateauction + " " + displayFormat.format(timdate) + "' ON COMPLETION PRESERVE ENABLE DO update PRODUCT SET PRODUCTSTATUS='Live' WHERE idPRODUCT=" + PRODUCTID + " ");
-            System.out.println("CREATE EVENT `" + eventname + "` ON SCHEDULE AT '" + dateauction + " " + displayFormat.format(timdate) + "' ON COMPLETION PRESERVE ENABLE DO update PRODUCT SET PRODUCTSTATUS='Live' WHERE idPRODUCT=" + PRODUCTID + " ");
+            
             db.closeConnection();
             message = "Successfully . Add Product to List";
         } catch (SQLException ex) {

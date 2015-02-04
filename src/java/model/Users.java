@@ -39,4 +39,22 @@ public class Users {
         }
         return message;
     }
+    
+    public String deleteUser(int idUSER){
+        String message=null;
+        try {
+            db.connect();
+            db.pstm=db.con.prepareStatement("DELETE FROM USER WHERE idUSER=?");
+            db.pstm.setInt(1, idUSER);
+            db.pstm.executeUpdate();
+            db.pstm.close();
+            db.closeConnection();
+            message="Successfully deleted user";
+        } catch (SQLException ex) {
+            db.closeConnection();
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            message="["+Integer.toString(ex.getErrorCode())+"] "+ex.getMessage();
+        }
+        return message;
+    }
 }

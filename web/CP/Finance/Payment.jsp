@@ -135,7 +135,7 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1>Add Product</h1>
+                            <h1>Payment Report</h1>
                         </div>
                         <div class="pull-right">
 
@@ -158,11 +158,11 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="view.jsp">Products</a>
+                                <a href="view.jsp">Payemnt</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="add.jsp">Add Product</a>
+                                <a href="add.jsp">Report</a>
                             </li>
                         </ul>
                         <div class="close-bread">
@@ -179,7 +179,7 @@
                                     <h3><i class="icon-th-list"></i> My Payment Report Form</h3>
                                 </div>
                                 <div class="box-content nopadding">
-                                    <form  method="POST" class='form-horizontal form-bordered' action="RevenuReport.jsp">
+                                    <form  method="POST" class='form-horizontal form-bordered' action="PaymentReport.jsp">
                                         <div class="control-group">
                                             <label for="autocom" class="control-label">Date From</label>
                                             <div class="controls">
@@ -195,7 +195,7 @@
                                             </div>
                                         </div>
                                         <div class="form-actions">
-                                            <button type="submit" class="btn btn-primary" >Save changes</button>
+                                            <button type="submit" class="btn btn-primary" >Run Report</button>
                                             <button type="reset" class="btn">Cancel</button>
                                         </div>
                                     </form>

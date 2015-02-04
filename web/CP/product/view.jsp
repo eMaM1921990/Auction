@@ -84,16 +84,16 @@
         <!-- Apple devices Homescreen icon -->
         <link rel="apple-touch-icon-precomposed" href="../img/apple-touch-icon-precomposed.png" />
         <style>
-                  .aParent div {
-  float: left;
-  clear: none;
-  height: 20%;
-  
+            .aParent div {
+                float: left;
+                clear: none;
+                height: 20%;
 
 
 
 
-}
+
+            }
         </style>
     </head>
 
@@ -108,9 +108,9 @@
                             <h1>Products</h1>
                         </div>
                         <div class="pull-right">
-                           
+
                             <ul class="stats">
-                              
+
                                 <li class='lightred'>
                                     <i class="icon-calendar"></i>
                                     <div class="details">
@@ -145,11 +145,11 @@
 
                     <div class="row-fluid">
                         <div class="span12">
-                             <div class="alert alert-success" style="display: ${param.suc}">
+                            <div class="alert alert-success" style="display: ${param.suc}">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong>Success!</strong> ${param.msg}.
                             </div>
-                           
+
                             <div class="alert alert-error" style="display: ${param.err}">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong>Warning!</strong> ${param.msg}.
@@ -165,29 +165,29 @@
                                         <thead>
                                             <tr class='thefilter'>
 
-                                                <th class='hidden-1024'>Product&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                <th class='hidden-1024'>Class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                <th class='hidden-1024'>Product&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</th>
+                                                <th class='hidden-1024'>Class</th>
                                                 <th class='hidden-350'>Quantity</th>
                                                 <th class='hidden-480'>Sell Price</th>
                                                 <th class='hidden-480'>Shipping Cost</th>
                                                 <th class='hidden-480'>International Shipping </th>
-                                                <th class='hidden-480'>Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-
+                                                <th class='hidden-480'>Details</th>
+                                                <th class='hidden-480'>Active </th>
                                                 <th class='hidden-480'>Auction Status</th>
-                                                <th class='hidden-1024'>Options&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                <th class='hidden-1024'>Options;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                             </tr>
                                             <tr>
 
-                                                <th class='hidden-1024'>Product&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                <th class='hidden-1024'>Class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                <th class='hidden-1024'>Product&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</th>
+                                                <th class='hidden-1024'>Class</th>
                                                 <th class='hidden-350'>Quantity</th>
                                                 <th class='hidden-480'>Sell Price</th>
                                                 <th class='hidden-480'>Shipping Cost</th>
                                                 <th class='hidden-480'>International Shipping </th>
-                                                <th class='hidden-480'>Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-
+                                                <th class='hidden-480'>Details</th>
+                                                <th class='hidden-480'>Active </th>
                                                 <th class='hidden-480'>Auction Status</th>
-                                                <th class='hidden-1024'>Options&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                <th class='hidden-1024'>Options;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -205,40 +205,58 @@
 
                                                 <td class='hidden-350'><span class="label label-red"><%=rs.getString("SHIPPINGCOST")%></span></td>
                                                 <td class='hidden-350'><span class="label label-satgreen"><%=rs.getString("TRANSPORT")%></span></td>
-                                                <td class='hidden-350'><%=rs.getString("DESCS").substring(0,rs.getString("DESCS").length()/2)%></td>
-
+                                                <td class='hidden-350'><%=rs.getString("DESCS").substring(0, rs.getString("DESCS").length() / 2)%></td>
+                                                <td><%=rs.getString("ISACTIVE")%></td>
                                                 <td><%=rs.getString("PRODUCTSTATUS")%></td>
                                                 <td class='hidden-480'>
                                                     <div class="aParent" style="height: 30px">
                                                         <div>
-                                                    <form action="addToList.jsp" method="post">
-                                                       <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
-                                                        <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
-                                                        <button type="submit" class="btn" rel="tooltip" title="Add To List"><i class="icon-search"></i></button>
-                                                    </form>
+
+                                                            <form action="addToList.jsp" method="post">
+                                                                <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
+                                                                <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
+                                                                <button type="submit" class="btn" rel="tooltip" title="Add To List"><i class="icon-search"></i></button>
+                                                            </form>
+
                                                         </div>
                                                         <div>
-                                                    <form action="edit.jsp" method="post">
-                                                        <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
-                                                        <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
-                                                        <input type="hidden" name="QUANTITYONHAND" value="<%=rs.getString("QUANTITYONHAND")%>"/>
-                                                        <input type="hidden" name="SELLPRICE" value="<%=rs.getString("SELLPRICE")%>"/>
-                                                        <input type="hidden" name="SHIPPINGCOST" value="<%=rs.getString("SHIPPINGCOST")%>"/>
-                                                        <input type="hidden" name="PRODUCTCAT" value="<%=rs.getString("PRODUCTCAT")%>"/>
-                                                        <input type="hidden" name="DESCS" value="<%=rs.getString("DESCS")%>"/>
-                                                        <input type="hidden" name="TRANSPORT" value="<%=rs.getString("TRANSPORT")%>"/>
-                                                        <input type="hidden" name="IMAGEURL" value="<%=rs.getString("IMAGEURL")%>"/>
-                                                        <button type="submit" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></button>
-                                                    </form>
+                                                            <form action="edit.jsp" method="post">
+                                                                <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
+                                                                <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
+                                                                <input type="hidden" name="QUANTITYONHAND" value="<%=rs.getString("QUANTITYONHAND")%>"/>
+                                                                <input type="hidden" name="SELLPRICE" value="<%=rs.getString("SELLPRICE")%>"/>
+                                                                <input type="hidden" name="SHIPPINGCOST" value="<%=rs.getString("SHIPPINGCOST")%>"/>
+                                                                <input type="hidden" name="PRODUCTCAT" value="<%=rs.getString("PRODUCTCAT")%>"/>
+                                                                <input type="hidden" name="DESCS" value="<%=rs.getString("DESCS")%>"/>
+                                                                <input type="hidden" name="TRANSPORT" value="<%=rs.getString("TRANSPORT")%>"/>
+                                                                <input type="hidden" name="IMAGEURL" value="<%=rs.getString("IMAGEURL")%>"/>
+                                                                <button type="submit" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></button>
+                                                            </form>
                                                         </div>
                                                         <div>
-                                                    <form action="../../DeleteProduct" method="post">
-                                                        <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
-                                                        <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
-                                                        <button type="submit" class="btn" rel="tooltip" title="Delete"><i class="icon-remove"></i></button>
-                                                    </form>
+                                                            <form action="../../DeleteProduct" method="post">
+                                                                <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
+                                                                <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
+                                                                <button type="submit" class="btn" rel="tooltip" title="Delete"><i class="icon-remove"></i></button>
+                                                            </form>
                                                         </div>
+                                                        <div>
+                                                            <form action="../../UpdateProductStatus" method="post">
+                                                                <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
+                                                                <input type="hidden" name="active" value="<%=rs.getString("ISACTIVE")%>"/>
+                                                                <%if(rs.getString("ISACTIVE").equals("Y")){%>
+                                                                <button type="submit" class="btn" rel="tooltip" title="In-Active">
+                                                                    <i class="icon-stop"></i>
+                                                                </button>
+                                                                <%}else{%>
+                                                                <button type="submit" class="btn" rel="tooltip" title="Active">
+                                                                    <i class="icon-play"></i>
+                                                                </button>
+                                                                <%}%>
+                                                            </form>
+
                                                         </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <%}
@@ -251,13 +269,13 @@
                         </div>
                     </div>
 
-                                        <div class="row-fluid">
-                                                                            <div class="span12">
-                                                                                <form action="add.jsp" method="post">
-                                                                                    <button class="btn btn-primary btn btn-large">Add</button>
-                                                                                </form>  
-                                                                            </div>
-                                                                            </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <form action="add.jsp" method="post">
+                                <button class="btn btn-primary btn btn-large">Add</button>
+                            </form>  
+                        </div>
+                    </div>
 
 
 
@@ -266,8 +284,8 @@
             </div>
         </div>
 
-                                         
-                                        
+
+
     </body>
 
 </html>

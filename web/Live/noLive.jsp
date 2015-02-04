@@ -13,88 +13,88 @@
 
         <title>Live Virtual Auction</title>
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="../CP/css/bootstrap.min.css">
         <!-- Bootstrap responsive -->
-        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="../CP/css/bootstrap-responsive.min.css">
         <!-- jQuery UI -->
-        <link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+        <link rel="stylesheet" href="../CP/css/plugins/jquery-ui/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="../CP/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
         <!-- PageGuide -->
-        <link rel="stylesheet" href="css/plugins/pageguide/pageguide.css">
+        <link rel="stylesheet" href="../CP/css/plugins/pageguide/pageguide.css">
         <!-- Fullcalendar -->
-        <link rel="stylesheet" href="css/plugins/fullcalendar/fullcalendar.css">
-        <link rel="stylesheet" href="css/plugins/fullcalendar/fullcalendar.print.css" media="print">
+        <link rel="stylesheet" href="../CP/css/plugins/fullcalendar/fullcalendar.css">
+        <link rel="stylesheet" href="../CP/css/plugins/fullcalendar/fullcalendar.print.css" media="print">
         <!-- chosen -->
-        <link rel="stylesheet" href="css/plugins/chosen/chosen.css">
+        <link rel="stylesheet" href="../CP/css/plugins/chosen/chosen.css">
         <!-- select2 -->
-        <link rel="stylesheet" href="css/plugins/select2/select2.css">
+        <link rel="stylesheet" href="../CP/css/plugins/select2/select2.css">
         <!-- icheck -->
-        <link rel="stylesheet" href="css/plugins/icheck/all.css">
+        <link rel="stylesheet" href="../CP/css/plugins/icheck/all.css">
         <!-- Theme CSS -->
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../CP/css/style.css">
         <!-- Color CSS -->
-        <link rel="stylesheet" href="css/themes.css">
+        <link rel="stylesheet" href="../CP/css/themes.css">
         <!-- Notify -->
-        <link rel="stylesheet" href="css/plugins/gritter/jquery.gritter.css">
+        <link rel="stylesheet" href="../CP/css/plugins/gritter/jquery.gritter.css">
 
         <!-- jQuery -->
-        <script src="js/jquery.min.js"></script>
+        <script src="../CP/js/jquery.min.js"></script>
 
         <!-- Nice Scroll -->
-        <script src="js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+        <script src="../CP/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
         <!-- Nice Scroll -->
-        <script src="js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+        <script src="../CP/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
         <!-- jQuery UI -->
-        <script src="js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
-        <script src="js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
-        <script src="js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
-        <script src="js/plugins/jquery-ui/jquery.ui.draggable.min.js"></script>
-        <script src="js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
-        <script src="js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
+        <script src="../CP/js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
+        <script src="../CP/js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
+        <script src="../CP/js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
+        <script src="../CP/js/plugins/jquery-ui/jquery.ui.draggable.min.js"></script>
+        <script src="../CP/js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
+        <script src="../CP/js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
         <!-- Touch enable for jquery UI -->
-        <script src="js/plugins/touch-punch/jquery.touch-punch.min.js"></script>
+        <script src="../CP/js/plugins/touch-punch/jquery.touch-punch.min.js"></script>
         <!-- slimScroll -->
-        <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="../CP/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
         <!-- Bootstrap -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../CP/js/bootstrap.min.js"></script>
         <!-- vmap -->
-        <script src="js/plugins/vmap/jquery.vmap.min.js"></script>
-        <script src="js/plugins/vmap/jquery.vmap.world.js"></script>
-        <script src="js/plugins/vmap/jquery.vmap.sampledata.js"></script>
+        <script src="../CP/js/plugins/vmap/jquery.vmap.min.js"></script>
+        <script src="../CP/js/plugins/vmap/jquery.vmap.world.js"></script>
+        <script src="../CP/js/plugins/vmap/jquery.vmap.sampledata.js"></script>
         <!-- Bootbox -->
-        <script src="js/plugins/bootbox/jquery.bootbox.js"></script>
+        <script src="../CP/js/plugins/bootbox/jquery.bootbox.js"></script>
         <!-- Flot -->
-        <script src="js/plugins/flot/jquery.flot.min.js"></script>
-        <script src="js/plugins/flot/jquery.flot.bar.order.min.js"></script>
-        <script src="js/plugins/flot/jquery.flot.pie.min.js"></script>
-        <script src="js/plugins/flot/jquery.flot.resize.min.js"></script>
+        <script src="../CP/js/plugins/flot/jquery.flot.min.js"></script>
+        <script src="../CP/js/plugins/flot/jquery.flot.bar.order.min.js"></script>
+        <script src="../CP/js/plugins/flot/jquery.flot.pie.min.js"></script>
+        <script src="../CP/js/plugins/flot/jquery.flot.resize.min.js"></script>
         <!-- imagesLoaded -->
-        <script src="js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
+        <script src="../CP/js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
         <!-- PageGuide -->
-        <script src="js/plugins/pageguide/jquery.pageguide.js"></script>
+        <script src="../CP/js/plugins/pageguide/jquery.pageguide.js"></script>
         <!-- FullCalendar -->
-        <script src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
+        <script src="../CP/js/plugins/fullcalendar/fullcalendar.min.js"></script>
         <!-- Chosen -->
-        <script src="js/plugins/chosen/chosen.jquery.min.js"></script>
+        <script src="../CP/js/plugins/chosen/chosen.jquery.min.js"></script>
         <!-- select2 -->
-        <script src="js/plugins/select2/select2.min.js"></script>
+        <script src="../CP/js/plugins/select2/select2.min.js"></script>
         <!-- icheck -->
-        <script src="js/plugins/icheck/jquery.icheck.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="style/freeow/freeow.css" />
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <script src="../CP/js/plugins/icheck/jquery.icheck.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CP/style/freeow/freeow.css" />
+        <link rel="stylesheet" type="text/css" href="../CP/css/demo.css" />
 
-        <script type="text/javascript" src="js/jquery.freeow.js"></script>
-        <script type="text/javascript" src="js/demo.js"></script>
+        <script type="text/javascript" src="../CP/js/jquery.freeow.js"></script>
+        <script type="text/javascript" src="../CP/js/demo.js"></script>
 
 
 
 
         <!-- Theme framework -->
-        <script src="js/eakroko.min.js"></script>
+        <script src="../CP/js/eakroko.min.js"></script>
         <!-- Theme scripts -->
-        <script src="js/application.min.js"></script>
+        <script src="../CP/js/application.min.js"></script>
         <!-- Just for demonstration -->
-        <script src="js/demonstration.min.js"></script>
+        <script src="../CP/js/demonstration.min.js"></script>
 
         <!--[if lte IE 9]>
                 <script src="js/plugins/placeholder/jquery.placeholder.min.js"></script>

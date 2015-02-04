@@ -107,7 +107,7 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1>Products</h1>
+                            <h1>Payment Report</h1>
                         </div>
                         <div class="pull-right">
 
@@ -130,7 +130,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="view.jsp">Product</a>
+                                <a href="view.jsp">My Payment</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -175,7 +175,7 @@
                                                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                                                 java.sql.Date sqldatefrom = new java.sql.Date(df.parse(request.getParameter("datefrom")).getTime());
                                                 java.sql.Date sqldateto = new java.sql.Date(df.parse(request.getParameter("dateto")).getTime());
-                                                db.pstm = db.con.prepareStatement("SELECT SUM(FEES) AS TOTAL,USERNAME FROM AUCTIONWINNER,AUCTION,PRODUCT WHERE DATEAUCTION BETWEEN ? AND ?  AND PRODUCT_ID=idPRODUCT AND PRODUCTCREATEDBY=idUSER AND PAID=? ORDER BY idUSER GROUP BY idUSER");
+                                                db.pstm = db.con.prepareStatement("SELECT SUM(FEES) AS TOTAL,USERNAME FROM AUCTIONWINNER,AUCTION,PRODUCT,USER WHERE DATEAUCTION BETWEEN ? AND ?  AND PRODUCT_ID=idPRODUCT AND PRODUCTCREATEDBY=idUSER AND PAID=?  GROUP BY idUSER ORDER BY idUSER");
                                                 db.pstm.setDate(1, sqldatefrom);
                                                 db.pstm.setDate(2, sqldateto);
                                                 db.pstm.setString(3, "N");

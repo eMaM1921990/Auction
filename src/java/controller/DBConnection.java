@@ -7,12 +7,11 @@ package controller;
  */
 /**
  *
- * @author  Ehab Emara
+ * @author Ehab Emara
  */
-
 import java.sql.*;
-
-import java.util.*;
+import java.util.Properties;
+import java.util.Vector;
 
 public class DBConnection {
 
@@ -20,19 +19,19 @@ public class DBConnection {
     public Statement stmt;
     public ResultSet rs;
     public String driverName = "com.mysql.jdbc.Driver";
-   
-    public String url ="jdbc:mysql://localhost:3306/icanor_autcion";
- 
-    public String user ="root";//"icanor";
-    public String password ="0122308791";//"livevirtualauctions1089";
+
+    public String url = "jdbc:mysql://localhost:3306/icanor_autcion";
+    public String user = "root";
+
+    public String password ="0122308791";//"M,qILVOlAc?D";
     public PreparedStatement pstm;
     int colcount;
 
-    /** Creates a new instance of DBConnection
-     *driver sun.jdbc.odbc.JdbcOdbcDriver
-     *url jdbc:odbc:student
+    /**
+     * Creates a new instance of DBConnection driver
+     * sun.jdbc.odbc.JdbcOdbcDriver url jdbc:odbc:student
      */
-       public void connect() {
+    public void connect() {
 
         try {
             Class.forName(driverName).newInstance();
@@ -45,7 +44,7 @@ public class DBConnection {
         }
 
         try {
-            con = DriverManager.getConnection(url,user,password);
+            con = DriverManager.getConnection(url, user, password);
         } catch (SQLException sqlex) {
             sqlex.printStackTrace();
         }
@@ -58,10 +57,7 @@ public class DBConnection {
             sqlex.printStackTrace();
         }
 
-
     }
-    
-    
 
     public void excuteUpdate(String sqlStmt) {
         try {
@@ -76,12 +72,12 @@ public class DBConnection {
 
         try {
             rs = stmt.executeQuery(selectStmt);
-           
+
         } catch (SQLException sqlex) {
             sqlex.printStackTrace();
         }
         return rs;
-        
+
     }
     /* returns data as a vector of vector to be displayed in a JTable
      **/
@@ -109,30 +105,30 @@ public class DBConnection {
         try {
             con.close();
             stmt.close();
-        
+
         } catch (SQLException sqlex) {
             sqlex.printStackTrace();
         }
     }
-    
-    public void closeResult(){
+
+    public void closeResult() {
         try {
-           
-          
+
             rs.close();
         } catch (SQLException sqlex) {
             sqlex.printStackTrace();
         }
     }
-    
-    public void CloseStatment(){
+
+    public void CloseStatment() {
         try {
-           
+
             stmt.close();
-            
+
         } catch (SQLException sqlex) {
             sqlex.printStackTrace();
         }
     }
-    
+
+   
 }

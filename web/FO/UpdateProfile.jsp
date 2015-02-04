@@ -5,6 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="controller.DBConnection" %>
+<%
+    DBConnection db = new DBConnection();
+
+%>
 <!DOCTYPE html>
 
 <html>
@@ -47,13 +52,50 @@
         <div class="container">
 
             <%@include file="Home_header.jsp" %>
+            <%                db.connect();
+                db.pstm = db.con.prepareStatement("SELECT * FROM USER WHERE idUSER=?");
+                db.pstm.setInt(1, userid);
+                db.rs=db.pstm.executeQuery();
+                String USERNAME = null;
+                String PASSWORD = null;
+                int USERTYPE = 0;
+                String FISRTNAME = null;
+                String LASTNAME = null;
+                String POSTALCODE = null;
+                String ADDRESS1 = null;
+                String ADDRESS2 = null;
+                String EMAIL = null;
+                String PHONE = null;
+                String PAYPAL = null;
+                String SHIPPINGADDRESS = null;
+                String COUNTRY = null;
+                String CITY = null;
+                while (db.rs.next()) {
+                    USERNAME = db.rs.getString("USERNAME");
+                    PASSWORD = db.rs.getString("PASSWORD");
+                    USERTYPE = db.rs.getInt("USERTYPE");
+                    FISRTNAME = db.rs.getString("FISRTNAME");
+                    LASTNAME = db.rs.getString("LASTNAME");
+                    POSTALCODE = db.rs.getString("POSTALCODE");
+                    ADDRESS1 = db.rs.getString("ADDRESS1");
+                    ADDRESS2 = db.rs.getString("ADDRESS2");
+                    EMAIL = db.rs.getString("EMAIL");
+                    PHONE = db.rs.getString("PHONE");
+                    PAYPAL = db.rs.getString("PAYPAL");
+                    SHIPPINGADDRESS = db.rs.getString("SHIPPINGADDRESS");
+                    COUNTRY = db.rs.getString("COUNTRY");
+                    CITY = db.rs.getString("CITY");
+                }
 
+                db.closeConnection();
+
+            %>
             <!-- Content -->
             <div class="row content">
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="breadcrumbs">
-                        <p><a href="#">Home</a> <i class="icons icon-right-dir"></i> Create an account</p>
+                        <p><a href="#">Home</a> <i class="icons icon-right-dir"></i> update an account</p>
                     </div>
                 </div>
 
@@ -69,8 +111,10 @@
                             <div class="carousel-heading no-margin">
                                 <h4>Update your profile</h4>
                             </div>
-                            <form action="../Registration" method="post">
+                            <form action="../updateprofile" method="post">
                                 <input type="hidden" name="userid" value="<%=userid%>" />
+                                <input type="hidden" id="type" value="<%=USERTYPE%>" />
+
                                 <div class="page-content">
                                     <div class="row">
 
@@ -82,7 +126,7 @@
                                             <p>E-Mail*</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="EMAIL">
+                                            <input type="text" name="EMAIL" value="<%=EMAIL%>">
                                         </div>	
 
                                     </div>
@@ -93,7 +137,7 @@
                                             <p>Username*</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="USERNAME">
+                                            <input type="text" name="USERNAME" value="<%=USERNAME%>">
                                         </div>	
 
                                     </div>
@@ -104,7 +148,7 @@
                                             <p>First name*</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="FISRTNAME">
+                                            <input type="text" name="FISRTNAME" value="<%=FISRTNAME%>">
                                         </div>	
 
                                     </div>
@@ -116,7 +160,7 @@
                                             <p>Last name*</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="LASTNAME">
+                                            <input type="text" name="LASTNAME" value="<%=LASTNAME%>">
                                         </div>	
 
                                     </div>
@@ -126,10 +170,17 @@
                                         <div class="col-lg-4 col-md-4 col-sm-4">
                                             <p>User Type</p>
                                         </div>
+
+
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <select class="chosen-select" name="USERTYPE">
+                                            <select class="chosen-select" name="USERTYPE" id="USERTYPE">
+                                                <%if (USERTYPE == 1) {%>
+                                                <option value="1">Admin</option>
+
+                                                <%}%>
                                                 <option value="3">User</option>
                                                 <option value="2">Seller</option>
+
                                             </select>
                                         </div>	
 
@@ -141,7 +192,7 @@
                                             <p>Password</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="PASSWORD">
+                                            <input type="text" name="PASSWORD" value="<%=PASSWORD%>">
                                         </div>	
 
                                     </div>
@@ -152,7 +203,7 @@
                                             <p>Confirm Password</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text">
+                                            <input type="text" >
                                         </div>	
 
                                     </div>
@@ -176,7 +227,7 @@
                                             <p>Address 1</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="ADDRESS1">
+                                            <input type="text" name="ADDRESS1" value="<%=ADDRESS1%>">
                                         </div>	
 
                                     </div>
@@ -187,7 +238,7 @@
                                             <p>Address 2</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="ADDRESS2">
+                                            <input type="text" name="ADDRESS2" value="<%=ADDRESS2%>">
                                         </div>	
 
                                     </div>
@@ -198,7 +249,7 @@
                                             <p>ZIP / Postal Code</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text"  name="POSTALCODE">
+                                            <input type="text"  name="POSTALCODE" value="<%=POSTALCODE%>">
                                         </div>	
 
                                     </div>
@@ -209,7 +260,7 @@
                                             <p>City</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="CITY">
+                                            <input type="text" name="CITY" value="<%=CITY%>">
                                         </div>	
 
                                     </div>
@@ -220,7 +271,7 @@
                                             <p>Country</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="COUNTRY">
+                                            <input type="text" name="COUNTRY" value="<%=COUNTRY%>">
                                         </div>	
 
                                     </div>
@@ -231,7 +282,7 @@
                                             <p>Phone</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="PHONE">
+                                            <input type="text" name="PHONE" value="<%=PHONE%>">
                                         </div>	
 
                                     </div>
@@ -242,7 +293,7 @@
                                             <p>PayPal Account</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="PAYPAL">
+                                            <input type="text" name="PAYPAL" value="<%=PAYPAL%>">
                                         </div>	
 
                                     </div>
@@ -331,7 +382,18 @@
         <script defer src="js/bootstrap.min.js"></script>
         <script src="js/main-script.js"></script>
 
+        <script src="js/jquery-1.11.0.min.js"></script>
+
 
     </body>
 
 </html>
+
+<script>
+
+    $(document).ready(function() {
+        var a=document.getElementById('type').value;
+        document.getElementById('USERTYPE').value=a;
+        //('#USERTYPE').val('2');
+    });
+</script> 

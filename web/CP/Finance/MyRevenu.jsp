@@ -136,7 +136,7 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1>Add Product</h1>
+                            <h1>My Auctions Revenu Report</h1>
                         </div>
                         <div class="pull-right">
 
@@ -159,11 +159,11 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="view.jsp">Products</a>
+                                <a href="#">Finance</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="add.jsp">Add Product</a>
+                                <a href="#">Report</a>
                             </li>
                         </ul>
                         <div class="close-bread">
@@ -196,7 +196,7 @@
                                             </div>
                                         </div>
                                         <div class="form-actions">
-                                            <button type="submit" class="btn btn-primary" >Save changes</button>
+                                            <button type="submit" class="btn btn-primary" >Generate Report</button>
                                             <button type="reset" class="btn">Cancel</button>
                                         </div>
                                     </form>

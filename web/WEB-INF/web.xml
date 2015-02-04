@@ -172,6 +172,18 @@
         <servlet-name>deleteinbox</servlet-name>
         <servlet-class>controller.deleteinbox</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>controller.DeleteUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductStatus</servlet-name>
+        <servlet-class>controller.UpdateProductStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Confirm</servlet-name>
+        <servlet-class>live.controller.Confirm</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
@@ -343,6 +355,18 @@
     <servlet-mapping>
         <servlet-name>deleteinbox</servlet-name>
         <url-pattern>/deleteinbox</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/DeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductStatus</servlet-name>
+        <url-pattern>/UpdateProductStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Confirm</servlet-name>
+        <url-pattern>/Confirm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -194,7 +194,7 @@
                             <ul>
 
                                 <li><a href="../Online.jsp"><i class="icons icon-right-dir"></i>Live Items</a></li>
-                                <li><a href="../Auction/AuctionCalendar.jsp"><i class="icons icon-right-dir"></i> Auction New</a></li>
+                                <li><a href="../Auction/AuctionCalendar.jsp"><i class="icons icon-right-dir"></i> Auction News</a></li>
                                 
                             </ul>
                         </li>

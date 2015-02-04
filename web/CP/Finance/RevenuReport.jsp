@@ -107,7 +107,7 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1>Products</h1>
+                            <h1>My Auctions Revenu Report</h1>
                         </div>
                         <div class="pull-right">
 
@@ -129,12 +129,12 @@
                                 <a href="../index.jsp">Home</a>
                                 <i class="icon-angle-right"></i>
                             </li>
-                            <li>
-                                <a href="view.jsp">Product</a>
+                           <li>
+                                <a href="#">Finance</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="#">View</a>
+                                <a href="#">Report</a>
                             </li>
                         </ul>
                         <div class="close-bread">
@@ -150,7 +150,7 @@
                             <div class="box">
                                 <div class="box-title">
                                     <h3>
-                                        Revenue Report From Date ${param.datefrom} To ${param.dateto}
+                                        Revenue Report From Date <strong>${param.datefrom} </strong> To <strong>${param.dateto}</strong>
                                     </h3>
                                 </div>
                                 <div class="box-content nopadding">
@@ -173,22 +173,35 @@
                                                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                                                 java.sql.Date sqldatefrom = new java.sql.Date(df.parse(request.getParameter("datefrom")).getTime());
                                                 java.sql.Date sqldateto = new java.sql.Date(df.parse(request.getParameter("dateto")).getTime());
-                                                db.pstm = db.con.prepareStatement("SELECT DATEAUCTION,FEES FROM AUCTIONWINNER,AUCTION WHERE DATEAUCTION BETWEEN ? AND ? AND PAID=?");
+                                                db.pstm = db.con.prepareStatement("SELECT DATEAUCTION,FEES,TOTAL,SUM(TOTAL-((FEES*TOTAL)/100)) FROM AUCTIONWINNER,AUCTION WHERE DATEAUCTION BETWEEN ? AND ? AND BUYPAID=? AND idAUCTION=AUCTION_ID_W AND AUCTION_PRO IN (SELECT idPRODUCT FROM PRODUCT WHERE PRODUCTCREATEDBY=?)");
                                                 db.pstm.setDate(1, sqldatefrom);
                                                 db.pstm.setDate(2, sqldateto);
                                                 db.pstm.setString(3,"Y");
+                                                db.pstm.setInt(4, userid);
                                                 ResultSet rs = db.pstm.executeQuery();
+                                                double summery=0.0;
                                                 while (rs.next()) {
                                             %>
                                             <tr>
 
-                                                <td><%=rs.getString(1)%></td>
-                                                <td><span class="label label-orange"><%=rs.getString(2)%></span></td>
+                                                <td>
+                                                    <%if(rs.getString(1)==null){%>
+                                                    <%="No Auction"%>
+                                                    <%}else{%>
+                                                    <%=rs.getString(1)%>
+                                                    <%}%>
+                                                    </td>
+                                                <td><span class="label label-orange"><%=rs.getDouble(3)-((rs.getDouble(2)*rs.getDouble(3))/100)%></span></td>
                                                
                                             </tr>
-                                            <%}
+                                            <%
+                                                summery=rs.getDouble(4);
+                                                } 
                                                 db.closeConnection();
                                             %>
+                                            <tr>
+                                                <td>&sum;</td><td><%=summery%></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

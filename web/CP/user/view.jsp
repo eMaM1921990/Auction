@@ -212,6 +212,7 @@
                                                         <button type="submit" class="btn" rel="tooltip" title="Manage Status"><i class="icon-cogs"></i></button>
                                                     </form>
                                                         </div>
+                                                        <a href="../../DeleteUser?id=<%=rs.getString("idUSER")%>"class="btn"><i class="icon-remove"></i></a>
                                                         </div>
 
                                                 </td>

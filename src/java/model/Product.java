@@ -116,4 +116,22 @@ public class Product {
         }
         return message;
     }
+    
+    public String setActive(int product,String status){
+        String message=null;
+        try {
+            db.connect();
+            db.pstm=db.con.prepareStatement("UPDATE PRODUCT SET ISACTIVE=? WHERE idPRODUCT=?");
+            db.pstm.setString(1, status);
+            db.pstm.setInt(2, product);
+            db.pstm.executeUpdate();
+            db.closeConnection();
+            message="Successfully . . Update Product status to IsActive "+status+". Thanks !";
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+            message="["+Integer.toString(ex.getErrorCode())+"] "+ex.getMessage();
+        }
+        
+        return message;
+    }
 }

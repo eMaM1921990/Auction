@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package live.controller;
 
-import controller.DBConnection;
+package controller;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Product;
 
 /**
  *
  * @author emam
  */
-public class LastTimer extends HttpServlet {
+public class UpdateProductStatus extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,42 +33,24 @@ public class LastTimer extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
-        DBConnection db = new DBConnection();
-        db.connect();
-        PrintWriter out = response.getWriter();
-        try {
-            int auction = 0;
-            String time = "0";
-            String sql = "SELECT MAX(idAUCTION) AS AUCTION FROM AUCTION WHERE STATUS=?";
-            String sql2 = "SELECT STARTTIME FROM AUCTION WHERE idAUCTION=?";
-            db.pstm = db.con.prepareStatement(sql);
-            db.pstm.setString(1, "open");
-            db.rs = db.pstm.executeQuery();
-            while (db.rs.next()) {
-                auction = db.rs.getInt(1);
-            }
-            db.rs.close();
-            db.pstm = db.con.prepareStatement(sql2);
-            db.pstm.setInt(1, auction);
-            db.rs = db.pstm.executeQuery();
-            while (db.rs.next()) {
-                time = db.rs.getString(1);
-            }
-
-           // System.out.println("Timing " + time);
-             Logger.getLogger(LastTimer.class.getName()).log(Level.SEVERE, null, time);
-
-            db.rs.close();
-            db.closeConnection();
-            response.getWriter().write(time);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(LastTimer.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            out.close();
+        response.setCharacterEncoding("UTF-8");
+        Product p=new Product();
+        String status=null;
+        if("Y".equals(request.getParameter("active"))){
+            status="N";
+        }else{
+            status="Y";
         }
+        
+        String message=p.setActive(Integer.valueOf(request.getParameter("idPRODUCT")), status);
+        if(message.contains("Successfully")){
+                response.sendRedirect(request.getContextPath()+"/CP/product/view.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&suc=block");
+            }else{
+                response.sendRedirect(request.getContextPath()+"/CP/product/view.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&err=block");
+            }
+                
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html>
     <head>
@@ -135,12 +136,12 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1>Add Product</h1>
+                            <h1>My Revenue From Seller Report</h1>
                         </div>
                         <div class="pull-right">
 
                             <ul class="stats">
-                                
+                               
                                 <li class='lightred'>
                                     <i class="icon-calendar"></i>
                                     <div class="details">
@@ -158,11 +159,11 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="view.jsp">Products</a>
+                                <a href="#">Finance</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="add.jsp">Add Product</a>
+                                <a href="#">Report</a>
                             </li>
                         </ul>
                         <div class="close-bread">
@@ -176,10 +177,10 @@
 
                             <div class="box box-color box-bordered">
                                 <div class="box-title">
-                                    <h3><i class="icon-th-list"></i> My Seller Revenue Report Form</h3>
+                                    <h3><i class="icon-th-list"></i> My Revenue Report Form</h3>
                                 </div>
                                 <div class="box-content nopadding">
-                                    <form  method="POST" class='form-horizontal form-bordered' action="RevenuReport.jsp">
+                                    <form  method="POST" class='form-horizontal form-bordered' action="RevenuFromSellerReport.jsp">
                                         <div class="control-group">
                                             <label for="autocom" class="control-label">Date From</label>
                                             <div class="controls">
@@ -195,7 +196,7 @@
                                             </div>
                                         </div>
                                         <div class="form-actions">
-                                            <button type="submit" class="btn btn-primary" >Save changes</button>
+                                            <button type="submit" class="btn btn-primary" >Generate Report</button>
                                             <button type="reset" class="btn">Cancel</button>
                                         </div>
                                     </form>

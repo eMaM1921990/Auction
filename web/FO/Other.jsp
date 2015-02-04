@@ -93,7 +93,7 @@
                     <div class="row"> 
                         <!-- Product Item -->
                           <%                                    
-                                    db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTCAT=?");
+                                    db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTCAT=? AND ISACTIVE='Y'");
                                     db.pstm.setInt(1, 7);
                                     ResultSet rs = db.pstm.executeQuery();
                                     while (rs.next()) {%>

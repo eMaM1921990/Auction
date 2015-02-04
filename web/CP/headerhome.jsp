@@ -9,57 +9,45 @@
 <%session = request.getSession();
     beans.LoginBeans login;
     login = (beans.LoginBeans) session.getAttribute("login");
-    String username = login.getUserName();
-    int userid = login.getUserId();
-    int type = login.getUserType();
-%>
-   <link rel="stylesheet" type="text/css" href="style/freeow/freeow.css" />
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    String username = "";
+    int userid = 0;
+    int type = 0;
+    if (login.getUserName() != null) {
+        username = login.getUserName();
+        userid = login.getUserId();
+        type = login.getUserType();
+    } else {
+        response.sendRedirect(request.getContextPath() + "/Redirect.jsp");
+    }
 
-        <script type="text/javascript" src="js/jquery.freeow.js"></script>
+%>
+<link rel="stylesheet" type="text/css" href="style/freeow/freeow.css" />
+<link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+<script type="text/javascript" src="js/jquery.freeow.js"></script>
 <script type="text/javascript">
-   
+
     var automax = setInterval(function()
     {
         $('#message').load('../backendunreadmessage').fadeIn("slow");
     }, 1000000); // refresh every 5000 milliseconds
 
-/*
-    var auction = setInterval(function()
-    {
-       // $('#auction').load('../getServerDateandTime').fadeIn("slow");
-        
-        $.get('../getServerDateandTime', null, function(responseText) {
-                    max = responseText;
-                    if (max > 0) {
-                        
-                        $(document).ready(function() {
-                            $("#freeow").freeow("Auction news", "New item ready for Live virtual auction", {
-                                classes: ["smokey", "slide"],
-                                autoHide: true
-                            });
-                        });
-                    }
-                    });
-                    
-    }, 1000); // refresh every 5000 milliseconds
-    
-    */
+
 </script>
 <!DOCTYPE html>
 
 <div id="navigation">
     <div class="container-fluid">
         <a href="#" id="brand">Auction </a>
-       
+
         <ul class='main-nav'>
-             <li class='active'>
-                    <a href="../FO/Portal.jsp">
+            <li class='active'>
+                <a href="../FO/Portal.jsp">
                     <i class="icon-exchange"></i>
                 </a>
             </li>
             <li >
-               
+
                 <a href="index.jsp">
                     <span>Dashboard</span>
                 </a>
@@ -130,13 +118,13 @@
                         <a href="Finance/viewFees.jsp">Fees</a>
                     </li>
                     <li>
-                        <a href="Finance/MyRevenu.jsp">My Revenue</a>
+                        <a href="Finance/MyRevenu.jsp">My Auctions Revenue</a>
                     </li>
                     <li>
-                        <a href="Finance/SellerRevenue.jsp">Seller Revenue</a>
+                        <a href="Finance/MyReveneFromSeller.jsp">My Revenue from seller </a>
                     </li>
                     <li>
-                        <a href="Finance/Payment.jsp">Total Payment</a>
+                        <a href="Finance/Payment.jsp"> Payment Not Received</a>
                     </li>
 
                 </ul>
@@ -151,11 +139,9 @@
                 <ul class="dropdown-menu">
 
                     <li>
-                        <a href="SellerRevenu/MyRevenu.jsp">My Revenue</a>
+                        <a href="SellerRevenu/MyRevenu.jsp">My Auctions Revenue</a>
                     </li>
-                    <li>
-                        <a href="SellerRevenu/Payment.jsp">Payment</a>
-                    </li>
+                    
 
 
                 </ul>
@@ -213,4 +199,4 @@
         </div>
     </div>
 </div>
-                <div id="freeow" class="freeow freeow-bottom-right "></div>
+<div id="freeow" class="freeow freeow-bottom-right "></div>

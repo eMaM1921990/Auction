@@ -110,7 +110,7 @@
                         <div class="pull-right">
 
                             <ul class="stats">
-                              
+
                                 <li class='lightred'>
                                     <i class="icon-calendar"></i>
                                     <div class="details">
@@ -153,7 +153,7 @@
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong>Success!</strong> ${param.msg}.
                             </div>
-                           
+
                             <div class="alert alert-error" style="display: ${param.err}">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong>Warning!</strong> ${param.msg}.
@@ -170,42 +170,47 @@
                                             <tr class='thefilter'>
 
                                                 <th class='hidden-1024'>Fees Amount</th>
-                                               
+
                                                 <th class='hidden-480'>Options</th>
-                                                
+
                                             </tr>
                                             <tr>
                                                 <th class='hidden-1024'>Fees Amount</th>
-                                                
+
                                                 <th class='hidden-480'>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <%db.pstm = db.con.prepareStatement("SELECT * FROM FEES ");
-                                                
+                                                boolean find=false;
                                                 ResultSet rs = db.pstm.executeQuery();
                                                 while (rs.next()) {
+                                                    if(rs.getRow()>0){
+                                                        find=true;
+                                                    }
+                                                    
+                                                 
                                             %>
                                             <tr>
 
                                                 <td><%=rs.getString("FEES")%> %</td>
-                                               
-                                                
-                                                
+
+
+
                                                 <td class='hidden-480'>
                                                     <div class="aParent" style="height: 30px">
-                                                     
+
                                                         <div>
                                                             <form action="EditFees.jsp" method="post">
                                                                 <input type="hidden" name="idFEES" value="<%=rs.getString("idFEES")%>"/>
                                                                 <input type="hidden" name="FEES" value="<%=rs.getString("FEES")%>"/>
-                                                             
+
                                                                 <button type="submit" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></button>
                                                             </form>
                                                         </div>
                                                         <div>
-                                                            <form action="../DeleteFees" method="post">
-                                                              <input type="hidden" name="idFEES" value="<%=rs.getString("idFEES")%>"/>
+                                                            <form action="../../DeleteFees" method="post">
+                                                                <input type="hidden" name="idFEES" value="<%=rs.getString("idFEES")%>"/>
                                                                 <button type="submit" class="btn" rel="tooltip" title="Delete"><i class="icon-remove"></i></button>
                                                             </form>
                                                         </div>
@@ -224,8 +229,14 @@
 
                     <div class="row-fluid">
                         <div class="span12">
+                            
                             <form action="AddFees.jsp" method="post">
-                                <button class="btn btn-primary btn btn-large">Add</button>
+                               <% if(find==true){%>
+                              
+                              <%}else{%>
+                              <button class="btn btn-primary btn btn-large">Add</button>
+                              <%}%>
+                                
                             </form>  
                         </div>
                     </div>

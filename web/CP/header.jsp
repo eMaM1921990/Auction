@@ -9,48 +9,55 @@
 <%session = request.getSession();
     beans.LoginBeans login;
     login = (beans.LoginBeans) session.getAttribute("login");
-    String username = login.getUserName();
-    int userid=login.getUserId();
-    int type=login.getUserType();
+    String username = "";
+    int userid = 0;
+    int type = 0;
+    if (login.getUserName() != null) {
+        username = login.getUserName();
+        userid = login.getUserId();
+        type = login.getUserType();
+    } else {
+        response.sendRedirect(request.getContextPath() + "/Redirect.jsp");
+    }
 %>
- <link rel="stylesheet" type="text/css" href="../style/freeow/freeow.css" />
-        <link rel="stylesheet" type="text/css" href="../css/demo.css" />
+<link rel="stylesheet" type="text/css" href="../style/freeow/freeow.css" />
+<link rel="stylesheet" type="text/css" href="../css/demo.css" />
 
-        <script type="text/javascript" src="../js/jquery.freeow.js"></script>
+<script type="text/javascript" src="../js/jquery.freeow.js"></script>
 <script type="text/javascript">
     var automax = setInterval(function()
     {
         $('#message').load('../../backendunreadmessage').fadeIn("slow");
     }, 1000000); // refresh every 5000 milliseconds
-    
+
     /*
      var auction = setInterval(function()
-    {
-        
-        $.get('../../getServerDateandTime', null, function(responseText) {
-                    max = responseText;
-                    if (max > 0) {
-                        
-                        $(document).ready(function() {
-                            $("#freeow").freeow("Auction news", "New item ready for Live virtual auction", {
-                                classes: ["smokey", "slide"],
-                                autoHide: true
-                            });
-                        });
-                    }
-                    });
-    }, 1000); // refresh every 5000 milliseconds
-    
-    */
+     {
+     
+     $.get('../../getServerDateandTime', null, function(responseText) {
+     max = responseText;
+     if (max > 0) {
+     
+     $(document).ready(function() {
+     $("#freeow").freeow("Auction news", "New item ready for Live virtual auction", {
+     classes: ["smokey", "slide"],
+     autoHide: true
+     });
+     });
+     }
+     });
+     }, 1000); // refresh every 5000 milliseconds
+     
+     */
 </script>
 <!DOCTYPE html>
 <div id="navigation">
     <div class="container-fluid">
         <a href="#" id="brand">Auction </a>
-        
+
         <ul class='main-nav'>
             <li class='active'>
-                    <a href="../../FO/Portal.jsp">
+                <a href="../../FO/Portal.jsp">
                     <i class="icon-exchange"></i>
                 </a>
             </li>
@@ -65,7 +72,7 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <%if(type==1){%>
+                    <%if (type == 1) {%>
                     <li>
                         <a href="../product/view.jsp">Manage Product</a>
                     </li>
@@ -78,11 +85,11 @@
                     <li>
                         <a href="../List/sellerList.jsp">Seller List</a>
                     </li>
-                    <%}else if(type==2){%>
+                    <%} else if (type == 2) {%>
                     <li>
                         <a href="../product/view.jsp">Manage Product</a>
                     </li>
-                    
+
                     <li>
                         <a href="../List/view.jsp">Manage List</a>
                     </li>
@@ -101,7 +108,7 @@
 
                 </ul>
             </li>
-            <%if(type==1){%>
+            <%if (type == 1) {%>
             <li>
                 <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>User</span>
@@ -114,7 +121,7 @@
 
                 </ul>
             </li>
-           
+
             <li>
                 <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>Financial</span>
@@ -125,18 +132,18 @@
                         <a href="../Finance/viewFees.jsp">Fees</a>
                     </li>
                     <li>
-                        <a href="../Finance/MyRevenu.jsp">My Revenue</a>
+                        <a href="../Finance/MyRevenu.jsp">My Auctions Revenue</a>
                     </li>
                     <li>
-                        <a href="../Finance/SellerRevenue.jsp">Seller Revenue</a>
+                        <a href="../Finance/MyReveneFromSeller.jsp">My Revenue from seller</a>
                     </li>
                     <li>
-                        <a href="../Finance/Payment.jsp">Total Payment</a>
+                        <a href="../Finance/Payment.jsp"> Payment Not Received</a>
                     </li>
 
                 </ul>
             </li>
-             <%}else if(type==2){%>
+            <%} else if (type == 2) {%>
 
             <li>
                 <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
@@ -146,17 +153,15 @@
                 <ul class="dropdown-menu">
 
                     <li>
-                        <a href="../SellerRevenu/MyRevenu.jsp">My Revenue</a>
+                        <a href="../SellerRevenu/MyRevenu.jsp">My Auctions Revenue</a>
                     </li>
-                    <li>
-                        <a href="../SellerRevenu/Payment.jsp">Payment</a>
-                    </li>
+                   
 
 
                 </ul>
             </li>
             <%}%>
-            <%if(type==1){%>
+            <%if (type == 1) {%>
             <li>
                 <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
                     <span>General Setting</span>
@@ -208,4 +213,4 @@
         </div>
     </div>
 </div>
-                <div id="freeow" class="freeow freeow-bottom-right "></div>
+<div id="freeow" class="freeow freeow-bottom-right "></div>

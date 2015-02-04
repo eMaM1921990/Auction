@@ -17,6 +17,7 @@
     while (db.rs.next()) {
         count = db.rs.getInt("TOTAL");
     }
+    db.closeConnection();
     if (count == 0) {
         response.sendRedirect("noLive.jsp");
     }
@@ -40,8 +41,7 @@
         <link rel="stylesheet" href="../CP/css/bootstrap.min.css">
         <!-- Bootstrap responsive -->
         <link rel="stylesheet" href="../CP/css/bootstrap-responsive.min.css">
-        <!-- imagesLoaded -->
-        <script src="../CP/js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
+
         <!-- jQuery UI -->
         <link rel="stylesheet" href="../CP/css/plugins/jquery-ui/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="../CP/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
@@ -52,14 +52,16 @@
         <!-- Color CSS -->
         <link rel="stylesheet" href="../CP/css/themes.css">
 
+        <!-- jQuery -->
+        <script src="../CP/js/jquery.min.js"></script>
         <!-- complexify -->
         <script src="../CP/js/plugins/complexify/jquery.complexify-banlist.min.js"></script>
         <script src="../CP/js/plugins/complexify/jquery.complexify.min.js"></script>
 
 
-        <!-- jQuery -->
-        <script src="../CP/js/jquery.min.js"></script>
 
+        <!-- imagesLoaded -->
+        <script src="../CP/js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
 
         <!-- Nice Scroll -->
         <script src="../CP/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
@@ -106,9 +108,9 @@
         <script src="../CP/js/application.min.js"></script>
         <!-- Just for demonstration -->
         <script src="../CP/js/demonstration.min.js"></script>
-        <script src="live.js"></script>
+        <script src="live.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="live.css"/>
-            
+
         <!--[if lte IE 9]>
                 <script src="js/plugins/placeholder/jquery.placeholder.min.js"></script>
                 <script>
@@ -124,8 +126,8 @@
         <link rel="shortcut icon" href="../CP/img/favicon.ico" />
         <!-- Apple devices Homescreen icon -->
         <link rel="apple-touch-icon-precomposed" href="../CP/img/apple-touch-icon-precomposed.png" />
-       
-        
+
+
 
     </head>
 
@@ -172,11 +174,14 @@
                                     <table class='table table-nohead' ><tbody>
 
                                             <%    try {
-                                                    db.rs = db.excuteQuery("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS='Live' ");
+                                                    db.connect();
+                                                    db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS='Live' ORDER BY NAME DESC");
+                                                    db.rs = db.pstm.executeQuery();
                                                     while (db.rs.next()) {%>
                                             <tr><td align="right"><div class='imgs'><img src='../<%=db.rs.getString("IMAGEURL")%>' alt='' width='100px' height='50px'  > <div class='descs' ><%=db.rs.getString("NAME")%></div></div></td></tr>
 
                                             <%}
+                                                    db.closeConnection();
                                                 } catch (Exception e) {
                                                     System.out.println(e);
                                                 }%>
@@ -300,7 +305,3 @@
 
 </html>
 
-<%
-    db.closeConnection();
-
-%>

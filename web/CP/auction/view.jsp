@@ -97,9 +97,9 @@
                             <h1>Auctions</h1>
                         </div>
                         <div class="pull-right">
-                            
+
                             <ul class="stats">
-                                
+
                                 <li class='lightred'>
                                     <i class="icon-calendar"></i>
                                     <div class="details">
@@ -142,11 +142,13 @@
                                     </h3>
                                     <ul class="tabs">
                                         <li class="active">
-                                            <a href="#t7" data-toggle="tab">Current Auction</a>
+                                            <a href="#t7" data-toggle="tab">My Auction</a>
                                         </li>
+                                        <%if (login.getUserType() == 1) {%>
                                         <li>
                                             <a href="#t8" data-toggle="tab">Seller Auction</a>
                                         </li>
+                                        <%}%>
 
                                     </ul>
                                 </div>
@@ -154,11 +156,11 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="t7">
                                             <div class="box">
-                                               
+
                                                 <div class="box-content nopadding">
                                                     <table class="table table-hover table-nomargin table-bordered dataTable-columnfilter dataTable">
                                                         <thead>
-                                                           <tr class='thefilter'>
+                                                            <tr class='thefilter'>
                                                                 <th class='hidden-1024'>Auction ID</th>
                                                                 <th class='hidden-1024'>Auction Product</th>
                                                                 <th class='hidden-1024'>Start Bid</th>
@@ -167,6 +169,7 @@
                                                                 <th class='hidden-480'>Date</th>
 
                                                                 <th class='hidden-480'>Status</th>
+                                                                <th class='hidden-480'>Winner</th>
                                                             </tr>
                                                             <tr>
                                                                 <th class='hidden-1024'>Auction ID</th>
@@ -177,10 +180,13 @@
                                                                 <th class='hidden-480'>Date</th>
 
                                                                 <th class='hidden-480'>Status</th>
+                                                                <th class='hidden-480'>Winner</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <%db.pstm = db.con.prepareStatement("SELECT * FROM AUCTION,PRODUCT,USER WHERE idUSER=USERBID AND PRODUCT_ID=idPRODUCT AND idUSER=?");
+                                                            <%db.pstm = db.con.prepareStatement(
+                                                                "SELECT * FROM AUCTIONDETAILSVIEW WHERE CREATEDBY=?");
+
                                                                 db.pstm.setInt(1, login.getUserId());
                                                                 ResultSet rs = db.pstm.executeQuery();
                                                                 while (rs.next()) {
@@ -195,13 +201,19 @@
                                                                 <td><%=rs.getString("DATEAUCTION")%></td>
                                                                 <% if (rs.getString("idAUCTION").equals("Open")) {%>
                                                                 <td><span class="label label-green"><%=rs.getString("STATUS")%></span></td>
-                                                                <%} else {%>
-                                                                <td><span class="label label-red"><%=rs.getString("STATUS")%></span></td>
+                                                                    <%} else {%>
+                                                                <td><span class="label label-red">
+                                                                        <%if (rs.getInt("NOOFBIDS") >= 1) {%>
+                                                                        Sold
+                                                                        <%}%>
+
+                                                                    </span></td>
                                                                     <%}%>
+                                                                <td><%=rs.getString("USERNAME")%></td>
                                                             </tr>
                                                             <%}
-                                                               db.pstm.close();
-                                                                db.closeConnection();
+                                                               // db.pstm.close();
+                                                               // db.closeConnection();
                                                             %>
                                                         </tbody>
                                                     </table>
@@ -209,9 +221,11 @@
                                             </div>
 
                                         </div>
+
+                                        <%if (login.getUserType() == 1) {%>                
                                         <div class="tab-pane" id="t8">
                                             <div class="box">
-                                               
+
                                                 <div class="box-content nopadding">
                                                     <table class="table table-hover table-nomargin table-bordered dataTable-columnfilter dataTable">
                                                         <thead>
@@ -238,12 +252,12 @@
                                                         </thead>
                                                         <tbody>
                                                             <%
-                                                                db.connect();
-                                                               // db.pstm = db.con.prepareStatement("SELECT * FROM AUCTION,PRODUCT,USER,USERTYPE WHERE idUSER=USERBID AND PRODUCT_ID=idPRODUCT AND idUSERTYPE=USERTYPE AND idUSERTYPE=?");
-                                                               ResultSet rs2=db.excuteQuery("SELECT * FROM AUCTION A,PRODUCT P,USER U,USERTYPE UT WHERE U.idUSER=A.USERBID AND A.PRODUCT_ID=P.idPRODUCT AND UT.idUSERTYPE=U.USERTYPE AND UT.idUSERTYPE=2");
+                                                                //SELECT * FROM AUCTIONDETAILSVIEW A,USER U,USERTYPE WHERE A.CREATEDBY=U.idUSER UT.idUSERTYPE=U.USERTYPE AND UT.idUSERTYPE=2 db.connect();
+                                                                // db.pstm = db.con.prepareStatement("SELECT * FROM AUCTION,PRODUCT,USER,USERTYPE WHERE idUSER=USERBID AND PRODUCT_ID=idPRODUCT AND idUSERTYPE=USERTYPE AND idUSERTYPE=?");
+                                                                ResultSet rs2 = db.excuteQuery("SELECT * FROM AUCTIONDETAILSVIEW A,USER U,USERTYPE UT WHERE A.CREATEDBY=U.idUSER and UT.idUSERTYPE=U.USERTYPE AND UT.idUSERTYPE=2");
                                                                // db.pstm.setInt(1, 2);
-                                                               
-                                                               // ResultSet rs2 = db.pstm.executeQuery();
+
+                                                                // ResultSet rs2 = db.pstm.executeQuery();
                                                                 while (rs2.next()) {
                                                             %>
 
@@ -256,8 +270,12 @@
                                                                 <td><%=rs2.getString("DATEAUCTION")%></td>
                                                                 <% if (rs2.getString("idAUCTION").equals("Open")) {%>
                                                                 <td><span class="label label-green"><%=rs2.getString("STATUS")%></span></td>
-                                                                <%} else {%>
-                                                                <td><span class="label label-red"><%=rs2.getString("STATUS")%></span></td>
+                                                                    <%} else {%>
+                                                                <td><span class="label label-red">
+                                                                        <%if (rs.getInt("NOOFBIDS") >= 1) {%>
+                                                                        Sold
+                                                                        <%}%>
+                                                                    </span></td>
                                                                     <%}%>
                                                             </tr>
                                                             <%}
@@ -268,7 +286,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <%}%>
                                     </div>
                                 </div>
                             </div>

@@ -107,12 +107,12 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1>Products</h1>
+                            <h1>My Auctions Revenu Report</h1>
                         </div>
                         <div class="pull-right">
 
                             <ul class="stats">
-                              
+                               
                                 <li class='lightred'>
                                     <i class="icon-calendar"></i>
                                     <div class="details">
@@ -129,12 +129,12 @@
                                 <a href="../index.jsp">Home</a>
                                 <i class="icon-angle-right"></i>
                             </li>
-                            <li>
-                                <a href="view.jsp">Product</a>
+                           <li>
+                                <a href="#">Finance</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="#">View</a>
+                                <a href="#">Report</a>
                             </li>
                         </ul>
                         <div class="close-bread">
@@ -150,46 +150,61 @@
                             <div class="box">
                                 <div class="box-title">
                                     <h3>
-                                        Revenue Report From Date ${param.datefrom} To ${param.dateto}
+                                        Revenue Report From Date <strong>${param.datefrom} </strong> To <strong>${param.dateto}</strong>
                                     </h3>
                                 </div>
                                 <div class="box-content nopadding">
                                     <table class="table table-hover table-nomargin table-bordered dataTable-columnfilter dataTable">
                                         <thead>
                                             <tr class='thefilter'>
-                                                <th class='hidden-1024'>Seller</th>
+
                                                 <th class='hidden-1024'>Date</th>
+                                                <th class='hidden-1024'>Seller Name</th>
                                                 <th class='hidden-1024'>Amount</th>
 
                                             </tr>
                                             <tr>
-                                                <th class='hidden-1024'>Seller</th>
 
                                                 <th class='hidden-1024'>Date</th>
+                                                <th class='hidden-1024'>Seller Name</th>
                                                 <th class='hidden-1024'>Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <%
-                                                DateFormat df = new SimpleDateFormat();
+                                                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                                                 java.sql.Date sqldatefrom = new java.sql.Date(df.parse(request.getParameter("datefrom")).getTime());
                                                 java.sql.Date sqldateto = new java.sql.Date(df.parse(request.getParameter("dateto")).getTime());
-                                                db.pstm = db.con.prepareStatement("SELECT DATEAUCTION,SUM(FEES) AS TOTAL,USERNAME FROM AUCTIONWINNER,AUCTION WHERE DATEAUCTION BETWEEN ? AND ?  AND PRODUCT_ID=idPRODUCT AND PRODUCTCREATEDBY=idUSER ORDER BY idUSER GROUP BY idUSER");
+                                                db.pstm = db.con.prepareStatement("SELECT DATEAUCTION,FEES,TOTAL,SUM(((FEES*TOTAL)/100)),USERNAME FROM AUCTIONWINNER,AUCTION,USER WHERE DATEAUCTION BETWEEN ? AND ? AND PAID=? AND idAUCTION=AUCTION_ID_W AND USER_AUCTION_W=idUSER");
                                                 db.pstm.setDate(1, sqldatefrom);
                                                 db.pstm.setDate(2, sqldateto);
+                                                db.pstm.setString(3,"Y");
                                                 
                                                 ResultSet rs = db.pstm.executeQuery();
+                                                double summery=0.0;
                                                 while (rs.next()) {
                                             %>
                                             <tr>
-                                                <td><%=rs.getString(3)%></td>
-                                                <td><%=rs.getString(1)%></td>
-                                                <td><span class="label label-orange"><%=rs.getString(2)%></span></td>
+
+                                                <td>
+                                                    <%if(rs.getString(1)==null){%>
+                                                    <%="No Auction"%>
+                                                    <%}else{%>
+                                                    <%=rs.getString(1)%>
+                                                    <%}%>
+                                                    </td>
+                                                    <td><%=rs.getString("USERNAME")%></td>
+                                                <td><span class="label label-orange"><%=(rs.getDouble(2)*rs.getDouble(3))/100%></span></td>
                                                
                                             </tr>
-                                            <%}
+                                            <%
+                                                summery=rs.getDouble(4);
+                                                } 
                                                 db.closeConnection();
                                             %>
+                                            <tr>
+                                                <td>&sum;</td><td><%=summery%></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -197,14 +212,7 @@
                         </div>
                     </div>
 
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <form action="add.jsp" method="post">
-                                <button class="btn btn-primary btn btn-large">Add</button>
-                            </form>  
-                        </div>
-                    </div>
-
+                    
 
 
 
