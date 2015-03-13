@@ -47,7 +47,7 @@ public class SendInvoice extends HttpServlet {
         int type = login.getUserType();
         try {
             /* TODO output your page here. You may use following sample code. */
-            String message=sis.SendInvoiceToInbox(request.getParameter("username"), request.getParameter("amount"), request.getParameter("datefrom"), request.getParameter("dateto"), userid);
+            String message=sis.SendInvoiceToInbox(request.getParameter("username"), userid);
             if(message.equals("Invoice Sent")){
                 response.sendRedirect(request.getContextPath()+"/CP/Finance/Payment.jsp?success="+URLEncoder.encode(message, "UTF-8"));
             }else {

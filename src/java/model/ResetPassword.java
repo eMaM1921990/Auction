@@ -7,6 +7,7 @@
 package model;
 
 import controller.DBConnection;
+import controller.mailprop;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.sql.ResultSet;
@@ -31,6 +32,7 @@ import org.apache.catalina.util.MD5Encoder;
 public class ResetPassword {
     DBConnection db=new DBConnection();
       private SecureRandom random = new SecureRandom();
+      mailprop prop=new mailprop();
 
    private  String Resetpassword() {
     return new BigInteger(50, random).toString(32);
@@ -81,10 +83,11 @@ public class ResetPassword {
    
    void sendMailResestingPassword(String mail,String password){
           try {
-            final String authAddress = "support@livevirtualauctions.com";
-            final String authPassword = "1089icanor";
-            final String smtpServer = "mail.livevirtualauctions.com";
-            final String smtpPort = "25";            
+              prop.mailsetting();
+            final String authAddress = prop.authaddress;
+            final String authPassword = prop.password;
+            final String smtpServer = prop.smtpserver;
+            final String smtpPort = prop.smtpport;         
             String to = mail;
             String sender=authAddress;
             String subject = "Live Virtual Auction|Security Department";

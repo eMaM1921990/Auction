@@ -1,4 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="controller.DBConnection" %>
+<%
+DBConnection db = new DBConnection();
+    db.connect();
+%>
 <!doctype html>
 <html>
     <head>
@@ -173,27 +178,38 @@
 
                     <div class="row-fluid">
                         <div class="span12">
+                            <div class="alert alert-success" style="display: ${param.suc}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Success!</strong> ${param.msg}.
+                            </div>
 
+                            <div class="alert alert-error" style="display: ${param.err}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Warning!</strong> ${param.msg}.
+                            </div>
                             <div class="box box-color box-bordered">
                                 <div class="box-title">
                                     <h3><i class="icon-th-list"></i> My Payment Report Form</h3>
                                 </div>
                                 <div class="box-content nopadding">
                                     <form  method="POST" class='form-horizontal form-bordered' action="PaymentReport.jsp">
-                                        <div class="control-group">
-                                            <label for="autocom" class="control-label">Date From</label>
+                                         <div class="control-group">
+                                            <label for="textfield" class="control-label">Seller Name</label>
                                             <div class="controls">
-                                                <input type="text" name="datefrom" id="dayone" class="input-medium datepick" >
-
+                                                <div class="input-xlarge"><select name="idUSER" id="select" class='chosen-select'>
+                                                        <%db.pstm = db.con.prepareStatement("SELECT U.idUSER AS ID,U.USERNAME AS NAME FROM AUCTIONDETAILSVIEW A,USER U WHERE A.CREATEDBY=U.idUSER GROUP BY U.idUSER");
+                                                            
+                                                            db.rs = db.pstm.executeQuery();
+                                                            while (db.rs.next()) {%>
+                                                        <option value="<%=db.rs.getString("ID")%>"><%=db.rs.getString("NAME")%></option>
+                                                        <%}
+                                                            db.closeConnection();
+                                                        %>
+                                                    </select></div>
                                             </div>
                                         </div>
-                                        <div class="control-group">
-                                            <label for="autocom" class="control-label">Date To</label>
-                                            <div class="controls">
-                                                <input type="text" name="dateto" id="daytwo" class="input-medium datepick">
-
-                                            </div>
-                                        </div>
+                                        
+                                        
                                         <div class="form-actions">
                                             <button type="submit" class="btn btn-primary" >Run Report</button>
                                             <button type="reset" class="btn">Cancel</button>

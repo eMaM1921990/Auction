@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Title -->
-       <title>Live Virtual Auction</title>
+        <title>Live Virtual Auction</title>
 
         <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,900,700italic,500italic' rel='stylesheet' type='text/css'>
@@ -91,22 +91,20 @@
 
                     <div class="row"> 
                         <!-- Product Item -->
-                          <%                                    
-                                    db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTCAT=? AND ISACTIVE='Y'");
-                                    db.pstm.setInt(1, 2);
-                                    ResultSet rs = db.pstm.executeQuery();
-                                    while (rs.next()) {%>
+                        <%                              db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTCAT=? AND ISACTIVE='Y'");
+                            db.pstm.setInt(1, 2);
+                            ResultSet rs = db.pstm.executeQuery();
+                              while (rs.next()) {%>
                         <div class="col-lg-4 col-md-4 col-sm-4 product">
 
                             <div class="product-image">
-                                <img src="../<%=rs.getString("IMAGEURL")%>" alt="">
-                                <a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>" class="product-hover">
-                                    <i class="icons icon-eye-1"></i> Quick View
-                                </a>
+                                <img src="../<%=rs.getString("IMAGEURL")%>" alt="" height="350" width="300">
+                               
+
                             </div>
 
                             <div class="product-info">
-                                <h5><a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>"><%=rs.getString("NAME")%></a></h5>
+                                <h5><a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>" title="<%=rs.getString("DESCS")%>"><%=rs.getString("NAME")%></a></h5>
                                 <span class="price">$<%=rs.getString("SELLPRICE")%></span>
                                 <div class="rating readonly-rating" data-score="5"></div>
                             </div>
@@ -118,12 +116,12 @@
                                         <span class="action-name">Start Bidding</span>
                                     </span >
                                 </span>
-                               
+
                             </div>
 
                         </div>
                         <%}
-                        db.closeConnection();
+                            db.closeConnection();
                         %>
                         <!-- Product Item -->
 
@@ -160,13 +158,13 @@
                                 <ul>
                                     <li><a href="Beauty.jsp">Beauty<i class="icons icon-right-dir"></i></a></li>
                                     <li><a href="Electronics.jsp">Electronics <i class="icons icon-right-dir"></i></a></li>
-                                   
+
                                     <li><a href="Fashion.jsp">Fashion <i class="icons icon-right-dir"></i></a></li>
                                     <li><a href="Home.jsp">Home <i class="icons icon-right-dir"></i></a></li>
                                     <li><a href="Jewelry.jsp">Jewelry <i class="icons icon-right-dir"></i></a></li>
                                     <li><a href="Other.jsp">Other <i class="icons icon-right-dir"></i></a></li>
                                     <li><a href="Supplies.jsp">Supplies <i class="icons icon-right-dir"></i></a></li>
-                                   
+
                                 </ul>
                             </div>
 
@@ -179,10 +177,10 @@
 
 
 
-                 
 
 
-                   
+
+
 
 
 
@@ -194,7 +192,7 @@
 
 
 
-          
+
 
             <%@include file="Home_Footer.jsp" %>
 

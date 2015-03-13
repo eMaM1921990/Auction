@@ -7,26 +7,32 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="controller.DBConnection" %>
 <%
-DBConnection db=new DBConnection();
-db.connect();
-db.pstm=db.con.prepareStatement("SELECT * FROM PRODUCT WHERE idPRODUCT=?");
-db.pstm.setString(1,request.getParameter("id"));
-db.rs=db.pstm.executeQuery();
-String productname=null;
-String quantity=null;
-String sellprice=null;
-String ship=null;
-String img=null;
-String status=null;
-String desc=null;
-    while(db.rs.next()){
-    productname=db.rs.getString("NAME");
-    quantity=db.rs.getString("QUANTITYONHAND");
-    sellprice=db.rs.getString("SELLPRICE");
-    ship=db.rs.getString("SHIPPINGCOST");
-    img=db.rs.getString("IMAGEURL");
-    status=db.rs.getString("PRODUCTSTATUS");
-    desc=db.rs.getString("DESCS");
+    DBConnection db = new DBConnection();
+    db.connect();
+    db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE idPRODUCT=?");
+    db.pstm.setString(1, request.getParameter("id"));
+    db.rs = db.pstm.executeQuery();
+    String productname = null;
+    String quantity = null;
+    String sellprice = null;
+    String ship = null;
+    String img = null;
+    String status = null;
+    String desc = null;
+    String img2 = null;
+    String img3 = null;
+    String img4 = null;
+    while (db.rs.next()) {
+        productname = db.rs.getString("NAME");
+        quantity = db.rs.getString("QUANTITYONHAND");
+        sellprice = db.rs.getString("SELLPRICE");
+        ship = db.rs.getString("SHIPPINGCOST");
+        img = db.rs.getString("IMAGEURL");
+        img2 = db.rs.getString("IMAGEURL1");
+        img3 = db.rs.getString("IMAGEURL2");
+        img4 = db.rs.getString("IMAGEURL3");
+        status = db.rs.getString("PRODUCTSTATUS");
+        desc = db.rs.getString("DESCS");
     }
 %>
 <!DOCTYPE html>
@@ -112,7 +118,7 @@ String desc=null;
                                         </li>
                                     </ul>
                                 </div>
-                               
+
                             </div>
                             <!-- /Product Images Carousel -->
 
@@ -131,7 +137,7 @@ String desc=null;
                                         <td>Shipping Cost</td>
                                         <td><a > $<%=ship%></a></td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td>Availability</td>
                                         <td><span class="green">in stock</span> <%=quantity%> items</td>
@@ -146,12 +152,82 @@ String desc=null;
                                     </tr>
                                 </table>
 
-                              
-                              
 
-                                
 
-                             
+
+
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <br><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 ">
+
+                                <div id="product-slider">
+                                    <ul class="slides">
+                                        <li>
+                                            <img class="cloud-zoom" src="../<%=img2%>" data-large="../<%=img2%>"  alt=""/>
+                                            <a class="fullscreen-button" href="../<%=img2%>">
+                                                <div class="product-fullscreen">
+                                                    <i class="icons icon-resize-full-1"></i>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>                
+
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 ">                   
+                                <div id="product-slider">
+                                    <ul class="slides">
+                                        <li>
+                                            <img class="cloud-zoom" src="../<%=img3%>" data-large="../<%=img3%>"  alt=""/>
+                                            <a class="fullscreen-button" href="../<%=img3%>">
+                                                <div class="product-fullscreen">
+                                                    <i class="icons icon-resize-full-1"></i>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 ">
+                                <div id="product-slider">
+                                    <ul class="slides">
+                                        <li>
+                                            <img class="cloud-zoom" src="../<%=img4%>" data-large="../<%=img4%>"  alt=""/>
+                                            <a class="fullscreen-button" href="../<%=img4%>">
+                                                <div class="product-fullscreen">
+                                                    <i class="icons icon-resize-full-1"></i>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+
+
 
                             </div>
 
@@ -161,7 +237,7 @@ String desc=null;
                     <!-- /Product -->
 
 
-                  
+
 
 
 
@@ -170,13 +246,13 @@ String desc=null;
 
 
 
-              
+
 
             </div>
             <!-- /Content -->
 
 
-          <%@include file="Home_Footer.jsp" %>
+            <%@include file="Home_Footer.jsp" %>
 
 
             <div id="back-to-top">

@@ -107,7 +107,7 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1>My Auctions Revenu Report</h1>
+                            <h1>My Seller Revenue Report</h1>
                         </div>
                         <div class="pull-right">
 
@@ -154,16 +154,12 @@
                                     </h3>
                                 </div>
                                 <div class="box-content nopadding">
-                                    <table class="table table-hover table-nomargin table-bordered dataTable-columnfilter dataTable">
+                                    <table class="table table-hover table-nomargin">
                                         <thead>
                                             <tr class='thefilter'>
-
-                                                <th class='hidden-1024'>Date</th>
-                                                <th class='hidden-1024'>Seller Name</th>
-                                                <th class='hidden-1024'>Amount</th>
-
-                                            </tr>
-                                            <tr>
+                                                
+                                           
+                                          
 
                                                 <th class='hidden-1024'>Date</th>
                                                 <th class='hidden-1024'>Seller Name</th>
@@ -175,7 +171,7 @@
                                                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                                                 java.sql.Date sqldatefrom = new java.sql.Date(df.parse(request.getParameter("datefrom")).getTime());
                                                 java.sql.Date sqldateto = new java.sql.Date(df.parse(request.getParameter("dateto")).getTime());
-                                                db.pstm = db.con.prepareStatement("SELECT DATEAUCTION,FEES,TOTAL,SUM(((FEES*TOTAL)/100)),USERNAME FROM AUCTIONWINNER,AUCTION,USER WHERE DATEAUCTION BETWEEN ? AND ? AND PAID=? AND idAUCTION=AUCTION_ID_W AND USER_AUCTION_W=idUSER");
+                                                db.pstm = db.con.prepareStatement("SELECT DATEAUCTION,FEES,TOTAL,SUM(((FEES*TOTAL))),USERNAME FROM AUCTIONWINNER,AUCTION,USER WHERE DATEAUCTION BETWEEN ? AND ? AND PAID=? AND idAUCTION=AUCTION_ID_W AND USER_AUCTION_W=idUSER");
                                                 db.pstm.setDate(1, sqldatefrom);
                                                 db.pstm.setDate(2, sqldateto);
                                                 db.pstm.setString(3,"Y");
@@ -187,13 +183,10 @@
                                             <tr>
 
                                                 <td>
-                                                    <%if(rs.getString(1)==null){%>
-                                                    <%="No Auction"%>
-                                                    <%}else{%>
-                                                    <%=rs.getString(1)%>
-                                                    <%}%>
+                                                    <%=rs.getString(1)==null?"No Auction":rs.getString(1)%>
+                                                  
                                                     </td>
-                                                    <td><%=rs.getString("USERNAME")%></td>
+                                                    <td><%=rs.getString("USERNAME")==null?"No Seller":rs.getString("USERNAME")%></td>
                                                 <td><span class="label label-orange"><%=(rs.getDouble(2)*rs.getDouble(3))/100%></span></td>
                                                
                                             </tr>
@@ -203,7 +196,7 @@
                                                 db.closeConnection();
                                             %>
                                             <tr>
-                                                <td>&sum;</td><td><%=summery%></td>
+                                                <td colspan="2">&sum;</td><td ><%=summery%></td>
                                             </tr>
                                         </tbody>
                                     </table>

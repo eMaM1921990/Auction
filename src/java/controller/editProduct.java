@@ -58,6 +58,7 @@ public class editProduct extends HttpServlet {
         int userid = login.getUserId();
         int type = login.getUserType();
         Product p = new Product();
+        int img_flag=0;
         try {
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
@@ -73,10 +74,12 @@ public class editProduct extends HttpServlet {
                     } else {
                         try {
                             if (!fileItem.getName().isEmpty()) {
+                                img_flag+=1;
                                 fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage") + "/" + fileItem.getName()));
                                 v.add("/CP/globalimage" + "/" + fileItem.getName());
                             } else {
-                                v.add("");
+                                
+                                v.add("CP/globalimage/default-image.png");
                                 System.out.println("Here");
                             }
 
@@ -89,20 +92,19 @@ public class editProduct extends HttpServlet {
                 Logger.getLogger(editProduct.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            int flag = 0;
-            if (v.elementAt(7).trim().isEmpty() || v.elementAt(7) == null) {
-                flag = 1;
-            } else {
-                flag = 0;
-            }
-            String message = "";
-            if (flag == 1) {
+           
+            String message = null;
+           
+                //message = p.editWithNoImage(v.elementAt(1), Integer.parseInt(v.elementAt(2)), Integer.parseInt(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), Double.parseDouble(v.elementAt(5)), v.elementAt(7), userid, df.format(dts), Integer.parseInt(v.elementAt(0)), v.elementAt(6), v.elementAt(8));
 
-                message = p.editWithNoImage(v.elementAt(1), Integer.parseInt(v.elementAt(2)), Integer.parseInt(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), Double.parseDouble(v.elementAt(5)), v.elementAt(7), userid, df.format(dts), Integer.parseInt(v.elementAt(0)), v.elementAt(6), v.elementAt(8));
-
-            } else {
-                message = p.edit(v.elementAt(1), Integer.parseInt(v.elementAt(2)), Integer.parseInt(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), Double.parseDouble(v.elementAt(5)), v.elementAt(7), userid, df.format(dts), Integer.parseInt(v.elementAt(0)), v.elementAt(6), v.elementAt(8));
+            if(img_flag>0){
+                message = p.edit(v.elementAt(1), Integer.parseInt(v.elementAt(2)), Integer.parseInt(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), Double.parseDouble(v.elementAt(5)), v.elementAt(7),v.elementAt(8),v.elementAt(9),v.elementAt(10), userid, df.format(dts), Integer.parseInt(v.elementAt(0)), v.elementAt(6), v.elementAt(11));
+            }else{
+                message = p.editWithNoImage(v.elementAt(1), Integer.parseInt(v.elementAt(2)), Integer.parseInt(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), Double.parseDouble(v.elementAt(5)), v.elementAt(7), userid, df.format(dts), Integer.parseInt(v.elementAt(0)), v.elementAt(6), v.elementAt(11));
             }
+          
+                
+          
 
             if (message.equals("Successfully . . Edit Product " + v.elementAt(1) + ". Thanks !")) {
                 response.sendRedirect(request.getContextPath() + "/CP/product/view.jsp?msg=" + URLEncoder.encode(message, "UTF-8") + "&suc=block");

@@ -272,7 +272,7 @@
                                                                 <td><span class="label label-green"><%=rs2.getString("STATUS")%></span></td>
                                                                     <%} else {%>
                                                                 <td><span class="label label-red">
-                                                                        <%if (rs.getInt("NOOFBIDS") >= 1) {%>
+                                                                        <%if (rs2.getInt("NOOFBIDS") >= 1) {%>
                                                                         Sold
                                                                         <%}%>
                                                                     </span></td>

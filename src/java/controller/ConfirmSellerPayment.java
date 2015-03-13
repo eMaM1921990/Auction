@@ -40,17 +40,20 @@ public class ConfirmSellerPayment extends HttpServlet {
         HttpSession session = request.getSession();
         beans.LoginBeans login;
         login = (beans.LoginBeans) session.getAttribute("login");
-        String username = login.getUserName();
+        //String username = login.getUserName();
         int userid = login.getUserId();
         int type = login.getUserType();
         SendInvoicesToSeller sis=new SendInvoicesToSeller();
         try {
-           String message=sis.SendConfirmationForPayment(request.getParameter("username"), request.getParameter("amount"), request.getParameter("datefrom"), request.getParameter("dateto"), userid);
-            if(message.equals("Payment Confirmation Sent")){
+           String message=sis.SendConfirmationForPayment(request.getParameter("username"), userid);
+            sis.updatePaidStatus(Integer.valueOf(request.getParameter("username")));
+           if(message.equals("Payment Confirmation Sent")){
+               
                 response.sendRedirect(request.getContextPath()+"/CP/Finance/Payment.jsp?success="+URLEncoder.encode(message, "UTF-8"));
             }else {
                  response.sendRedirect(request.getContextPath()+"/CP/Finance/Payment.jsp?error="+URLEncoder.encode(message, "UTF-8"));
             }
+           
         } finally {
             out.close();
         }

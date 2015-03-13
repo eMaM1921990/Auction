@@ -212,21 +212,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="control-group">
-                                            <label for="textfield" class="control-label">List</label>
-                                            <div class="controls">
-                                                <div class="input-xlarge"><select name="idUSERLIST" id="select" class='chosen-select'>
-                                                        <%db.pstm = db.con.prepareStatement("SELECT * FROM USERLIST WHERE USERLIST=?");
-                                                            db.pstm.setInt(1, login.getUserId());
-                                                            ResultSet rs = db.pstm.executeQuery();
-                                                            while (rs.next()) {%>
-                                                        <option value="<%=rs.getString("idUSERLIST")%>"><%=rs.getString("LISTNAME")%></option>
-                                                        <%}
-                                                            db.closeConnection();
-                                                        %>
-                                                    </select></div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="control-group">
                                             <label for="autocom" class="control-label">Date of Auction</label>
                                             <div class="controls">

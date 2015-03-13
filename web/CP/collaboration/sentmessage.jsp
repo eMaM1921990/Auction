@@ -220,14 +220,28 @@
                                             <label for="textfield" class="control-label">To</label>
                                             <div class="controls">
                                                 <div class="input-xlarge"><select name="Tos" id="select" class='chosen-select' placeholder="Select Reciever">
-                                                        <% while (rs.next()) {%>
+                                                        <option value="0">All</option>
+                                                        <%
+    
+                                                        String sender=null;
+                                                        while (rs.next()) {%>
                                                         <option value="<%=rs.getString(1)%>"><%=rs.getString(1)%></option>
-                                                        <%}
+                                                        
+                                                        <%
+                                                        if(sender==null){
+                                                            sender=rs.getString(1)+",";
+                                                        }else{
+                                                            sender=sender+rs.getString(1)+",";
+                                                        }
+                                                        
+                                                        }
                                                             db.closeConnection();
                                                         %>
 
 
                                                     </select></div>
+                                                        
+                                                        <input type="hidden" name="s" value="<%=sender%>"/>
                                             </div>
                                         </div>
 

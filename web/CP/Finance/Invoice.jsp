@@ -1,5 +1,3 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.text.DateFormat"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="controller.DBConnection" %>
@@ -71,6 +69,7 @@
         <script src="../js/application.min.js"></script>
         <!-- Just for../ demonstration -->
         <script src="../js/demonstration.min.js"></script>
+        <script src="../js/custom.js"></script>
 
         <!--[if lte IE 9]>
                 <script src="js/plugins/placeholder/jquery.placeholder.min.js"></script>
@@ -107,12 +106,12 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1>Payment Report</h1>
+                            <h1>Billing Invoice</h1>
                         </div>
                         <div class="pull-right">
 
                             <ul class="stats">
-                               
+
                                 <li class='lightred'>
                                     <i class="icon-calendar"></i>
                                     <div class="details">
@@ -130,7 +129,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="view.jsp">My Payment</a>
+                                <a href="view.jsp">Invoice</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -144,72 +143,112 @@
                         </div>
                     </div>
 
-
                     <div class="row-fluid">
                         <div class="span12">
+                            <div class="alert alert-success" style="display: ${param.suc}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Success!</strong> ${param.msg}.
+                            </div>
+
+                            <div class="alert alert-error" style="display: ${param.err}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Warning!</strong> ${param.msg}.
+                            </div>
                             <div class="box">
                                 <div class="box-title">
                                     <h3>
-                                        Payment Report For  Seller 
+                                        <i class="icon-money"></i>
+                                        Invoice
                                     </h3>
                                 </div>
-                                <div class="box-content nopadding">
-                                    <table class="table table-hover table-nomargin">
-                                        <thead>
-                                            <tr class='thefilter'>
-                                                
-                                                <th class='hidden-1024'>Amount</th>
-                                                <th class='hidden-1024'>Status</th>
+                                <div class="box-content">
+                                    <div class="invoice-info">
+                                        <div class="invoice-name">
+                                            Live Virtual Auction
+                                        </div>
+                                        <div class="invoice-from">
+                                            <span>From</span>
+                                            <strong>Live Virtual Auction </strong>
+                                            <address>
+                                                PO Box 97 <br> West Haven CT<br> 06516<br>
 
+                                            </address>
+                                        </div>
+
+
+                                    </div>
+                                    <table class="table table-striped table-invoice">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Price</th>
+                                                <th>Fees</th>
+                                                <th>Shipping Cost</th>
+                                                <th class='total'>Total</th>
                                             </tr>
-                                           
                                         </thead>
                                         <tbody>
                                             <%
-                                                db.pstm = db.con.prepareStatement("SELECT FEES,PAID, TRUNCATE(SUM(TOTAL*FEES),2)  FROM AUCTIONWINNER WHERE USER_AUCTION_W=? AND PAID=? GROUP BY USER_AUCTION_W");
-                                                db.pstm.setInt(1, Integer.parseInt(request.getParameter("idUSER")));
-                                                
-                                                db.pstm.setString(2, "N");
-                                                ResultSet rs = db.pstm.executeQuery();
-                                                while (rs.next()) {
+                                                db.pstm = db.con.prepareStatement("SELECT P.NAME,A.TOTAL,A.FEES,TRUNCATE((A.TOTAL*A.FEES),2),A.SHIPPINGCOST FROM icanor_autcion.AUCTIONWINNER A,PRODUCT P WHERE A.AUCTION_PRO=P.idPRODUCT AND A.PAID='N' AND A.USER_AUCTION_W=?");
+                                                db.pstm.setString(1, request.getParameter("id"));
+                                                db.rs = db.pstm.executeQuery();
+                                                double sum = 0;
+                                                while (db.rs.next()) {
+
                                             %>
                                             <tr>
-                                                
-                                                
-                                                <td><span class="label label-orange"><%=rs.getString(3)%> &nbsp;&nbsp; $</span></td>
-                                                <td>
-                                                    <div class="aParent" style="height: 30px">
-                                                        <div>
-                                                            <form action="../../SendInvoice" method="post">
-                                                                
-                                                                <input type="hidden" name="username" value="<%=request.getParameter("idUSER")%>"/>
-                                                                <button type="submit" class="btn" ><i class=" icon-shopping-cart"></i></button>
-                                                            </form>
-                                                        </div>
-                                                        <div>
-                                                            <form action="../../ConfirmSellerPayment" method="post">
-                                                               
-                                                                <input type="hidden" name="username" value="<%=request.getParameter("idUSER")%>"/>
-                                                                <button type="submit" class="btn" ><i class=" icon-ok"></i></button>
-                                                            </form>
-                                                            
-                                                        </div>
-                                                    </div>
+                                                <td class='name'><%=db.rs.getString(1)%></td>
+                                                <td class='price'>$<%=db.rs.getString(2)%></td>
+                                                <td class='qty'>$<%=db.rs.getString(3)%></td>
+                                                <td class='qty'>$<%=db.rs.getString(5)%></td>
+                                                <td class='total'>$<%=db.rs.getString(4)+db.rs.getString(5)%></td>
+                                            </tr>
+                                            <%
+                                                    sum = sum + db.rs.getDouble(4)+db.rs.getDouble(5);
+                                                }%>
+
+                                            <tr>
+                                                <td colspan="3"></td>
+                                                <td class='taxes'>
+
+                                                    <p>
+                                                        <span class="light">Total</span>
+                                                        <span class="totalprice">
+                                                            $<%=sum%>
+                                                        </span>
+                                                    </p>
                                                 </td>
                                             </tr>
-                                            <%}
-                                                db.closeConnection();
-                                            %>
                                         </tbody>
                                     </table>
+
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="span10">
+                            
+
+                                <div class="input-append">
+                                    <label id="val">
+                                        Please enter your paypal transaction no.
+                                    </label>
+                                    <input type="text" id="transaction" data-rule-required="true"/>
+                                    <input type="hidden" id="userid" value="<%=request.getParameter("id")%>"/>
+                                    <button class="btn btn-success btn btn-small" id="confirm" onclick="Transaction()">Confirm</button>
+                                </div>
+                                                      <div class="invoice-payment">
+                                <span>Payment methods</span>
+                                <ul>
+                                    <li>
+                                        <img src="../img/demo/paypal.png" alt="">
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>                                
                     </div>
-
-                    
-
-
 
 
                 </div>

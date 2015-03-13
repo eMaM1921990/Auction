@@ -230,6 +230,9 @@
                                                                 <input type="hidden" name="DESCS" value="<%=rs.getString("DESCS")%>"/>
                                                                 <input type="hidden" name="TRANSPORT" value="<%=rs.getString("TRANSPORT")%>"/>
                                                                 <input type="hidden" name="IMAGEURL" value="<%=rs.getString("IMAGEURL")%>"/>
+                                                                <input type="hidden" name="IMAGEURL2" value="<%=rs.getString("IMAGEURL1")%>"/>
+                                                                <input type="hidden" name="IMAGEURL3" value="<%=rs.getString("IMAGEURL2")%>"/>
+                                                                <input type="hidden" name="IMAGEURL4" value="<%=rs.getString("IMAGEURL3")%>"/>
                                                                 <button type="submit" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></button>
                                                             </form>
                                                         </div>

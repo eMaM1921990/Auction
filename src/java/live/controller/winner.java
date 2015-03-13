@@ -6,6 +6,7 @@
 package live.controller;
 
 import controller.DBConnection;
+import controller.mailprop;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -26,6 +27,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sun.awt.geom.Curve;
 
 /**
  *
@@ -33,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class winner extends HttpServlet {
 
+    mailprop prop=new mailprop();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -65,22 +68,24 @@ public class winner extends HttpServlet {
         processRequest(request, response);
         DBConnection db = new DBConnection();
         PrintWriter out = response.getWriter();
+        prop.mailsetting();
 
         try {
             String result = null;
             String user = null;
             String email = null;
-            final String authAddress = "support@livevirtualauctions.com";
-            final String authPassword = "1089icanor";
-            final String smtpServer = "mail.livevirtualauctions.com";
-            final String smtpPort = "26";
+            final String authAddress = prop.authaddress;
+            final String authPassword = prop.password;
+            final String smtpServer = prop.smtpserver;
+            final String smtpPort = prop.smtpport;
             String siteName = request.getServerName();
             int itemid = 0;
             String uservalid = null;
             double bid = 0;
             int currentauctionid = 0;
             String product_name=null;
-            String sql = "SELECT USERBID,PRODUCT_ID,MAXBID,idAUCTION,NAME  FROM AUCTION A,PRODUCT P WHERE A.idAUCTION=(SELECT MAX(idAUCTION) FROM AUCTION WHERE STATUS=?) AND A.PRODUCT_ID=P.idPRODUCT";
+            double shippingcost=0;
+            String sql = "SELECT USERBID,PRODUCT_ID,MAXBID,idAUCTION,NAME,P.SHIPPINGCOST  FROM AUCTION A,PRODUCT P WHERE A.idAUCTION=(SELECT MAX(idAUCTION) FROM AUCTION WHERE STATUS=?) AND A.PRODUCT_ID=P.idPRODUCT";
             db.connect();
             db.pstm = db.con.prepareStatement(sql);
             db.pstm.setString(1, "open");
@@ -91,6 +96,7 @@ public class winner extends HttpServlet {
                 bid = db.rs.getInt(3);
                 currentauctionid = db.rs.getInt(4);
                 product_name=db.rs.getString(5);
+                shippingcost=db.rs.getDouble(6);
             }
             db.pstm.closeOnCompletion();
             db.rs.close();
@@ -129,10 +135,10 @@ public class winner extends HttpServlet {
                 String to = email;
                 String subject = "Congratulation, you are the winner";
                 String message = "<p>"
-                        + " Congratulations.<br> Your bid was the winner in the last auction # <div style='color:red'>"+product_name+", total "+bid+" </div> in LiveVirtualAuctions.com. \n \n"
-                        + " Please contact the seller <b style='color:red'>"+seller_name+"</b>- <b>"+seller_mail+"</b> &nbsp;&nbsp;as soon as possible in order to pay the item and shipping cost.After you pay for the total , "
+                        + " Congratulations.<br> Your bid was the winner in the last auction # <font style='color:red'>"+product_name+", total "+bid+" (+ "+shippingcost+" for shipping)</font> in LiveVirtualAuctions.com. <br>"
+                        + " Please contact the seller <b style='color:red'>"+seller_name+"</b>- <b>"+seller_mail+"</b> &nbsp;&nbsp;as soon as possible in order to pay the item and shipping cost.<br><br>After you pay for the total , "
                         + "please Confirm Your Payment By Click here : <br> http://livevirtualauctions.com/AuctionWeb/Confirm?p=" + currentauctionid
-                        + "\n The  seller will contact you as soon as the payment is verified. \n \n We have hundreds of items available at low prices. Please go back and find your favorite  \n items. Remember, you don't have to pay anything to make bids, unless your bid is the winner.\n \n Thanks for being part of LiveVirtualAuctions.com \n \n Administration </p>";
+                        + "<br><br> The  seller will contact you as soon as the payment is verified. \n \n We have hundreds of items available at low prices. Please go back and find your favorite  \n items. Remember, you don't have to pay anything to make bids, unless your bid is the winner.<br><br>Thanks for being part of LiveVirtualAuctions.com <br> Administration </p>";
                 try {
                     Properties props = new Properties();
                     props.put("mail.smtp.host", smtpServer);
@@ -235,7 +241,7 @@ public class winner extends HttpServlet {
 
                 String toSeller = seller_mail;
                 String Seller_subject = "Congratulation";
-                String Seller_message = "<p>Your item Auction # <b style='color:red'>"+product_name+", total "+bid+"</b> was sold. Please, contact the buyers <b style='color:red'>"+to+"</b> in order to closed this sale fast and smooth. \n Go to your back office and check your Items Sold list. After that, go back and list another items.</p>";
+                String Seller_message = "<p>Your item Auction # <b style='color:red'>"+product_name+", total "+bid+"  (+ "+shippingcost+" shipping cost) </b> was sold.<br><br> Please, contact the buyers <b style='color:red'>"+to+"</b> in order to closed this sale fast and smooth.<br> Go to your back office and check your Items Sold list.<br> After that, go back and list another items.<br><br>Thanks for being part of LiveVirtualAuctions.com <br>Administration</p>";
                 try {
                     Properties props = new Properties();
                     props.put("mail.smtp.host", smtpServer);
@@ -288,7 +294,7 @@ public class winner extends HttpServlet {
                 db.pstm.setInt(1, itemid);
                 db.pstm.executeUpdate();
 
-                String sql6 = "INSERT INTO AUCTIONWINNER (AUCTION_PRO,USER_AUCTION_W,WINNER,TOTAL,FEES,AUCTION_ID_W) VALUES (?,?,?,?,?,?)";
+                String sql6 = "INSERT INTO AUCTIONWINNER (AUCTION_PRO,USER_AUCTION_W,WINNER,TOTAL,FEES,AUCTION_ID_W,SHIPPINGCOST) VALUES (?,?,?,?,?,?,?)";
                 db.pstm = db.con.prepareStatement(sql6);
                 db.pstm.setInt(1, itemid);
                 db.pstm.setString(2, seller_id);
@@ -296,6 +302,7 @@ public class winner extends HttpServlet {
                 db.pstm.setDouble(4, bid);
                 db.pstm.setDouble(5, fees);
                 db.pstm.setInt(6, currentauctionid);
+                db.pstm.setDouble(7, shippingcost);
                 db.pstm.executeUpdate();
 
                 /* TODO output your page here. You may use following sample code. */

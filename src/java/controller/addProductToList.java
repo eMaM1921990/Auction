@@ -6,6 +6,7 @@
 
 package controller;
 
+import beans.LoginBeans;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
@@ -13,7 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.ProductList;
+import model.Users;
 
 /**
  *
@@ -33,25 +36,27 @@ public class addProductToList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        HttpSession session=request.getSession();
+        LoginBeans u=(LoginBeans)session.getAttribute("login");
         ProductList p=new ProductList();
         try {
-           String USERLISTID=request.getParameter("idUSERLIST");
+          
            String PRODUCTID=request.getParameter("idPRODUCT");
            String STARTDAY=request.getParameter("STARTDAY");
            String STARTTIM=request.getParameter("STARTTIM");
            String DESC=request.getParameter("DESC");
          
-           String message=p.save(Integer.parseInt(USERLISTID), Integer.parseInt(PRODUCTID), STARTDAY, STARTTIM);
+           String message=p.save(u.getUserId(), Integer.parseInt(PRODUCTID), STARTDAY, STARTTIM);
             if(message.equals("Successfully . Add Product to List")){
                 response.sendRedirect(request.getContextPath()+"/CP/product/view.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&suc=block");
             }else{
                 response.sendRedirect(request.getContextPath()+"/CP/product/addToList.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&err=block");
             }
         } finally {
-            out.close();
+            
         }
     }
 

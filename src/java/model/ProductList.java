@@ -38,7 +38,7 @@ public class ProductList {
            // java.sql.Date timeauction = new java.sql.Date(datetim.getTime());
 
             db.connect();
-            db.pstm = db.con.prepareStatement("INSERT INTO USERLISTDETAILS (USERLISTID,PRODUCTID,STARTDAY,STARTTIM) VALUES (?,?,?,?)");
+            db.pstm = db.con.prepareStatement("INSERT INTO USERLISTDETAILS (USERID,PRODUCTID,STARTDAY,STARTTIM) VALUES (?,?,?,?)");
             db.pstm.setInt(1, USERLISTID);
             db.pstm.setInt(2, PRODUCTID);
             db.pstm.setDate(3, dateauction);

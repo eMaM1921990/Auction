@@ -9,6 +9,8 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +47,20 @@ public class SendNewMessage extends HttpServlet {
         int userid = login.getUserId();
         int type = login.getUserType();
         try {
+            String message="";
+            if("0".equals(request.getParameter("Tos"))){
+                String sendto=request.getParameter("s").substring(request.getParameter("s").lastIndexOf(","), request.getParameter("s").length());
+                String[] tokens = request.getParameter("s").split(",");
+                for(int i=0;i<tokens.length;i++){
+                    System.out.println("Token"+tokens[i]);
+                    message=sm.SendMessage(username, tokens[i], request.getParameter("Subject"),request.getParameter("CONTENT"));
+                }
+                
+            }else{
+                 message=sm.SendMessage(username, request.getParameter("Tos"), request.getParameter("Subject"),request.getParameter("CONTENT"));
+            }
             /* TODO output your page here. You may use following sample code. */
-          String message=sm.SendMessage(username, request.getParameter("Tos"), request.getParameter("Subject"),request.getParameter("CONTENT"));
+          
             if(message.equals("Message Sent")){
                 
              response.sendRedirect(request.getContextPath()+"/CP/collaboration/listmessage.jsp?success="+URLEncoder.encode(message, "UTF-8")+"&suc=block");

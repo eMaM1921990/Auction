@@ -77,8 +77,15 @@ public class addProduct extends HttpServlet {
                   System.out.println(fieldvalue);
                 } else {
                     try {
-                        fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage")+"/"+ fileItem.getName()));
+                        
+                        System.out.println("path :"+fileItem.getName());
+                        if(fileItem.getName().trim().length()>0){
+                            fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage")+"/"+ fileItem.getName()));
                         v.add("CP/globalimage/"+ fileItem.getName());
+                        }else{
+                            v.add("CP/globalimage/default-image.png");
+                        }
+                        
                         System.out.println(new File(getServletContext().getRealPath("/CP/globalimage/")+ fileItem.getName()));
                     } catch (Exception ex) {
                         Logger.getLogger(addProduct.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +100,7 @@ public class addProduct extends HttpServlet {
             
             /* TODO output your page here. You may use following sample code. */
             /// Dont Forget Created By Session
-            String message=p.save(v.elementAt(0),Integer.parseInt(v.elementAt(1)) ,Integer.parseInt(v.elementAt(2)) ,Double.parseDouble(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), v.elementAt(5),v.elementAt(7),v.elementAt(6),userid, df.format(dts));
+            String message=p.save(v.elementAt(0),Integer.parseInt(v.elementAt(1)) ,Integer.parseInt(v.elementAt(2)) ,Double.parseDouble(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), v.elementAt(5),v.elementAt(10),v.elementAt(6),v.elementAt(7),v.elementAt(8),v.elementAt(9),userid, df.format(dts));
             if(message.equals("Successfully . . Add Product "+v.elementAt(0)+". Thanks !")){
                 response.sendRedirect(request.getContextPath()+"/CP/product/add.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&suc=block");
             }else{

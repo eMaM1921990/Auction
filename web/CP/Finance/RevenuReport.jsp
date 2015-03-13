@@ -173,7 +173,7 @@
                                                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                                                 java.sql.Date sqldatefrom = new java.sql.Date(df.parse(request.getParameter("datefrom")).getTime());
                                                 java.sql.Date sqldateto = new java.sql.Date(df.parse(request.getParameter("dateto")).getTime());
-                                                db.pstm = db.con.prepareStatement("SELECT DATEAUCTION,FEES,TOTAL,SUM(TOTAL-((FEES*TOTAL)/100)) FROM AUCTIONWINNER,AUCTION WHERE DATEAUCTION BETWEEN ? AND ? AND BUYPAID=? AND idAUCTION=AUCTION_ID_W AND AUCTION_PRO IN (SELECT idPRODUCT FROM PRODUCT WHERE PRODUCTCREATEDBY=?)");
+                                                db.pstm = db.con.prepareStatement("SELECT DATEAUCTION,FEES,TOTAL,SUM(TOTAL-((FEES*TOTAL))) FROM AUCTIONWINNER,AUCTION WHERE DATEAUCTION BETWEEN ? AND ? AND BUYPAID=? AND idAUCTION=AUCTION_ID_W AND AUCTION_PRO IN (SELECT idPRODUCT FROM PRODUCT WHERE PRODUCTCREATEDBY=?)");
                                                 db.pstm.setDate(1, sqldatefrom);
                                                 db.pstm.setDate(2, sqldateto);
                                                 db.pstm.setString(3,"Y");

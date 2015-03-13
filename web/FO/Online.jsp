@@ -99,14 +99,13 @@
 
                             <div class="product-image">
                                 <span class="product-tag">Live</span>
-                                <img src="../<%=rs.getString("IMAGEURL")%>" alt="">
-                                <a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>" class="product-hover">
-                                    
-                                </a>
+                                <img src="../<%=rs.getString("IMAGEURL")%>" alt="" height="350" width="300">
+                              
+
                             </div>
 
                             <div class="product-info">
-                                <h5><a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>"><%=rs.getString("NAME")%></a></h5>
+                                <h5><a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>" title="<%=rs.getString("DESCS")%>"><%=rs.getString("NAME")%></a></h5>
                                 <span class="price">$<%=rs.getString("SELLPRICE")%></span>
                                 <div class="rating readonly-rating" data-score="5"></div>
                             </div>

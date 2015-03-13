@@ -20,11 +20,11 @@ public class Product {
 
     public static long log=12345698667L;
     DBConnection db=new DBConnection();
-    public String save(String NAME,int PRODUCTCAT,int QUANTITYONHAND,double SELLPRICE,double SHIPPINGCOST,String TRANSPORT,String DESC,String IMAGEURL,int PRODUCTCREATEDBY,String PRODUCTCREATEDDAT){
+    public String save(String NAME,int PRODUCTCAT,int QUANTITYONHAND,double SELLPRICE,double SHIPPINGCOST,String TRANSPORT,String DESC,String IMAGEURL,String IMAGEURL2,String IMAGEURL3,String IMAGEURL4,int PRODUCTCREATEDBY,String PRODUCTCREATEDDAT){
         String message=null;
         try {
             db.connect();
-            db.pstm=db.con.prepareStatement("INSERT INTO PRODUCT (NAME,QUANTITYONHAND,SELLPRICE,SHIPPINGCOST,PRODUCTCREATEDBY,PRODUCTCREATEDDAT,PRODUCTCAT,IMAGEURL,TRANSPORT,DESCS) VALUES (?,?,?,?,?,?,?,?,?,?)");
+            db.pstm=db.con.prepareStatement("INSERT INTO PRODUCT (NAME,QUANTITYONHAND,SELLPRICE,SHIPPINGCOST,PRODUCTCREATEDBY,PRODUCTCREATEDDAT,PRODUCTCAT,IMAGEURL,IMAGEURL1,IMAGEURL2,IMAGEURL3,TRANSPORT,DESCS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             db.pstm.setString(1, NAME);
             db.pstm.setInt(2, QUANTITYONHAND);
             db.pstm.setDouble(3, SELLPRICE);
@@ -34,8 +34,11 @@ public class Product {
             db.pstm.setString(6, PRODUCTCREATEDDAT);
             db.pstm.setInt(7, PRODUCTCAT);
             db.pstm.setString(8, IMAGEURL);
-            db.pstm.setString(9, TRANSPORT);
-            db.pstm.setString(10, DESC);
+            db.pstm.setString(9, IMAGEURL2);
+            db.pstm.setString(10, IMAGEURL3);
+            db.pstm.setString(11, IMAGEURL4);
+            db.pstm.setString(12, TRANSPORT);
+            db.pstm.setString(13, DESC);
             db.pstm.executeUpdate();
             db.closeConnection();
             message="Successfully . . Add Product "+NAME+". Thanks !";
@@ -47,23 +50,25 @@ public class Product {
         
     }
     
-    public String edit(String NAME,int PRODUCTCAT,int QUANTITYONHAND,double SELLPRICE,double SHIPPINGCOST,String IMAGEURL,int PRODUCTCREATEDBY,String PRODUCTCREATEDDAT,int productid,String TRANSPORT,String DESC){
+    public String edit(String NAME,int PRODUCTCAT,int QUANTITYONHAND,double SELLPRICE,double SHIPPINGCOST,String IMAGEURL,String IMAGEURL2,String IMAGEURL3,String IMAGEURL4,int PRODUCTCREATEDBY,String PRODUCTCREATEDDAT,int productid,String TRANSPORT,String DESC){
         String message=null;
         try {
             db.connect();
-            db.pstm=db.con.prepareStatement("UPDATE PRODUCT SET NAME=?,QUANTITYONHAND=?,SELLPRICE=?,SHIPPINGCOST=?,PRODUCTCREATEDBY=?,PRODUCTCREATEDDAT=?,PRODUCTCAT=?,IMAGEURL=?,TRANSPORT=?,DESCS=? WHERE idPRODUCT=?");
+            db.pstm=db.con.prepareStatement("UPDATE PRODUCT SET NAME=?,QUANTITYONHAND=?,SELLPRICE=?,SHIPPINGCOST=?,PRODUCTCREATEDBY=?,PRODUCTCREATEDDAT=?,PRODUCTCAT=?,IMAGEURL=?,IMAGEURL1=?,IMAGEURL2=?,IMAGEURL3=?,TRANSPORT=?,DESCS=? WHERE idPRODUCT=?");
             db.pstm.setString(1, NAME);
             db.pstm.setInt(2, QUANTITYONHAND);
             db.pstm.setDouble(3, SELLPRICE);
             db.pstm.setDouble(4, SHIPPINGCOST);
             db.pstm.setInt(5, PRODUCTCREATEDBY);
-            
             db.pstm.setString(6,  PRODUCTCREATEDDAT);
             db.pstm.setInt(7, PRODUCTCAT);
             db.pstm.setString(8, IMAGEURL);
-            db.pstm.setString(9, TRANSPORT);
-            db.pstm.setString(10, DESC);
-            db.pstm.setInt(11, productid);
+            db.pstm.setString(9, IMAGEURL2);
+            db.pstm.setString(10, IMAGEURL3);
+            db.pstm.setString(11, IMAGEURL4);
+            db.pstm.setString(12, TRANSPORT);
+            db.pstm.setString(13, DESC);
+            db.pstm.setInt(14, productid);
             db.pstm.executeUpdate();
             db.closeConnection();
             message="Successfully . . Edit Product "+NAME+". Thanks !";

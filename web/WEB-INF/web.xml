@@ -184,6 +184,18 @@
         <servlet-name>Confirm</servlet-name>
         <servlet-class>live.controller.Confirm</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConfirmTransaction</servlet-name>
+        <servlet-class>controller.ConfirmTransaction</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductStatusSeller</servlet-name>
+        <servlet-class>controller.UpdateProductStatusSeller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProductSeller</servlet-name>
+        <servlet-class>controller.DeleteProductSeller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
@@ -367,6 +379,18 @@
     <servlet-mapping>
         <servlet-name>Confirm</servlet-name>
         <url-pattern>/Confirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmTransaction</servlet-name>
+        <url-pattern>/ConfirmTransaction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductStatusSeller</servlet-name>
+        <url-pattern>/UpdateProductStatusSeller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductSeller</servlet-name>
+        <url-pattern>/DeleteProductSeller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

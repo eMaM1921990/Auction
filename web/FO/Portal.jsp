@@ -182,7 +182,7 @@
 
                             <div class="owl-carousel" data-max-items="4">
 
-                                <%db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS != ?");
+                                <%db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS != ? AND ISACTIVE='Y'");
                                     db.pstm.setString(1, "Not Live");
                                     ResultSet rs = db.pstm.executeQuery();
                                     while (rs.next()) {%>
@@ -193,12 +193,11 @@
 
                                         <div class="product-image">
                                             <span class="product-tag">Live</span>
-                                            <img src="../<%=rs.getString("IMAGEURL")%>" alt="Product1">
 
                                         </div>
 
                                         <div class="product-info">
-                                            <h5><a href="#"><%=rs.getString("NAME")%></a></h5>
+                                            <h5><a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>" title="<%=rs.getString("DESCS")%>"><%=rs.getString("NAME")%></a></h5>
                                             <span class="price">$<%=rs.getString("SELLPRICE")%></span>
                                             <div class="rating readonly-rating" data-score="5"></div>
                                         </div>
@@ -373,7 +372,7 @@
 
                             <div class="owl-carousel" data-max-items="4">
 
-                                <%db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT ORDER BY RAND() LIMIT 10");
+                                <%db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE  ISACTIVE='Y' ORDER BY RAND() LIMIT 10");
 
                                     ResultSet rss = db.pstm.executeQuery();
                                     while (rss.next()) { %>
@@ -386,10 +385,11 @@
                                             <% if (!rss.getString("PRODUCTSTATUS").equals("Not Live")) {%>
                                             <span class="product-tag"><%=rss.getString("PRODUCTSTATUS")%></span>
                                             <%}%>
-                                            <img src="../<%=rss.getString("IMAGEURL")%>" alt="Product1">
-                                            <a href="ProductDetails.jsp?id=<%=rss.getString("idPRODUCT")%>" class="product-hover">
-                                                <i class="icons icon-eye-1"></i> <%=rss.getString("PRODUCTSTATUS")%>
-                                            </a>
+                                            <img src="../<%=rss.getString("IMAGEURL")%>" alt="Product1" height="350" width="300">
+                                                                           <a href="ProductDetails.jsp?id=<%=rss.getString("idPRODUCT")%>" class="product-hover" title="<%=rss.getString("DESCS")%>" >
+                                    Item Details
+                                </a>
+
                                         </div>
 
                                         <div class="product-info">

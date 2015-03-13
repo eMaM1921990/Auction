@@ -7,6 +7,7 @@ package model;
 
 
 import controller.DBConnection;
+import controller.mailprop;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,8 +32,21 @@ import javax.mail.internet.MimeMessage;
 public class SendInvoicesToSeller {
 
     DBConnection db = new DBConnection();
+     mailprop prop=new mailprop();
 
-    public String SendInvoiceToInbox(String username, String amount, String dateform, String dateto, int sentfrom) {
+    public void updatePaidStatus(int user){
+        try {
+            db.connect();
+            db.pstm=db.con.prepareStatement("UPDATE AUCTIONWINNER SET PAID='Y' WHERE USER_AUCTION_W=?");
+            db.pstm.setInt(1, user);
+            db.pstm.executeUpdate();
+            db.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(SendInvoicesToSeller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String SendInvoiceToInbox(String username,  int sentfrom) {
          String message = null;
         try {
            
@@ -40,16 +54,16 @@ public class SendInvoicesToSeller {
             java.util.Date dys = new java.util.Date();
             java.sql.Date date = new Date(dys.getTime());
             String sender=getSenderName(sentfrom);
-            int reciver_id=getRevceiverId(username);
+            String reciver_id=username;
             db.connect();
-            db.pstm = db.con.prepareStatement("INSERT INTO (DAYS,SUBJECT,FROMS,TOS,DETAILS) VALUES (?,?,?,?,?)");
+            db.pstm = db.con.prepareStatement("INSERT INTO MAILHEADER (DAYS,SUBJECT,FROMS,TOS,DETAILS) VALUES (?,?,?,?,?)");
             db.pstm.setDate(1, date);
             db.pstm.setString(2, "Seller Billing Invoice");
             db.pstm.setString(3, sender);
-            db.pstm.setInt(4, reciver_id);
-            db.pstm.setString(5, "Amount :"+amount+"\n"+" From Date :"+dateform+" \n "+"To Date :"+dateto +"\n" +"Check your Mail Please"+"\n"+sender+"\n"+"System Adminstrator");
+            db.pstm.setString(4, reciver_id);
+            db.pstm.setString(5, "Your invoice <br> <a href='../Finance/Invoice.jsp?id="+reciver_id+"'>View </a> <br>Check your invoice Please"+"\n"+sender+"\n"+"System Adminstrator");
             db.pstm.executeUpdate();
-            sendEmailForInvoice(username, amount, dateform, dateto, sentfrom);
+            sendEmailForInvoice(username, sentfrom);
             message="Invoice Sent";
         } catch (SQLException ex) {
             Logger.getLogger(SendInvoicesToSeller.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,7 +190,7 @@ public class SendInvoicesToSeller {
         try {
 
             db.connect();
-            db.pstm = db.con.prepareStatement("SELECT EMAIL FROM USER WHERE USERNAME=?");
+            db.pstm = db.con.prepareStatement("SELECT EMAIL FROM USER WHERE idUSER=?");
             db.pstm.setString(1, username);
             ResultSet rs = db.pstm.executeQuery();
             while (rs.next()) {
@@ -190,16 +204,18 @@ public class SendInvoicesToSeller {
         return email;
     }
     
-    void sendEmailForInvoice(String username, String amount, String dateform, String dateto, int sentfrom){
+    void sendEmailForInvoice(String username,  int sentfrom){
         try {
-            final String authAddress = "support@livevirtualauctions.com";
-            final String authPassword = "1089icanor";
-            final String smtpServer = "mail.livevirtualauctions.com";
-            final String smtpPort = "25";            
+           
+            prop.mailsetting();
+            final String authAddress = prop.authaddress;
+            final String authPassword = prop.password;
+            final String smtpServer = prop.smtpserver;
+            final String smtpPort = prop.smtpport;
             String to = RecieverMail(username);
             String sender=getSenderName(sentfrom);
             String subject = "Live Virtual Auction|Billing Invoice";
-            String message = "Dear "+username+"\n Amount :"+amount+"\n"+" From Date :"+dateform+" \n "+"To Date :"+dateto +"\n" +"Check your Mail Please"+"\n"+sender+"\n"+"System Adminstrator";
+            String message = "Dear Seller <font style='color:red'> "+getSenderName(Integer.valueOf(username))+"</font>, a new invoice was created in order to pay your fees for this week. <br> Please, check your back Office, go to messages and follow the instructions.<br><br>Thanks for being part of LiveVirtualAuctions.com <br>Administration";
             Properties props = new Properties();
             props.put("mail.smtp.host", smtpServer);
             props.put("mail.smtp.port", smtpPort);
@@ -238,7 +254,7 @@ public class SendInvoicesToSeller {
     }
     
     
-    public String SendConfirmationForPayment(String username, String amount, String dateform, String dateto, int sentfrom){
+    public String SendConfirmationForPayment(String username, int sentfrom){
           String message = null;
         try {
            
@@ -246,16 +262,16 @@ public class SendInvoicesToSeller {
             java.util.Date dys = new java.util.Date();
             java.sql.Date date = new Date(dys.getTime());
             String sender=getSenderName(sentfrom);
-            int reciver_id=getRevceiverId(username);
+            String reciver_id=username;
             db.connect();
-            db.pstm = db.con.prepareStatement("INSERT INTO (DAYS,SUBJECT,FROMS,TOS,DETAILS) VALUES (?,?,?,?,?)");
+            db.pstm = db.con.prepareStatement("INSERT INTO MAILHEADER (DAYS,SUBJECT,FROMS,TOS,DETAILS) VALUES (?,?,?,?,?)");
             db.pstm.setDate(1, date);
             db.pstm.setString(2, "Confirmation Seller Billing Invoice");
             db.pstm.setString(3, sender);
-            db.pstm.setInt(4, reciver_id);
-            db.pstm.setString(5, "Amount :"+amount+"\n"+" From Date :"+dateform+" \n "+"To Date :"+dateto +"\n" +"Check your Mail Please"+"\n"+sender+"\n"+"System Adminstrator");
+            db.pstm.setString(4, reciver_id);
+            db.pstm.setString(5, "Thanks your payment confirmed "+"\n"+sender+"\n"+"System Adminstrator");
             db.pstm.executeUpdate();
-            sendConfirmmail(username, amount, dateform, dateto, sentfrom);
+            sendConfirmmail(username, sentfrom);
             message="Payment Confirmation Sent";
         } catch (SQLException ex) {
             Logger.getLogger(SendInvoicesToSeller.class.getName()).log(Level.SEVERE, null, ex);
@@ -265,16 +281,17 @@ public class SendInvoicesToSeller {
         return message;
     }
     
-    void sendConfirmmail(String username, String amount, String dateform, String dateto, int sentfrom){
+    void sendConfirmmail(String username, int sentfrom){
           try {
-            final String authAddress = "support@livevirtualauctions.com";
-            final String authPassword = "1089icanor";
-            final String smtpServer = "mail.livevirtualauctions.com";
-            final String smtpPort = "25";            
+              prop.mailsetting();
+            final String authAddress = prop.authaddress;
+            final String authPassword = prop.password;
+            final String smtpServer = prop.smtpserver;
+            final String smtpPort = prop.smtpport;
             String to = RecieverMail(username);
             String sender=getSenderName(sentfrom);
             String subject = "Live Virtual Auction|Billing Invoice";
-            String message = "Dear "+username+"\n Amount :"+amount+"\n"+" From Date :"+dateform+" \n "+"To Date :"+dateto +"\n" +"Check your Mail Please"+"\n"+sender+"\n"+"System Adminstrator";
+            String message = "Dear Seller \n your payment is confrmed Thanks."+"\n"+sender+"\n"+"System Adminstrator";
             Properties props = new Properties();
             props.put("mail.smtp.host", smtpServer);
             props.put("mail.smtp.port", smtpPort);

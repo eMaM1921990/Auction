@@ -115,7 +115,7 @@
         <script type="text/javascript">
 
             function data() {
-                document.getElementById("select").value =document.getElementById("typ").value;
+                document.getElementById("select").value = document.getElementById("typ").value;
                 //  document.getElementsByName("TRANSPORT").value=<%=request.getParameter("TRANSPORT")%>;
 
             }
@@ -197,7 +197,7 @@
                                 </div>
                                 <div class="box-content nopadding">
                                     <form action="../../editProduct" method="POST" class='form-horizontal form-bordered' enctype='multipart/form-data'>
-                                        
+
                                         <div class="control-group">
                                             <label for="textfield" class="control-label" style="color: red">Product ID</label>
                                             <div class="controls">
@@ -267,23 +267,72 @@
 
 
                                         <div class="control-group">
-                                            <label for="textfield" class="control-label">Image</label>
+                                            <label for="textfield" class="control-label">Image  </label>
                                             <div class="controls">
-                                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img style="width: 200px; height: 150px;" src="../../${param.IMAGEURL}"></div>
+
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                    <div class="input-append">
+                                                        <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" name="aaaa" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+
+                                                    </div>
+
+
+                                                </div>
+                                                <a href="../../${param.IMAGEURL}" target="_blank"><i class="icon-search"></i></a>View Current Image
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                            <label for="textfield" class="control-label">Image 2</label>
+                                            <div class="controls">
+
                                                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                                     <div class="input-append">
                                                         <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" name="aaaa" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
                                                     </div>
                                                 </div>
+
+                                                <a href="../../${param.IMAGEURL2}" ><i class="icon-search"></i></a>View Current Image
                                             </div>
                                         </div>
+
+                                        <div class="control-group">
+                                            <label for="textfield" class="control-label">Image 3</label>
+                                            <div class="controls">
+
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                    <div class="input-append">
+                                                        <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" name="aaaa" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                    </div>
+                                                </div>
+
+                                                <a href="../../${param.IMAGEURL3}" ><i class="icon-search"></i></a>View Current Image
+                                            </div>
+                                        </div>
+
+
+                                        <div class="control-group">
+                                            <label for="textfield" class="control-label">Image 4</label>
+                                            <div class="controls">
+
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                    <div class="input-append">
+                                                        <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" name="aaaa" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                    </div>
+                                                </div>
+                                                <a href="../../${param.IMAGEURL4}" ><i class="icon-search"></i></a>View Current Image
+                                            </div>
+
+                                        </div>        
 
 
 
                                         <div class="control-group">
                                             <label for="textfield" class="control-label">Description</label>
                                             <div class="controls">
-                                                <div class="input-xlarge"><textarea name="DESC"  rows="5" cols="100" style="margin-left: 0px; margin-right: 0px; width: 400px;">
+                                                <div class="input-xlarge"><textarea name="DESC"  rows="5" cols="100" style="margin-left: 0px; margin-right: 0px; width: 200%;">
                                                         ${param.DESCS}
                                                     </textarea></div>
                                             </div>

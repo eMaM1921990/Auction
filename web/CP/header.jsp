@@ -79,20 +79,24 @@
                     <li >
                         <a href="../product/sellerproduct.jsp">Seller Product</a>
                     </li>
+                    <!--
                     <li>
                         <a href="../List/view.jsp">Manage List</a>
                     </li>
                     <li>
                         <a href="../List/sellerList.jsp">Seller List</a>
                     </li>
+                    -->
                     <%} else if (type == 2) {%>
                     <li>
                         <a href="../product/view.jsp">Manage Product</a>
                     </li>
 
+                    <!--
                     <li>
                         <a href="../List/view.jsp">Manage List</a>
                     </li>
+                    -->
                     <%}%>
                 </ul>
             </li>
