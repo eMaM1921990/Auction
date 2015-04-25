@@ -8,6 +8,7 @@ package controller;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -26,15 +27,17 @@ public class mailprop {
     public String smtpport=null;
     public void mailsetting() {
         try {
-            String path = Thread.currentThread().getContextClassLoader().getResource("/").toURI().resolve(propFileName).getPath();
+            
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream pth=classLoader.getResourceAsStream("/mails.properties");
+            //String path = Thread.currentThread().getContextClassLoader().getResource("/").toURI().resolve(propFileName).getPath();
             Properties prop = new Properties();
-            prop.load(new FileInputStream(path));
+            prop.load(pth);
             authaddress = prop.getProperty(prop.getProperty("autaddress"));
             smtpserver = prop.getProperty(prop.getProperty("smtpserver"));
             smtpport=prop.getProperty(prop.getProperty("smtpport"));
             password = prop.getProperty(prop.getProperty("mailpassword"));
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(mailprop.class.getName()).log(Level.SEVERE, null, ex);
+        
         } catch (FileNotFoundException ex) {
             Logger.getLogger(mailprop.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

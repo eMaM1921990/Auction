@@ -27,7 +27,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sun.awt.geom.Curve;
 
 /**
  *
@@ -68,16 +67,15 @@ public class winner extends HttpServlet {
         processRequest(request, response);
         DBConnection db = new DBConnection();
         PrintWriter out = response.getWriter();
-        prop.mailsetting();
 
         try {
             String result = null;
             String user = null;
             String email = null;
-            final String authAddress = prop.authaddress;
-            final String authPassword = prop.password;
-            final String smtpServer = prop.smtpserver;
-            final String smtpPort = prop.smtpport;
+            final String authAddress = "support@livevirtualauctions.com";
+            final String authPassword = "aBSlzwI4TSik";
+            final String smtpServer = "mail.livevirtualauctions.com";
+            final String smtpPort = "26";
             String siteName = request.getServerName();
             int itemid = 0;
             String uservalid = null;
@@ -135,9 +133,10 @@ public class winner extends HttpServlet {
                 String to = email;
                 String subject = "Congratulation, you are the winner";
                 String message = "<p>"
-                        + " Congratulations.<br> Your bid was the winner in the last auction # <font style='color:red'>"+product_name+", total "+bid+" (+ "+shippingcost+" for shipping)</font> in LiveVirtualAuctions.com. <br>"
-                        + " Please contact the seller <b style='color:red'>"+seller_name+"</b>- <b>"+seller_mail+"</b> &nbsp;&nbsp;as soon as possible in order to pay the item and shipping cost.<br><br>After you pay for the total , "
-                        + "please Confirm Your Payment By Click here : <br> http://livevirtualauctions.com/AuctionWeb/Confirm?p=" + currentauctionid
+                        + " Congratulations.<br> Your bid was the winner in the last auction # <font style='color:red'>"+product_name+", total "+bid+" (+ "+shippingcost+" for shipping)</font> in LiveVirtualAuctions.com. <br> To make payment , please click next button : <br>"
+                 
+                        + "<br><a href='https://www.livevirtualauctions.com/AuctionWeb/getOrderdetails?p="+currentauctionid+"' ><img src=\"https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png\" alt=\"Check out with PayPal\" /></a>"
+                        + "<br><br></p><p>Any question, Contact the seller <b style='color:red'>"+seller_name+"</b>- <b>"+seller_mail+"</b>"
                         + "<br><br> The  seller will contact you as soon as the payment is verified. \n \n We have hundreds of items available at low prices. Please go back and find your favorite  \n items. Remember, you don't have to pay anything to make bids, unless your bid is the winner.<br><br>Thanks for being part of LiveVirtualAuctions.com <br> Administration </p>";
                 try {
                     Properties props = new Properties();

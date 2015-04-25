@@ -109,7 +109,7 @@
                                 <div id="product-slider">
                                     <ul class="slides">
                                         <li>
-                                            <img class="cloud-zoom" src="../<%=img%>" data-large="../<%=img%>"  alt=""/>
+                                            <img class="cloud-zoom" src="../<%=img%>" data-large="../<%=img%>"  alt="" />
                                             <a class="fullscreen-button" href="../<%=img%>">
                                                 <div class="product-fullscreen">
                                                     <i class="icons icon-resize-full-1"></i>
@@ -176,7 +176,7 @@
                                 <div id="product-slider">
                                     <ul class="slides">
                                         <li>
-                                            <img class="cloud-zoom" src="../<%=img2%>" data-large="../<%=img2%>"  alt=""/>
+                                            <img class="cloud-zoom" src="../<%=img2%>" data-large="../<%=img2%>"  alt="" width="370px" height="370px"/>
                                             <a class="fullscreen-button" href="../<%=img2%>">
                                                 <div class="product-fullscreen">
                                                     <i class="icons icon-resize-full-1"></i>
@@ -196,7 +196,7 @@
                                 <div id="product-slider">
                                     <ul class="slides">
                                         <li>
-                                            <img class="cloud-zoom" src="../<%=img3%>" data-large="../<%=img3%>"  alt=""/>
+                                            <img class="cloud-zoom" src="../<%=img3%>" data-large="../<%=img3%>"  alt="" width="370px" height="370px"/>
                                             <a class="fullscreen-button" href="../<%=img3%>">
                                                 <div class="product-fullscreen">
                                                     <i class="icons icon-resize-full-1"></i>
@@ -215,7 +215,7 @@
                                 <div id="product-slider">
                                     <ul class="slides">
                                         <li>
-                                            <img class="cloud-zoom" src="../<%=img4%>" data-large="../<%=img4%>"  alt=""/>
+                                            <img class="cloud-zoom" src="../<%=img4%>" data-large="../<%=img4%>"  alt="" width="370px" height="370px"/>
                                             <a class="fullscreen-button" href="../<%=img4%>">
                                                 <div class="product-fullscreen">
                                                     <i class="icons icon-resize-full-1"></i>

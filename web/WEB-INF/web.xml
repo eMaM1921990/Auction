@@ -196,6 +196,14 @@
         <servlet-name>DeleteProductSeller</servlet-name>
         <servlet-class>controller.DeleteProductSeller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getOrderdetails</servlet-name>
+        <servlet-class>paypal.getOrderdetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>doexpresscheckout</servlet-name>
+        <servlet-class>paypal.doexpresscheckout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
@@ -391,6 +399,14 @@
     <servlet-mapping>
         <servlet-name>DeleteProductSeller</servlet-name>
         <url-pattern>/DeleteProductSeller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getOrderdetails</servlet-name>
+        <url-pattern>/getOrderdetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doexpresscheckout</servlet-name>
+        <url-pattern>/doexpresscheckout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

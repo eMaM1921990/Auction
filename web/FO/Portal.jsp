@@ -1,4 +1,4 @@
-<%-- 
+ <%-- 
     Document   : FO_home
     Created on : Jun 3, 2014, 2:22:52 AM
     Author     : eMaM
@@ -193,6 +193,7 @@
 
                                         <div class="product-image">
                                             <span class="product-tag">Live</span>
+                                            <img src="../<%=rs.getString("IMAGEURL")%>" alt="Product1" height="350" width="300">
 
                                         </div>
 
@@ -386,14 +387,12 @@
                                             <span class="product-tag"><%=rss.getString("PRODUCTSTATUS")%></span>
                                             <%}%>
                                             <img src="../<%=rss.getString("IMAGEURL")%>" alt="Product1" height="350" width="300">
-                                                                           <a href="ProductDetails.jsp?id=<%=rss.getString("idPRODUCT")%>" class="product-hover" title="<%=rss.getString("DESCS")%>" >
-                                    Item Details
-                                </a>
+                                                   
 
                                         </div>
 
                                         <div class="product-info">
-                                            <h5><a href="ProductDetails.jsp?id=<%=rss.getString("idPRODUCT")%>"><%=rss.getString("NAME")%></a></h5>
+                                          <h5><a href="ProductDetails.jsp?id=<%=rss.getString("idPRODUCT")%>" title="<%=rss.getString("DESCS")%>"><%=rss.getString("NAME")%></a></h5>
                                             <span class="price">$<%=rss.getString("SELLPRICE")%></span>
                                             <div class="rating readonly-rating" data-score="5"></div>
                                         </div>

@@ -139,4 +139,85 @@ public class Product {
         
         return message;
     }
+    
+    public String getImgOne(int id){
+        String imgurl=null;
+        try {
+            db.connect();
+            db.pstm=db.con.prepareStatement("SELECT IMAGEURL FROM PRODUCT WHERE idPRODUCT=?");
+            db.pstm.setInt(1, id);
+            db.rs=db.pstm.executeQuery();
+            while(db.rs.next()){
+                imgurl=db.rs.getString(1);
+            }
+            db.closeConnection();
+        } catch (SQLException ex) {
+            db.closeConnection();
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return imgurl;
+    }
+    
+    
+    
+     public String getImgTwo(int id){
+        String imgurl=null;
+        try {
+            db.connect();
+            db.pstm=db.con.prepareStatement("SELECT IMAGEURL1 FROM PRODUCT WHERE idPRODUCT=?");
+            db.pstm.setInt(1, id);
+            db.rs=db.pstm.executeQuery();
+            while(db.rs.next()){
+                imgurl=db.rs.getString(1);
+            }
+            db.closeConnection();
+        } catch (SQLException ex) {
+            db.closeConnection();
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return imgurl;
+    }
+     
+     
+     public String getImgThree(int id){
+        String imgurl=null;
+        try {
+            db.connect();
+            db.pstm=db.con.prepareStatement("SELECT IMAGEURL2 FROM PRODUCT WHERE idPRODUCT=?");
+            db.pstm.setInt(1, id);
+            db.rs=db.pstm.executeQuery();
+            while(db.rs.next()){
+                imgurl=db.rs.getString(1);
+            }
+            db.closeConnection();
+        } catch (SQLException ex) {
+            db.closeConnection();
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return imgurl;
+    }
+     
+     
+     public String getImgFour(int id){
+        String imgurl=null;
+        try {
+            db.connect();
+            db.pstm=db.con.prepareStatement("SELECT IMAGEURL3 FROM PRODUCT WHERE idPRODUCT=?");
+            db.pstm.setInt(1, id);
+            db.rs=db.pstm.executeQuery();
+            while(db.rs.next()){
+                imgurl=db.rs.getString(1);
+            }
+            db.closeConnection();
+        } catch (SQLException ex) {
+            db.closeConnection();
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return imgurl;
+    }
+     
 }

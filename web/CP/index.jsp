@@ -119,6 +119,9 @@
                                     </h3>
                                 </div>
                                 <div class="box-content">
+                                    
+                                    
+                                    
                                     <div dir="ltr" style="font-size:16px">
                                         <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px;">Welcome to Live Virtual Auctions.</div>
                                         <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">

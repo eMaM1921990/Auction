@@ -207,11 +207,11 @@ public class SendInvoicesToSeller {
     void sendEmailForInvoice(String username,  int sentfrom){
         try {
            
-            prop.mailsetting();
-            final String authAddress = prop.authaddress;
-            final String authPassword = prop.password;
-            final String smtpServer = prop.smtpserver;
-            final String smtpPort = prop.smtpport;
+            
+           final String authAddress = "support@livevirtualauctions.com";
+            final String authPassword = "aBSlzwI4TSik";
+            final String smtpServer = "mail.livevirtualauctions.com";
+            final String smtpPort = "26";
             String to = RecieverMail(username);
             String sender=getSenderName(sentfrom);
             String subject = "Live Virtual Auction|Billing Invoice";

@@ -278,7 +278,7 @@
 
 
                                                 </div>
-                                                <a href="../../${param.IMAGEURL}" target="_blank"><i class="icon-search"></i></a>View Current Image
+                                                <a href="../../${param.IMAGEURL}" target="_blank"><i class="icon-search"></i>View Current Image</a>
 
 
                                             </div>
@@ -294,7 +294,7 @@
                                                     </div>
                                                 </div>
 
-                                                <a href="../../${param.IMAGEURL2}" ><i class="icon-search"></i></a>View Current Image
+                                                <a href="../../${param.IMAGEURL2}" target="_blank"><i class="icon-search"></i>View Current Image</a>
                                             </div>
                                         </div>
 
@@ -308,7 +308,7 @@
                                                     </div>
                                                 </div>
 
-                                                <a href="../../${param.IMAGEURL3}" ><i class="icon-search"></i></a>View Current Image
+                                                <a href="../../${param.IMAGEURL3}" target="_blank" ><i class="icon-search"></i>View Current Image</a>
                                             </div>
                                         </div>
 
@@ -322,7 +322,7 @@
                                                         <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" name="aaaa" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
                                                     </div>
                                                 </div>
-                                                <a href="../../${param.IMAGEURL4}" ><i class="icon-search"></i></a>View Current Image
+                                                <a href="../../${param.IMAGEURL4}" target="_blank"><i class="icon-search"></i>View Current Image</a>
                                             </div>
 
                                         </div>        

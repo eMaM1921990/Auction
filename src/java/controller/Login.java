@@ -79,6 +79,7 @@ public class Login extends HttpServlet {
                 db.pstm.executeUpdate();
                 db.closeConnection();
                 response.sendRedirect(request.getContextPath()+"/FO/Portal.jsp");
+                
             }
            
           
