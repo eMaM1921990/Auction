@@ -10,7 +10,7 @@
 <%
     GetExpressCheckout express = new GetExpressCheckout();
     express.getExperess(request.getParameter("token"));
-    if(express.param.get("ACK")!="Success"){
+    if(express.param.get("ACK")!="Success" || !express.param.get("ACK").equals("Success")){
         response.sendRedirect(request.getContextPath()+"/FO/PaymentError.jsp?L_ERRORCODE0="+URLEncoder.encode(express.param.get("L_ERRORCODE0"), "UTF-8")+"&L_SHORTMESSAGE0="+URLEncoder.encode(express.param.get("L_SHORTMESSAGE0"), "UTF-8")+"&L_LONGMESSAGE0="+URLEncoder.encode(express.param.get("L_LONGMESSAGE0"), "UTF-8")+"&L_SEVERITYCODE0="+URLEncoder.encode(express.param.get("L_SEVERITYCODE0"),"UTF-8"));
     }
 
@@ -92,10 +92,7 @@
                                     <td><%=express.param.get("TIMESTAMP")%></td>
                                 </tr>
 
-                                <tr>
-                                    <th>Order status</th>
-                                    <td><%=express.param.get("TIMESTAMP")%></td>
-                                </tr>
+                               
 
 
 
@@ -167,10 +164,7 @@
                                     <td><%=express.param.get("SHIPTOSTREET")%></td>
                                 </tr> 
 
-                                <tr>
-                                    <th>Address 2</th>
-                                    <td><%=express.param.get("SHIPTOSTREET2")%></td>
-                                </tr> 
+                                
 
                                 <tr>
                                     <th>ZIP / Postal code</th>

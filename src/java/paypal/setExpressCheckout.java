@@ -48,7 +48,8 @@ public class setExpressCheckout {
             paypal_NVP += "&RETURNURL=" + URLEncoder.encode(p.RETURNURL, "UTF-8");
             paypal_NVP += "&CANCELURL=" + URLEncoder.encode(p.CANCELURL, "UTF-8");
             paypal_NVP += "&METHOD=" + URLEncoder.encode("SetExpressCheckout", "UTF-8");
-            paypal_NVP += "&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=" + URLEncoder.encode(payerid, "UTF-8");
+            //paypal_NVP += "&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=" + URLEncoder.encode(payerid, "UTF-8");
+            paypal_NVP += "&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=" + URLEncoder.encode("eng.ahmed2005@yahoo.com", "UTF-8");
 
             HttpGet get = new HttpGet(paypal_NVP);
             System.out.println("Asked URL "+paypal_NVP);
@@ -57,7 +58,7 @@ public class setExpressCheckout {
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String line = "";
             while ((line = rd.readLine()) != null) {
-                System.out.println(URLDecoder.decode(line, "UTF-8"));
+                System.out.println("Cureent :"+URLDecoder.decode(line, "UTF-8"));
                 FormatString(URLDecoder.decode(line, "UTF-8"));
 
             }

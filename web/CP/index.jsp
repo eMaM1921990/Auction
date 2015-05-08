@@ -119,9 +119,9 @@
                                     </h3>
                                 </div>
                                 <div class="box-content">
-                                    
-                                    
-                                    
+
+
+
                                     <div dir="ltr" style="font-size:16px">
                                         <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px;">Welcome to Live Virtual Auctions.</div>
                                         <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">
@@ -140,10 +140,20 @@
                                         <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">4. Enter your item information and click “Save Changes” or “Cancel” - *** REMEMBER, we don’t have Reserve Price, be sure to enter a price you agree to sell. (maybe the minimum value you agree to receive for your item)</div>
                                         <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">
                                             <br clear="none"></div><div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">5. Done. Your item is alive.</div>
-                                            <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">
-                                                <br clear="none"></div>
-                                            <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">6. Now, you need to set up the date and time you want your item in the Live Auction. Go to "Products & List" and click on "Manage List" and create a new List name of your choice. Them, and go back to "Products & List", and click on "Manage Items", them look for the tap “ Options” and click on the magnified draw. In the new page fill the blank spaces and select your "List" name, when finish, click "Save Changes".</div><div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px"><br clear="none"></div><div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">Thanks for be part of&nbsp;<a href="http://LiveVirtualAuctions.com/" target="_blank">LiveVirtualAuctions.com</a></div></div>
-                                    <center><iframe width="560" height="315" src="https://www.youtube.com/embed/DkoLcu0hnrs" frameborder="0" allowfullscreen></iframe></center>
+                                        <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">
+                                            <br clear="none"></div>
+                                        <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">
+                                            6. Now, you need to set up the date and time you want your item in the Live Auction.<br><br>
+                                            a. Go to "Products & List" and click on "Manage Product" <br><br>
+                                            b. Look for the tap “ Options” and click on the magnified draw. <br><br>
+                                            c. In the new page, click on the "Date of Auction" block.<br><br>
+                                            d. Select the day by make a click on the day. Do the same with the "Time of Start".<br><br>
+                                            e. When finish, click "Save Changes".<br><br>
+
+                                            Your item will be show in the "Auction News" page under "AUCTION"<br><br>
+                                            Any question, send an email to support@livevirtualauctions.com
+                                        </div><div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px"><br clear="none"></div><div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">Thanks for be part of&nbsp;<a href="http://LiveVirtualAuctions.com/" target="_blank">LiveVirtualAuctions.com</a></div></div>
+
                                 </div>
                             </div>
                         </div>

@@ -44,7 +44,8 @@ public class GetExpressCheckout {
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String line = "";
             while ((line = rd.readLine()) != null) {
-                System.out.println(URLDecoder.decode(line, "UTF-8"));
+                
+                FormatString(URLDecoder.decode(line, "UTF-8"));
                 
             }
 
