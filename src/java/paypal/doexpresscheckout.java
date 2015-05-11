@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Auction;
 
 /**
  *
@@ -33,12 +34,14 @@ public class doexpresscheckout extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        Auction a=new Auction();
         String token=request.getParameter("token");
         String PayerID=request.getParameter("PayerID");
         String amount=request.getParameter("AMT");
         DoExpressCheckout do_express=new DoExpressCheckout();
         do_express.doexpress(token, PayerID, amount);
         if("Success".equals(do_express.param.get("ACK"))){
+            a.payforauction(Integer.valueOf(request.getParameter("p")));
             response.sendRedirect(request.getContextPath()+"/FO/PaymentSuccess.jsp?TIMESTAMP="+URLEncoder.encode(do_express.param.get("TIMESTAMP"),"UTF-8"));
         }else if("Failure".equals(do_express.param.get("ACK"))){
             response.sendRedirect(request.getContextPath()+"/FO/PaymentError.jsp?L_ERRORCODE0="+URLEncoder.encode(do_express.param.get("L_ERRORCODE0"), "UTF-8")+"&L_SHORTMESSAGE0="+URLEncoder.encode(do_express.param.get("L_SHORTMESSAGE0"), "UTF-8")+"&L_LONGMESSAGE0="+URLEncoder.encode(do_express.param.get("L_LONGMESSAGE0"), "UTF-8")+"&L_SEVERITYCODE0="+URLEncoder.encode(do_express.param.get("L_SEVERITYCODE0"),"UTF-8"));

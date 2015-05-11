@@ -10,7 +10,7 @@
 <%
     GetExpressCheckout express = new GetExpressCheckout();
     express.getExperess(request.getParameter("token"));
-    if(express.param.get("ACK")!="Success" || !express.param.get("ACK").equals("Success")){
+    if(express.param.get("ACK").contains("F") ){
         response.sendRedirect(request.getContextPath()+"/FO/PaymentError.jsp?L_ERRORCODE0="+URLEncoder.encode(express.param.get("L_ERRORCODE0"), "UTF-8")+"&L_SHORTMESSAGE0="+URLEncoder.encode(express.param.get("L_SHORTMESSAGE0"), "UTF-8")+"&L_LONGMESSAGE0="+URLEncoder.encode(express.param.get("L_LONGMESSAGE0"), "UTF-8")+"&L_SEVERITYCODE0="+URLEncoder.encode(express.param.get("L_SEVERITYCODE0"),"UTF-8"));
     }
 
@@ -244,7 +244,7 @@
                                             
                                             
                                             <tr>
-                                                <td class="align-right" colspan="6"><span class="price big"><a href=" doexpresscheckout?token=<%=request.getParameter("token")%>&PayerID=<%=request.getParameter("PayerID")%>&AMT=<%=express.param.get("AMT")%>"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-medium.png" alt="Buy now with PayPal" /></a></span></td>
+                                                <td class="align-right" colspan="6"><span class="price big"><a href="../doexpresscheckout?token=<%=express.param.get("TOKEN")%>&PayerID=<%=express.param.get("PAYERID")%>&AMT=<%=express.param.get("AMT")%>&p=<%=express.param.get("L_PAYMENTREQUEST_0_DESC0").substring(5, express.param.get("L_PAYMENTREQUEST_0_DESC0").indexOf("-"))%>"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-medium.png" alt="Buy now with PayPal" /></a></span></td>
 
                                                 
                                             </tr>

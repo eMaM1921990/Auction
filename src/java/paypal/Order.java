@@ -34,7 +34,7 @@ public class Order {
             while(db.rs.next()){
                 PAYMENTREQUEST_0_AMT=db.rs.getString("PAYMENTREQUEST_0_AMT");
                 L_PAYMENTREQUEST_0_NAME0=db.rs.getString("L_PAYMENTREQUEST_0_NAME0");
-                L_PAYMENTREQUEST_0_DESC0=db.rs.getString("L_PAYMENTREQUEST_0_DESC0");
+                L_PAYMENTREQUEST_0_DESC0="Code:"+auctionId+"-"+db.rs.getString("L_PAYMENTREQUEST_0_DESC0");
                 L_PAYMENTREQUEST_0_AMT0=db.rs.getString("PAYMENTREQUEST_0_AMT");
                 L_PAYMENTREQUEST_0_QTY0="1";
                 PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=db.rs.getString("PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID");
