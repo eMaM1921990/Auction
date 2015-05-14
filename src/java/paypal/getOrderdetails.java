@@ -43,7 +43,7 @@ public class getOrderdetails extends HttpServlet {
             try {
                 o.getOrder(request.getParameter("p"));
                 setExpressCheckout express=new setExpressCheckout();
-                express.setExpress(Order.L_PAYMENTREQUEST_0_AMT0, Order.L_PAYMENTREQUEST_0_NAME0, Order.L_PAYMENTREQUEST_0_DESC0, Order.L_PAYMENTREQUEST_0_AMT0, Order.L_PAYMENTREQUEST_0_QTY0, Order.PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID);
+                express.setExpress(Order.L_PAYMENTREQUEST_0_AMT0, Order.L_PAYMENTREQUEST_0_NAME0, Order.L_PAYMENTREQUEST_0_DESC0, Order.L_PAYMENTREQUEST_0_AMT0, Order.L_PAYMENTREQUEST_0_QTY0, Order.PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID,request.getParameter("p").trim());
                 System.out.println("Ack"+setExpressCheckout.param.get("ACK"));
                 if(setExpressCheckout.param.get("ACK").equals("Success")){
                     

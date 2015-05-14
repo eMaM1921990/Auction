@@ -29,7 +29,7 @@ public class setExpressCheckout {
     public static String Token;
     public static HashMap<String, String> param = new HashMap<String, String>();
     PaypalProp p=new PaypalProp();
-    public void setExpress(String total,String item,String desc,String amount,String quantity,String payerid) throws Exception {
+    public void setExpress(String total,String item,String desc,String amount,String quantity,String payerid,String auction_id) throws Exception {
         try {
             p.read();
             DefaultHttpClient client = new DefaultHttpClient();
@@ -41,15 +41,15 @@ public class setExpressCheckout {
             paypal_NVP += "&PAYMENTREQUEST_0_PAYMENTACTION=" + URLEncoder.encode("Sale", "UTF8");
             paypal_NVP += "&PAYMENTREQUEST_0_AMT=" + URLEncoder.encode(total, "UTF-8");
             paypal_NVP += "&L_PAYMENTREQUEST_0_NAME0=" + URLEncoder.encode(item, "UTF-8");
-            paypal_NVP += "&L_PAYMENTREQUEST_0_DESC0=" + URLEncoder.encode(item, "UTF-8");
+            paypal_NVP += "&L_PAYMENTREQUEST_0_DESC0=" + URLEncoder.encode("Code:"+auction_id+"-"+item, "UTF-8");
             paypal_NVP += "&L_PAYMENTREQUEST_0_AMT0=" + URLEncoder.encode(amount, "UTF-8");
             paypal_NVP += "&L_PAYMENTREQUEST_0_QTY0=" + URLEncoder.encode(quantity, "UTF-8");
             paypal_NVP += "&L_PAYMENTREQUEST_0_ITEMCATEGORY0=" + URLEncoder.encode("Digital", "UTF-8");
             paypal_NVP += "&RETURNURL=" + URLEncoder.encode(p.RETURNURL, "UTF-8");
             paypal_NVP += "&CANCELURL=" + URLEncoder.encode(p.CANCELURL, "UTF-8");
             paypal_NVP += "&METHOD=" + URLEncoder.encode("SetExpressCheckout", "UTF-8");
-            //paypal_NVP += "&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=" + URLEncoder.encode(payerid, "UTF-8");
-            paypal_NVP += "&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=" + URLEncoder.encode("eng.ahmed2005@yahoo.com", "UTF-8");
+            paypal_NVP += "&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=" + URLEncoder.encode(payerid, "UTF-8");
+            
 
             HttpGet get = new HttpGet(paypal_NVP);
             System.out.println("Asked URL "+paypal_NVP);
