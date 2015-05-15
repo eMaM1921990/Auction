@@ -40,6 +40,11 @@ public class ConfirmTransaction {
             db.pstm.setString(5, "Confirm Payment Transaction # "+trans);
             db.pstm.executeUpdate();
             
+            db.pstm=db.con.prepareStatement("UPDATE AUCTIONWINNER SET PAID='Y' WHERE USER_AUCTION_W=?");
+            db.pstm.setString(1, Integer.toString(sentto));
+            db.pstm.executeUpdate();
+            db.closeConnection();
+            
             message="Payment confirmed";
         } catch (SQLException ex) {
             Logger.getLogger(SendInvoicesToSeller.class.getName()).log(Level.SEVERE, null, ex);

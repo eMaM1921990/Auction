@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="controller.DBConnection" %>
@@ -183,7 +184,7 @@
                                                 <th>Item</th>
                                                 <th>Price</th>
                                                 <th>Fees</th>
-                                                <th>Shipping Cost</th>
+
                                                 <th class='total'>Total</th>
                                             </tr>
                                         </thead>
@@ -200,12 +201,15 @@
                                                 <td class='name'><%=db.rs.getString(1)%></td>
                                                 <td class='price'>$<%=db.rs.getString(2)%></td>
                                                 <td class='qty'>$<%=db.rs.getString(3)%></td>
-                                                <td class='qty'>$<%=db.rs.getString(5)%></td>
-                                                <td class='total'>$<%=db.rs.getString(4)+db.rs.getString(5)%></td>
+
+                                                <td class='total'>$<%=db.rs.getString(4)%></td>
                                             </tr>
                                             <%
-                                                    sum = sum + db.rs.getDouble(4)+db.rs.getDouble(5);
-                                                }%>
+                                                    sum = sum + db.rs.getDouble(4);
+                                                }
+
+                                                DecimalFormat decform = new DecimalFormat("0.00");
+                                            %>
 
                                             <tr>
                                                 <td colspan="3"></td>
@@ -214,7 +218,7 @@
                                                     <p>
                                                         <span class="light">Total</span>
                                                         <span class="totalprice">
-                                                            $<%=sum%>
+                                                            $<%=decform.format(sum)%>
                                                         </span>
                                                     </p>
                                                 </td>
@@ -227,18 +231,43 @@
                         </div>
 
 
-                        <div class="span10">
-                            
 
-                                <div class="input-append">
-                                    <label id="val">
-                                        Please enter your paypal transaction no.
-                                    </label>
-                                    <input type="text" id="transaction" data-rule-required="true"/>
-                                    <input type="hidden" id="userid" value="<%=request.getParameter("id")%>"/>
-                                    <button class="btn btn-success btn btn-small" id="confirm" onclick="Transaction()">Confirm</button>
-                                </div>
-                                                      <div class="invoice-payment">
+                        <div class="span5">
+                            <label style="color: green">
+                                <b> Just 2 step to pay your fees:</b>
+                            </label> 
+                            1. Make your payment. (After you make your payment, please, copy the transaction number and paste in the box, then click the green button, <b>"Confirm"</b>.)
+                            2. Confirm your payment. </p>
+                        </div>
+                        <div class="span5">
+
+                            <div class="input-append">
+                                <label id="val" >
+                                    <b>1. Pay your fees here: </b>
+                                </label>
+                                <form action="../../SellerInvoicePayment" method="POST" target="_blank">
+                                    <input type="hidden" value="<%=decform.format(sum)%>" name="amount"/>
+                                    <input type="image"src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png" alt="Check out with PayPal"/> 
+<!--                                    <button><img  /></button>-->
+                                </form>
+
+
+                            </div>
+                        </div>
+
+                        <div class="span6">
+
+
+
+                            <div class="input-append">
+                                <label id="val"  style="color: red">
+                                    <b> 2. Confirm your payment:</b>
+                                </label>
+                                <input type="text" id="transaction" data-rule-required="true"/>
+                                <input type="hidden" id="userid" value="<%=request.getParameter("id")%>"/>
+                                <button class="btn btn-success btn btn-small" id="confirm" onclick="Transaction()">Confirm</button>
+                            </div>
+                            <div class="invoice-payment">
                                 <span>Payment methods</span>
                                 <ul>
                                     <li>

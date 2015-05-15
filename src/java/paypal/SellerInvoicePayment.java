@@ -3,22 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package paypal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Auction;
 
 /**
  *
  * @author emam
  */
-public class doexpresscheckout extends HttpServlet {
+public class SellerInvoicePayment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,25 +33,27 @@ public class doexpresscheckout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        Auction a = new Auction();
-        String token = request.getParameter("token");
-        String PayerID = request.getParameter("PayerID");
-        String amount = request.getParameter("AMT");
-        DoExpressCheckout do_express = new DoExpressCheckout();
-        do_express.doexpress(token, PayerID, amount);
-        System.out.println("DoExpress :"+do_express.param.get("ACK"));
-        if ("Success".equals(do_express.param.get("ACK"))) {
-            if ("#".equals(request.getParameter("p"))) {
-                a.payforauction(Integer.valueOf(request.getParameter("p")));
-            }
-
-            response.sendRedirect(request.getContextPath() + "/FO/PaymentSuccess.jsp?ID=" + URLEncoder.encode(do_express.param.get("PAYMENTREQUEST_0_TRANSACTIONID"), "UTF-8"));
-        } else if ("Failure".equals(do_express.param.get("ACK"))) {
-            response.sendRedirect(request.getContextPath() + "/FO/PaymentError.jsp?L_ERRORCODE0=" + URLEncoder.encode(do_express.param.get("L_ERRORCODE0"), "UTF-8") + "&L_SHORTMESSAGE0=" + URLEncoder.encode(do_express.param.get("L_SHORTMESSAGE0"), "UTF-8") + "&L_LONGMESSAGE0=" + URLEncoder.encode(do_express.param.get("L_LONGMESSAGE0"), "UTF-8") + "&L_SEVERITYCODE0=" + URLEncoder.encode(do_express.param.get("L_SEVERITYCODE0"), "UTF-8"));
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            PaypalProp p=new PaypalProp();
+            p.read();
+            setExpressCheckout express=new setExpressCheckout();
+            express.setExpress(request.getParameter("amount"),
+                    "LiveVirtualAuction Fees Payment", 
+                    "Payment Fees", 
+                    request.getParameter("amount"), 
+                    "1", p.RECIVER, "#");
+            
+            if(setExpressCheckout.param.get("ACK").equals("Success")){
+                    
+                   response.sendRedirect(p.EXPRESS_CHECKOUT_URL+setExpressCheckout.param.get("TOKEN"));
+                    
+                }else{
+                    response.sendRedirect(request.getContextPath()+"/FO/PaymentError.jsp?L_ERRORCODE0="+URLEncoder.encode(setExpressCheckout.param.get("L_ERRORCODE0"), "UTF-8")+"&L_SHORTMESSAGE0="+URLEncoder.encode(setExpressCheckout.param.get("L_SHORTMESSAGE0"), "UTF-8")+"&L_LONGMESSAGE0="+URLEncoder.encode(setExpressCheckout.param.get("L_LONGMESSAGE0"), "UTF-8")+"&L_SEVERITYCODE0="+URLEncoder.encode(setExpressCheckout.param.get("L_SEVERITYCODE0"),"UTF-8"));
+                }
+        } catch (Exception ex) {
+            Logger.getLogger(SellerInvoicePayment.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

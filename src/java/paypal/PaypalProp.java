@@ -31,6 +31,7 @@ public class PaypalProp {
      public String CANCELURL;
      public String RETURNURL;
      public String EXPRESS_CHECKOUT_URL;
+     public String RECIVER;
 
     public PaypalProp() {
         try {
@@ -46,6 +47,7 @@ public class PaypalProp {
             CANCELURL = prop.getProperty("CANCELURL");
             RETURNURL = prop.getProperty("RETURNURL");
             EXPRESS_CHECKOUT_URL=prop.getProperty("EXPRESS_CHECKOUT_URL");
+            RECIVER=prop.getProperty("RECIVER");
         }  catch (FileNotFoundException ex) {
             Logger.getLogger(PaypalProp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

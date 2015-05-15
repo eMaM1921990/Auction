@@ -204,6 +204,10 @@
         <servlet-name>doexpresscheckout</servlet-name>
         <servlet-class>paypal.doexpresscheckout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerInvoicePayment</servlet-name>
+        <servlet-class>paypal.SellerInvoicePayment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
@@ -407,6 +411,10 @@
     <servlet-mapping>
         <servlet-name>doexpresscheckout</servlet-name>
         <url-pattern>/doexpresscheckout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerInvoicePayment</servlet-name>
+        <url-pattern>/SellerInvoicePayment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
