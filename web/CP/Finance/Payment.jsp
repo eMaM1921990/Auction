@@ -197,7 +197,7 @@ DBConnection db = new DBConnection();
                                             <label for="textfield" class="control-label">Seller Name</label>
                                             <div class="controls">
                                                 <div class="input-xlarge"><select name="idUSER" id="select" class='chosen-select'>
-                                                        <%db.pstm = db.con.prepareStatement("SELECT U.idUSER AS ID,U.USERNAME AS NAME FROM AUCTIONDETAILSVIEW A,USER U WHERE A.CREATEDBY=U.idUSER GROUP BY U.idUSER");
+                                                        <%db.pstm = db.con.prepareStatement("SELECT U.idUSER AS ID,U.USERNAME AS NAME FROM AUCTIONWINNER A,USER U WHERE A.USER_AUCTION_W=U.idUSER AND PAID='N' GROUP BY U.idUSER;");
                                                             
                                                             db.rs = db.pstm.executeQuery();
                                                             while (db.rs.next()) {%>

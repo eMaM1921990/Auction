@@ -20,24 +20,23 @@ import java.util.logging.Logger;
  */
 public class mailprop {
 
-    String propFileName = "../mails.properties";
-    public String authaddress=null;
-    public String smtpserver=null;
-    public String password=null;
-    public String smtpport=null;
+    String propFileName = "mails.properties";
+    public String authaddress = null;
+    public String smtpserver = null;
+    public String password = null;
+    public String smtpport = null;
+
     public void mailsetting() {
         try {
-            
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream pth=classLoader.getResourceAsStream("/mails.properties");
-            //String path = Thread.currentThread().getContextClassLoader().getResource("/").toURI().resolve(propFileName).getPath();
+
+            InputStream io = getClass().getResourceAsStream(propFileName);
             Properties prop = new Properties();
-            prop.load(pth);
-            authaddress = prop.getProperty(prop.getProperty("autaddress"));
-            smtpserver = prop.getProperty(prop.getProperty("smtpserver"));
-            smtpport=prop.getProperty(prop.getProperty("smtpport"));
-            password = prop.getProperty(prop.getProperty("mailpassword"));
-        
+            prop.load(io);
+            authaddress = prop.getProperty("autaddress");
+            smtpserver = prop.getProperty("smtpserver");
+            smtpport =prop.getProperty("smtpport");
+            password = prop.getProperty("mailpassword");
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(mailprop.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
