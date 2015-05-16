@@ -23,7 +23,7 @@ public class DBConnection {
     public String url = "jdbc:mysql://localhost:3306/icanor_autcion";
     public String user = "root";
 
-    public String password ="0122308791";//"M,qILVOlAc?D";
+    public String password ="0122308791";//M,qILVOlAc?D";
     public PreparedStatement pstm;
     int colcount;
 

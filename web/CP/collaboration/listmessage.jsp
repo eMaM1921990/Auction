@@ -193,7 +193,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <%db.pstm = db.con.prepareStatement("SELECT * FROM MAILHEADER WHERE TOS=?");
+                                                            <%db.pstm = db.con.prepareStatement("SELECT * FROM MAILHEADER WHERE TOS=? ORDER BY DAYS DESC");
                                                                 db.pstm.setInt(1, login.getUserId());
                                                                 ResultSet rs = db.pstm.executeQuery();
                                                                 while (rs.next()) {
