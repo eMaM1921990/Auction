@@ -70,7 +70,6 @@ public class PaypalProp {
             CANCELURL = prop.getProperty("CANCELURL");
             RETURNURL = prop.getProperty("RETURNURL");
             EXPRESS_CHECKOUT_URL=prop.getProperty("EXPRESS_CHECKOUT_URL");
-            System.out.println("EXPRESS_CHECKOUT_URL"+prop.getProperty("EXPRESS_CHECKOUT_URL"));
         }  catch (FileNotFoundException ex) {
             Logger.getLogger(PaypalProp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

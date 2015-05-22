@@ -45,7 +45,7 @@ public class doexpresscheckout extends HttpServlet {
                 a.payforauction(Integer.valueOf(request.getParameter("p")));
             }
 
-            response.sendRedirect(request.getContextPath() + "/FO/PaymentSuccess.jsp?ID=" + URLEncoder.encode(do_express.param.get("PAYMENTREQUEST_0_TRANSACTIONID"), "UTF-8"));
+            response.sendRedirect(request.getContextPath() + "/FO/PaymentSuccess.jsp?ID=" + URLEncoder.encode(do_express.param.get("PAYMENTINFO_0_TRANSACTIONID"), "UTF-8"));
         } else if ("Failure".equals(do_express.param.get("ACK"))) {
             response.sendRedirect(request.getContextPath() + "/FO/PaymentError.jsp?L_ERRORCODE0=" + URLEncoder.encode(do_express.param.get("L_ERRORCODE0"), "UTF-8") + "&L_SHORTMESSAGE0=" + URLEncoder.encode(do_express.param.get("L_SHORTMESSAGE0"), "UTF-8") + "&L_LONGMESSAGE0=" + URLEncoder.encode(do_express.param.get("L_LONGMESSAGE0"), "UTF-8") + "&L_SEVERITYCODE0=" + URLEncoder.encode(do_express.param.get("L_SEVERITYCODE0"), "UTF-8"));
         }

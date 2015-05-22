@@ -50,7 +50,7 @@ public class DoExpressCheckout {
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String line = "";
             while ((line = rd.readLine()) != null) {
-                //System.out.println(URLDecoder.decode(line, "UTF-8"));
+                System.out.println(line);
                 FormatString(URLDecoder.decode(line, "UTF-8"));
 
             }
@@ -72,4 +72,12 @@ public class DoExpressCheckout {
         }
 
     }
+    
+    
+//    public static void main(String args[]){
+//        DoExpressCheckout d=new DoExpressCheckout();
+//        d.doexpress("EC-12E975068D4862618", "5WQL52ARD2FNA", "30");
+//        System.out.println("Data :"+d.param.get("PAYMENTINFO_0_TRANSACTIONID"));
+//                
+//    }
 }
