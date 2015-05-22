@@ -42,7 +42,7 @@ public class SellerInvoicePayment extends HttpServlet {
                     "LiveVirtualAuction Fees Payment", 
                     "Payment Fees", 
                     request.getParameter("amount"), 
-                    "1", p.RECIVER, "#");
+                    "1", p.RECIVER, "s");
             
             if(setExpressCheckout.param.get("ACK").equals("Success")){
                     

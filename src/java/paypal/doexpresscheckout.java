@@ -39,9 +39,9 @@ public class doexpresscheckout extends HttpServlet {
         String amount = request.getParameter("AMT");
         DoExpressCheckout do_express = new DoExpressCheckout();
         do_express.doexpress(token, PayerID, amount);
-        System.out.println("DoExpress :"+do_express.param.get("ACK"));
+        
         if ("Success".equals(do_express.param.get("ACK"))) {
-            if ("#".equals(request.getParameter("p"))) {
+            if (!request.getParameter("p").equals("s")) {
                 a.payforauction(Integer.valueOf(request.getParameter("p")));
             }
 
