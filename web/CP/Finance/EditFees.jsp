@@ -207,7 +207,7 @@
                                             <label for="textfield" class="control-label">Fees amount</label>
                                             <div class="controls">
                                                 <div class="input-append">
-                                                    <input type="text" name="FEES" value="${param.FEES}">
+                                                    <input type="text" name="Fees" value="${param.FEES}">
 
                                                 </div>
                                                

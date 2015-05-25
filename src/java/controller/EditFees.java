@@ -46,7 +46,7 @@ public class EditFees extends HttpServlet {
         Fees f=new Fees();
         try {
            String message=f.edit(Double.parseDouble(request.getParameter("Fees")), userid, Integer.parseInt(request.getParameter("idFEES")));
-           if(message.equals("Successfully . . Edit Fees amount " + request.getParameter("FEES") + ". Thanks !")){
+           if(message.equals("Successfully . . Edit Fees amount " + request.getParameter("Fees") + ". Thanks !")){
                 response.sendRedirect(request.getContextPath()+"/CP/Finance/viewFees.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&suc=block");
             }else{
                 response.sendRedirect(request.getContextPath()+"/CP/Finance/viewFees.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&err=block");
