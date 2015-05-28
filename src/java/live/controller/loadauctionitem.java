@@ -84,7 +84,7 @@ public class loadauctionitem extends HttpServlet {
                     + "</style>");
             db.connect();
             String buffer = null;
-            String sql="SELECT * FROM PRODUCT WHERE PRODUCTSTATUS=?";
+            String sql="SELECT * FROM PRODUCT WHERE PRODUCTSTATUS=? ORDER BY idPRODUCT ASC";
             db.pstm=db.con.prepareStatement(sql);
             db.pstm.setString(1, "Live");
             db.rs=db.pstm.executeQuery();

@@ -215,7 +215,7 @@
                                                             <form action="addToList.jsp" method="post">
                                                                 <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
                                                                 <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
-                                                                <button type="submit" class="btn" rel="tooltip" title="Add To List"><i class="icon-search"></i></button>
+                                                                <button type="submit" class="btn" rel="tooltip" title="Add To List"><i class="icon-bookmark"></i></button>
                                                             </form>
 
                                                         </div>

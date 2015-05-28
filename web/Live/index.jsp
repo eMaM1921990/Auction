@@ -175,7 +175,7 @@
 
                                             <%    try {
                                                     db.connect();
-                                                    db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS='Live' ORDER BY NAME DESC");
+                                                    db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS='Live' ORDER BY idPRODUCT DESC");
                                                     db.rs = db.pstm.executeQuery();
                                                     while (db.rs.next()) {%>
                                             <tr><td align="right"><div class='imgs'><img src='../<%=db.rs.getString("IMAGEURL")%>' alt='' width='100px' height='50px'  > <div class='descs' ><%=db.rs.getString("NAME")%></div></div></td></tr>
@@ -183,7 +183,7 @@
                                             <%}
                                                     db.closeConnection();
                                                 } catch (Exception e) {
-                                                    System.out.println(e);
+                                                    out.println(e);
                                                 }%>
                                         </tbody></table>    
 
