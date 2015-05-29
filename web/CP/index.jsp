@@ -145,7 +145,7 @@
                                         <div style="margin-top:0px;margin-bottom:0in;color:rgb(51,51,51);font-family:'Open Sans',sans-serif;font-size:13px">
                                             6. Now, you need to set up the date and time you want your item in the Live Auction.<br><br>
                                             a. Go to "Products & List" and click on "Manage Product" <br><br>
-                                            b. Look for the tap “ Options” and click on the magnified draw. <br><br>
+                                            b. Look for the tap “ Options” and click on the bookmark draw. <br><br>
                                             c. In the new page, click on the "Date of Auction" block.<br><br>
                                             d. Select the day by make a click on the day. Do the same with the "Time of Start".<br><br>
                                             e. When finish, click "Save Changes".<br><br>

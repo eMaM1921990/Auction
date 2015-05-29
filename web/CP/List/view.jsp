@@ -191,7 +191,7 @@ db.connect();
                                                                                                 
                                                                                                 <div>
                                                                                             <form>
-                                                                                                <button type="submit" class="btn" rel="tooltip" title="View"><i class="icon-search"></i></button>
+                                                                                                <button type="submit" class="btn"  title="View"><i class="icon-search"></i></button>
                                                                                             </form>
                                                                                                     </div>
                                                                                                 <div>
@@ -199,14 +199,14 @@ db.connect();
                                                                                                 <input type="hidden" name="idUSERLIST" value="<%=rs.getString("idUSERLIST")%>"/>
                                                                                                 <input type="hidden" name="LISTNAME" value="<%=rs.getString("LISTNAME")%>"/>
                                                                                               
-                                                                                                <button type="submit" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></button>
+                                                                                                <button type="submit" class="btn"  title="Edit"><i class="icon-edit"></i></button>
                                                                                             </form>
                                                                                                 </div>
                                                                                                 <div>
                                                                                             <form action="../../deleteList" method="post">
                                                                                                <input type="hidden" name="idUSERLIST" value="<%=rs.getString("idUSERLIST")%>"/>
                                                                                                 <input type="hidden" name="LISTNAME" value="<%=rs.getString("LISTNAME")%>"/>
-                                                                                                <button type="submit" class="btn" rel="tooltip" title="Delete"><i class="icon-remove"></i></button>
+                                                                                                <button type="submit" class="btn"  title="Delete"><i class="icon-remove"></i></button>
                                                                                             </form>
                                                                                                 </div>
 												 </div>

@@ -209,7 +209,7 @@
                                                         <input type="hidden" name="idUSER" value="<%=rs.getString("idUSER")%>"/>
                                                         <input type="hidden" name="STATUS" value="<%=rs.getString("STATUS")%>"/>
 
-                                                        <button type="submit" class="btn" rel="tooltip" title="Manage Status"><i class="icon-cogs"></i></button>
+                                                        <button type="submit" class="btn"  title="Manage Status"><i class="icon-cogs"></i></button>
                                                     </form>
                                                         </div>
                                                         <a href="../../DeleteUser?id=<%=rs.getString("idUSER")%>"class="btn"><i class="icon-remove"></i></a>

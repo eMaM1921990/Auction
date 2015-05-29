@@ -215,7 +215,7 @@
                                                             <form action="addToList.jsp" method="post">
                                                                 <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
                                                                 <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
-                                                                <button type="submit" class="btn" rel="tooltip" title="Add To List"><i class="icon-bookmark"></i></button>
+                                                                <button type="submit" class="btn"  title="Add To List"><i class="icon-bookmark"></i></button>
                                                             </form>
 
                                                         </div>
@@ -233,14 +233,14 @@
                                                                 <input type="hidden" name="IMAGEURL2" value="<%=rs.getString("IMAGEURL1")%>"/>
                                                                 <input type="hidden" name="IMAGEURL3" value="<%=rs.getString("IMAGEURL2")%>"/>
                                                                 <input type="hidden" name="IMAGEURL4" value="<%=rs.getString("IMAGEURL3")%>"/>
-                                                                <button type="submit" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></button>
+                                                                <button type="submit" class="btn"  title="Edit"><i class="icon-edit"></i></button>
                                                             </form>
                                                         </div>
                                                         <div>
                                                             <form action="../../DeleteProduct" method="post">
                                                                 <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
                                                                 <input type="hidden" name="NAME" value="<%=rs.getString("NAME")%>"/>
-                                                                <button type="submit" class="btn" rel="tooltip" title="Delete"><i class="icon-remove"></i></button>
+                                                                <button type="submit" class="btn"  title="Delete"><i class="icon-remove"></i></button>
                                                             </form>
                                                         </div>
                                                         <div>
@@ -248,11 +248,11 @@
                                                                 <input type="hidden" name="idPRODUCT" value="<%=rs.getString("idPRODUCT")%>"/>
                                                                 <input type="hidden" name="active" value="<%=rs.getString("ISACTIVE")%>"/>
                                                                 <%if(rs.getString("ISACTIVE").equals("Y")){%>
-                                                                <button type="submit" class="btn" rel="tooltip" title="In-Active">
+                                                                <button type="submit" class="btn"  title="In-Active">
                                                                     <i class="icon-stop"></i>
                                                                 </button>
                                                                 <%}else{%>
-                                                                <button type="submit" class="btn" rel="tooltip" title="Active">
+                                                                <button type="submit" class="btn"  title="Active">
                                                                     <i class="icon-play"></i>
                                                                 </button>
                                                                 <%}%>
