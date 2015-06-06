@@ -6,6 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="beans.LoginBeans" %>
+<%
+    int timeout = session.getMaxInactiveInterval();
+    response.setHeader("Refresh", timeout + "; URL = Redirect.jsp");
+%>
 <%session = request.getSession();
     beans.LoginBeans login;
     login = (beans.LoginBeans) session.getAttribute("login");
