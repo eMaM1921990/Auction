@@ -61,30 +61,22 @@
                 int USERTYPE = 0;
                 String FISRTNAME = null;
                 String LASTNAME = null;
-                String POSTALCODE = null;
-                String ADDRESS1 = null;
-                String ADDRESS2 = null;
+               
                 String EMAIL = null;
                 String PHONE = null;
                 String PAYPAL = null;
-                String SHIPPINGADDRESS = null;
-                String COUNTRY = null;
-                String CITY = null;
+               
                 while (db.rs.next()) {
                     USERNAME = db.rs.getString("USERNAME");
                     PASSWORD = db.rs.getString("PASSWORD");
                     USERTYPE = db.rs.getInt("USERTYPE");
                     FISRTNAME = db.rs.getString("FISRTNAME");
                     LASTNAME = db.rs.getString("LASTNAME");
-                    POSTALCODE = db.rs.getString("POSTALCODE");
-                    ADDRESS1 = db.rs.getString("ADDRESS1");
-                    ADDRESS2 = db.rs.getString("ADDRESS2");
+                  
                     EMAIL = db.rs.getString("EMAIL");
                     PHONE = db.rs.getString("PHONE");
                     PAYPAL = db.rs.getString("PAYPAL");
-                    SHIPPINGADDRESS = db.rs.getString("SHIPPINGADDRESS");
-                    COUNTRY = db.rs.getString("COUNTRY");
-                    CITY = db.rs.getString("CITY");
+                  
                 }
 
                 db.closeConnection();
@@ -209,88 +201,11 @@
                                     </div>
 
 
-                                    <div class="row">
-
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <p><strong>Bill to</strong></p>
-                                        </div>
-
-
-                                    </div>
-
-
-
 
                                     <div class="row">
 
                                         <div class="col-lg-4 col-md-4 col-sm-4">
-                                            <p>Address 1</p>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="ADDRESS1" value="<%=ADDRESS1%>">
-                                        </div>	
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-lg-4 col-md-4 col-sm-4">
-                                            <p>Address 2</p>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="ADDRESS2" value="<%=ADDRESS2%>">
-                                        </div>	
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-lg-4 col-md-4 col-sm-4">
-                                            <p>ZIP / Postal Code</p>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text"  name="POSTALCODE" value="<%=POSTALCODE%>">
-                                        </div>	
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-lg-4 col-md-4 col-sm-4">
-                                            <p>City</p>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="CITY" value="<%=CITY%>">
-                                        </div>	
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-lg-4 col-md-4 col-sm-4">
-                                            <p>Country</p>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="COUNTRY" value="<%=COUNTRY%>">
-                                        </div>	
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-lg-4 col-md-4 col-sm-4">
-                                            <p>Phone</p>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <input type="text" name="PHONE" value="<%=PHONE%>">
-                                        </div>	
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-lg-4 col-md-4 col-sm-4">
-                                            <p>PayPal Account</p>
+                                            <p>PayPal Account *</p>
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
                                             <input type="text" name="PAYPAL" value="<%=PAYPAL%>">

@@ -36,7 +36,7 @@ public class Registration extends HttpServlet {
         PrintWriter out = response.getWriter();
         model.Regestration reg=new Regestration();
         try {
-           String message=reg.saveNewUser(request.getParameter("USERNAME"),request.getParameter("PASSWORD"), Integer.parseInt(request.getParameter("USERTYPE")), request.getParameter("FISRTNAME"), request.getParameter("LASTNAME"), request.getParameter("POSTALCODE"), request.getParameter("ADDRESS1"), request.getParameter("ADDRESS2"), request.getParameter("EMAIL"), request.getParameter("PHONE"), request.getParameter("PAYPAL"), request.getParameter("COUNTRY"), request.getParameter("CITY"), "active");
+           String message=reg.saveNewUser(request.getParameter("USERNAME"),request.getParameter("PASSWORD"), Integer.parseInt(request.getParameter("USERTYPE")), request.getParameter("FISRTNAME"), request.getParameter("LASTNAME"),  request.getParameter("EMAIL"),  request.getParameter("PAYPAL"), "active");
            if(message.equals("Successfully Created your new account : "+request.getParameter("USERNAME")+" , Press button to able start bidding \n\n Thanks!.")){
                response.sendRedirect(request.getContextPath()+"/FO/Success.jsp?msg="+URLEncoder.encode(message, "UTF-8"));
            }else {

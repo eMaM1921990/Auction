@@ -156,89 +156,12 @@
                                     
                                 </div>
                                 
-                                
-                                <div class="row">
-                                
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                    	<p><strong>Bill to</strong></p>
-                                    </div>
-                                   	
-                                    
-                                </div>
-                                
                              
-                              
-                           
-                                <div class="row">
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                    	<p>Address 1</p>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <input type="text" name="ADDRESS1">
-                                    </div>	
-                                    
-                                </div>
                                 
                                 <div class="row">
                                     
                                     <div class="col-lg-4 col-md-4 col-sm-4">
-                                    	<p>Address 2</p>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <input type="text" name="ADDRESS2">
-                                    </div>	
-                                    
-                                </div>
-                                
-                                <div class="row">
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                    	<p>ZIP / Postal Code</p>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <input type="text"  name="POSTALCODE">
-                                    </div>	
-                                    
-                                </div>
-                                
-                                <div class="row">
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                    	<p>City</p>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <input type="text" name="CITY">
-                                    </div>	
-                                    
-                                </div>
-                                
-                                <div class="row">
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                    	<p>Country</p>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <input type="text" name="COUNTRY">
-                                    </div>	
-                                    
-                                </div>
-                                
-                                <div class="row">
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                    	<p>Phone</p>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <input type="text" name="PHONE">
-                                    </div>	
-                                    
-                                </div>
-                                
-                                <div class="row">
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                    	<p>PayPal Account</p>
+                                    	<p>PayPal Account *</p>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8">
                                         <input type="text" name="PAYPAL">

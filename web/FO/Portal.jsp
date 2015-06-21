@@ -49,20 +49,6 @@
 
 
 
-        <script>
-
-
-            // $.noConflict();
-            //    var auto = setInterval(function()
-            //    {
-            //        $('#current').load('newjsp.jsp').fadeIn("slow");
-            //    }, 10000); // refresh every 5000 milliseconds
-
-
-
-
-
-        </script>
 
     </head>
 
@@ -80,6 +66,77 @@
 
                 <!-- Main Content -->
                 <section class="main-content col-lg-12 col-md-12 col-sm-12">
+
+                    
+                    
+                         <!-- New Collection -->
+                    <div class="products-row row">
+
+                        <!-- Carousel Heading -->
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+
+                            <div class="carousel-heading">
+                                <h4>Auction Item</h4>
+                                <div class="carousel-arrows">
+                                    <i class="icons icon-left-dir"></i>
+                                    <i class="icons icon-right-dir"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /Carousel Heading -->
+
+                        <!-- Carousel -->
+                        <div class="carousel owl-carousel-wrap col-lg-12 col-md-12 col-sm-12">
+
+                            <div class="owl-carousel" data-max-items="4">
+
+                                <%db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS != ? AND ISACTIVE='Y'");
+                                    db.pstm.setString(1, "Not Live");
+                                    ResultSet rs = db.pstm.executeQuery();
+                                    while (rs.next()) {%>
+                                <!-- Slide -->
+                                <div>
+                                    <!-- Carousel Item -->
+                                    <div class="product">
+
+                                        <div class="product-image">
+                                            <span class="product-tag">Live</span>
+                                            <img src="../<%=rs.getString("IMAGEURL")%>" alt="Product1" height="350" width="300">
+
+                                        </div>
+
+                                        <div class="product-info">
+                                            <h5><a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>" title="<%=rs.getString("DESCS")%>"><%=rs.getString("NAME")%></a></h5>
+                                            <span class="price">$<%=rs.getString("SELLPRICE")%></span>
+                                            <div class="rating readonly-rating" data-score="5"></div>
+                                        </div>
+
+                                        <div class="product-actions">
+                                            <span class="add-to-cart">
+                                                <span class="action-wrapper">
+                                                    <i  class="icons icon-basket-2"></i>
+                                                    <a href="../Live/index.jsp" target="_blank">
+                                                        <span class="action-name">Start Bidding</span>
+                                                    </a>
+
+                                                </span >
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /Carousel Item -->
+                                </div>
+                                <%}%>
+                                <!-- /Slide -->
+
+                            </div>
+                        </div>
+                        <!-- /Carousel -->
+
+                    </div>
+                    <!-- /New Collection -->
 
                     <!-- Slider -->
                     <div class = "iosSlider">
@@ -160,75 +217,7 @@
 
 
 
-                    <!-- New Collection -->
-                    <div class="products-row row">
-
-                        <!-- Carousel Heading -->
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-
-                            <div class="carousel-heading">
-                                <h4>Auction Item</h4>
-                                <div class="carousel-arrows">
-                                    <i class="icons icon-left-dir"></i>
-                                    <i class="icons icon-right-dir"></i>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- /Carousel Heading -->
-
-                        <!-- Carousel -->
-                        <div class="carousel owl-carousel-wrap col-lg-12 col-md-12 col-sm-12">
-
-                            <div class="owl-carousel" data-max-items="4">
-
-                                <%db.pstm = db.con.prepareStatement("SELECT * FROM PRODUCT WHERE PRODUCTSTATUS != ? AND ISACTIVE='Y'");
-                                    db.pstm.setString(1, "Not Live");
-                                    ResultSet rs = db.pstm.executeQuery();
-                                    while (rs.next()) {%>
-                                <!-- Slide -->
-                                <div>
-                                    <!-- Carousel Item -->
-                                    <div class="product">
-
-                                        <div class="product-image">
-                                            <span class="product-tag">Live</span>
-                                            <img src="../<%=rs.getString("IMAGEURL")%>" alt="Product1" height="350" width="300">
-
-                                        </div>
-
-                                        <div class="product-info">
-                                            <h5><a href="ProductDetails.jsp?id=<%=rs.getString("idPRODUCT")%>" title="<%=rs.getString("DESCS")%>"><%=rs.getString("NAME")%></a></h5>
-                                            <span class="price">$<%=rs.getString("SELLPRICE")%></span>
-                                            <div class="rating readonly-rating" data-score="5"></div>
-                                        </div>
-
-                                        <div class="product-actions">
-                                            <span class="add-to-cart">
-                                                <span class="action-wrapper">
-                                                    <i  class="icons icon-basket-2"></i>
-                                                    <a href="../Live/index.jsp" target="_blank">
-                                                        <span class="action-name">Start Bidding</span>
-                                                    </a>
-
-                                                </span >
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-                                    <!-- /Carousel Item -->
-                                </div>
-                                <%}%>
-                                <!-- /Slide -->
-
-                            </div>
-                        </div>
-                        <!-- /Carousel -->
-
-                    </div>
-                    <!-- /New Collection -->
-
+               
 
 
                     <!-- News -->

@@ -38,7 +38,7 @@ public class updateprofile extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         Regestration reg=new Regestration();
         try {
-            reg.updateuser(request.getParameter("USERNAME"),request.getParameter("PASSWORD"), Integer.parseInt(request.getParameter("USERTYPE")), request.getParameter("FISRTNAME"), request.getParameter("LASTNAME"), request.getParameter("POSTALCODE"), request.getParameter("ADDRESS1"), request.getParameter("ADDRESS2"), request.getParameter("EMAIL"), request.getParameter("PHONE"), request.getParameter("PAYPAL"), request.getParameter("COUNTRY"), request.getParameter("CITY"), "active",Integer.valueOf(request.getParameter("userid")));
+            reg.updateuser(request.getParameter("USERNAME"),request.getParameter("PASSWORD"), Integer.parseInt(request.getParameter("USERTYPE")), request.getParameter("FISRTNAME"), request.getParameter("LASTNAME"),  request.getParameter("EMAIL"),request.getParameter("PAYPAL"), "active",Integer.valueOf(request.getParameter("userid")));
             response.sendRedirect(request.getContextPath()+"/FO/Success.jsp?msg="+URLEncoder.encode("Profile updated", "UTF-8"));
             /* TODO output your page here. You may use following sample code. */
           
