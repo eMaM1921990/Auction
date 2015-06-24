@@ -51,6 +51,10 @@ public class editProduct extends HttpServlet {
 
         java.util.Date dts = new java.util.Date();
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        
+                //Date format for image upload
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyssSSS");
+
         HttpSession session = request.getSession();
         beans.LoginBeans login;
         login = (beans.LoginBeans) session.getAttribute("login");
@@ -75,8 +79,11 @@ public class editProduct extends HttpServlet {
                         try {
                             if (!fileItem.getName().isEmpty()) {
                                 img_flag += 1;
-                                fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage") + "/" + fileItem.getName()));
-                                v.add("CP/globalimage" + "/" + fileItem.getName());
+                                 String img_name=fileItem.getName();
+                                 img_name = img_name.substring(0, img_name.indexOf(".")) +"_"+sdf.format(new java.util.Date())+img_name.substring(img_name.indexOf("."));
+                      
+                                fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage") + "/" + img_name));
+                                v.add("CP/globalimage" + "/" + img_name);
                             } else {
 
                                 v.add("CP/globalimage/default-image.png");

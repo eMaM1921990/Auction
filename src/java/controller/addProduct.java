@@ -55,6 +55,8 @@ public class addProduct extends HttpServlet {
         
         java.util.Date dts=new java.util.Date();
         DateFormat df=new SimpleDateFormat("dd-MM-yyyy");
+        //Date format for image upload
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyssSSS");
         //Date date=new Date(Long.parseLong(df.format(dts).toString()));
         Product p=new Product();
           HttpSession session = request.getSession();
@@ -74,14 +76,13 @@ public class addProduct extends HttpServlet {
                 if (fileItem.isFormField()) {
                     String fieldvalue = fileItem.getString();
                     v.add(fieldvalue);
-                  System.out.println(fieldvalue);
                 } else {
                     try {
-                        
-                        System.out.println("path :"+fileItem.getName());
+                        String img_name=fileItem.getName();
+                        img_name = img_name.substring(0, img_name.indexOf(".")) +"_"+sdf.format(new java.util.Date())+img_name.substring(img_name.indexOf("."));
                         if(fileItem.getName().trim().length()>0){
-                            fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage")+"/"+ fileItem.getName()));
-                        v.add("CP/globalimage/"+ fileItem.getName());
+                            fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage")+"/"+ img_name));
+                        v.add("CP/globalimage/"+ img_name);
                         }else{
                             v.add("CP/globalimage/default-image.png");
                         }
