@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -52,14 +50,14 @@ public class addProduct extends HttpServlet {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload fileUpload = new ServletFileUpload(factory);
         Vector<String> v = new Vector<String>();
-        
-        java.util.Date dts=new java.util.Date();
-        DateFormat df=new SimpleDateFormat("dd-MM-yyyy");
+
+        java.util.Date dts = new java.util.Date();
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         //Date format for image upload
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyssSSS");
         //Date date=new Date(Long.parseLong(df.format(dts).toString()));
-        Product p=new Product();
-          HttpSession session = request.getSession();
+        Product p = new Product();
+        HttpSession session = request.getSession();
         beans.LoginBeans login;
         login = (beans.LoginBeans) session.getAttribute("login");
         String username = login.getUserName();
@@ -72,40 +70,42 @@ public class addProduct extends HttpServlet {
                 List listItems = fileUpload.parseRequest(request);
                 FileItem fileItem = null;
                 for (Object o : listItems) {
-                fileItem = (FileItem) o;
-                if (fileItem.isFormField()) {
-                    String fieldvalue = fileItem.getString();
-                    v.add(fieldvalue);
-                } else {
-                    try {
-                        String img_name=fileItem.getName();
-                        img_name = img_name.substring(0, img_name.indexOf(".")) +"_"+sdf.format(new java.util.Date())+img_name.substring(img_name.indexOf("."));
-                        if(fileItem.getName().trim().length()>0){
-                            fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage")+"/"+ img_name));
-                        v.add("CP/globalimage/"+ img_name);
-                        }else{
-                            v.add("CP/globalimage/default-image.png");
+                    fileItem = (FileItem) o;
+                    if (fileItem.isFormField()) {
+                        String fieldvalue = fileItem.getString();
+                        v.add(fieldvalue);
+                    } else {
+                        try {
+                                String img_name = fileItem.getName();
+                                
+                                if (fileItem.getName().trim().length() > 0) {
+                                    img_name = img_name.substring(0, img_name.indexOf(".")) + "_" + sdf.format(new java.util.Date()) + img_name.substring(img_name.indexOf("."));
+                                    fileItem.write(new File(getServletContext().getRealPath("/CP/globalimage") + "/" + img_name));
+                                    v.add("CP/globalimage/" + img_name);
+                                } else {
+                                    v.add("CP/globalimage/default-image.png");
+                                }
+
+                           
+
+                            System.out.println(new File(getServletContext().getRealPath("/CP/globalimage/") + fileItem.getName()));
+                        } catch (Exception ex) {
+                            Logger.getLogger(addProduct.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        
-                        System.out.println(new File(getServletContext().getRealPath("/CP/globalimage/")+ fileItem.getName()));
-                    } catch (Exception ex) {
-                        Logger.getLogger(addProduct.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            }
             } catch (FileUploadException ex) {
                 Logger.getLogger(addProduct.class.getName()).log(Level.SEVERE, null, ex);
             }
            // String result=p.edit(v.elementAt(0), QUANTITYONHAND, SELLPRICE, SHIPPINGCOST, PRODUCTCREATEDBY, null, null, PRODUCTCAT, idPRODUCT, null)
-            
-            
+
             /* TODO output your page here. You may use following sample code. */
             /// Dont Forget Created By Session
-            String message=p.save(v.elementAt(0),Integer.parseInt(v.elementAt(1)) ,Integer.parseInt(v.elementAt(2)) ,Double.parseDouble(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), v.elementAt(5),v.elementAt(10),v.elementAt(6),v.elementAt(7),v.elementAt(8),v.elementAt(9),userid, df.format(dts));
-            if(message.equals("Successfully . . Add Product "+v.elementAt(0)+". Thanks !")){
-                response.sendRedirect(request.getContextPath()+"/CP/product/add.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&suc=block");
-            }else{
-                response.sendRedirect(request.getContextPath()+"/CP/product/add.jsp?msg="+URLEncoder.encode(message, "UTF-8")+"&err=block");
+            String message = p.save(v.elementAt(0), Integer.parseInt(v.elementAt(1)), Integer.parseInt(v.elementAt(2)), Double.parseDouble(v.elementAt(3)), Double.parseDouble(v.elementAt(4)), v.elementAt(5), v.elementAt(10), v.elementAt(6), v.elementAt(7), v.elementAt(8), v.elementAt(9), userid, df.format(dts));
+            if (message.equals("Successfully . . Add Product " + v.elementAt(0) + ". Thanks !")) {
+                response.sendRedirect(request.getContextPath() + "/CP/product/add.jsp?msg=" + URLEncoder.encode(message, "UTF-8") + "&suc=block");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/CP/product/add.jsp?msg=" + URLEncoder.encode(message, "UTF-8") + "&err=block");
             }
         } finally {
             out.close();
