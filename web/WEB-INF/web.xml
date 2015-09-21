@@ -208,6 +208,10 @@
         <servlet-name>SellerInvoicePayment</servlet-name>
         <servlet-class>paypal.SellerInvoicePayment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetCounter</servlet-name>
+        <servlet-class>controller.ResetCounter</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
@@ -415,6 +419,10 @@
     <servlet-mapping>
         <servlet-name>SellerInvoicePayment</servlet-name>
         <url-pattern>/SellerInvoicePayment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetCounter</servlet-name>
+        <url-pattern>/ResetCounter</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

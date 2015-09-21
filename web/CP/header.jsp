@@ -33,26 +33,6 @@
     {
         $('#message').load('../../backendunreadmessage').fadeIn("slow");
     }, 1000000); // refresh every 5000 milliseconds
-
-    /*
-     var auction = setInterval(function()
-     {
-     
-     $.get('../../getServerDateandTime', null, function(responseText) {
-     max = responseText;
-     if (max > 0) {
-     
-     $(document).ready(function() {
-     $("#freeow").freeow("Auction news", "New item ready for Live virtual auction", {
-     classes: ["smokey", "slide"],
-     autoHide: true
-     });
-     });
-     }
-     });
-     }, 1000); // refresh every 5000 milliseconds
-     
-     */
 </script>
 <!DOCTYPE html>
 <div id="navigation">
@@ -178,6 +158,9 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a href="../Message/View.jsp">Message Template</a>
+                    </li>
+                    <li>
+                        <a href="../ResetCounter">Reset Counter</a>
                     </li>
                 </ul>
             </li>

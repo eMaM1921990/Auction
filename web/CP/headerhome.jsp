@@ -165,6 +165,9 @@
                     <li>
                         <a href="Message/View.jsp">Message Template</a>
                     </li>
+                     <li>
+                        <a href="ResetCounter">Reset Counter</a>
+                    </li>
                 </ul>
             </li>
             <%}%>

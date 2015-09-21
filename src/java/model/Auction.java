@@ -37,4 +37,23 @@ public class Auction {
         
         return message;
     }
+    
+    public String resetAuction(){
+        String msg=null;
+        try {
+            db.connect();
+            db.pstm=db.con.prepareCall("UPDATE AUCTION SET STARTTIME=? WHERE STATUS=?");
+            db.pstm.setString(1, "0");
+            db.pstm.setString(2, "open");
+            db.pstm.executeUpdate();
+            msg="Timer reset successfuly";
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Auction.class.getName()).log(Level.SEVERE, null, ex);
+            msg="["+ex.getErrorCode()+"]"+ex.getMessage();
+        }
+        db.closeConnection();
+        return msg;
+        
+    }
 }
